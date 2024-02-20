@@ -3,11 +3,9 @@ import LoginSignup from './components/LoginSignup/LoginSignup';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-          <Route path='/' element={<LoginSignup/>}/>
-        </Routes>
-    </Router>
+    <div>
+      <LoginSignup />
+    </div>
   );
 }
 

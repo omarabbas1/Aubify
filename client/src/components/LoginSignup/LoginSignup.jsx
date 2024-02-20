@@ -1,42 +1,67 @@
-import React, { useState } from 'react'
-import './LoginSignup.css'
+import React, { useState } from 'react';
+import './LoginSignup.css'; // Import CSS styles
 
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+function Login() {
+  const [activeContainer, setActiveContainer] = useState('');
 
-const LoginSignup = () => {
+  const handleRegisterClick = () => {
+    setActiveContainer('active');
+  };
 
-  const [action,setAction]= useState("Sign Up");
+  const handleLoginClick = () => {
+    setActiveContainer('');
+  };
 
   return (
-    <div className ='container'>
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div> 
+    <div className={`container ${activeContainer}`}>
+      <div className="form-container sign-up">
+        <form>
+          <h1>Create Account</h1>
+          <div className="social-icons">
+            <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
+            <a href="#" className="icon"><i className="fab fa-facebook-f"></i></a>
+            <a href="#" className="icon"><i className="fab fa-github"></i></a>
+            <a href="#" className="icon"><i className="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your email for registration</span>
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <button>Sign Up</button>
+        </form>
       </div>
-        <div className="inputs">
-          {action === "Login"? <div></div>:<div className="input">
-            <img src={user_icon} alt="" />
-            <input type="text" placeholder="Name" />
-          </div>}
-          
-          <div className="input">
-            <img src={email_icon} alt="" />
-            <input type="email" placeholder= "Email Id"/>
+      <div className="form-container sign-in">
+        <form>
+          <h1>Sign In</h1>
+          <div className="social-icons">
+            <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
+            <a href="#" className="icon"><i className="fab fa-facebook-f"></i></a>
+            <a href="#" className="icon"><i className="fab fa-github"></i></a>
+            <a href="#" className="icon"><i className="fab fa-linkedin-in"></i></a>
           </div>
-          <div className="input">
-            <img src={password_icon} alt="" />
-            <input type="password"placeholder= "Password"/>
+          <span>or use your email password</span>
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <a href="#">Forget Your Password?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
+      <div className="toggle-container">
+        <div className="toggle">
+          <div className={`toggle-panel toggle-left ${activeContainer}`}>
+            <h1>Welcome Back!</h1>
+            <p>Enter your personal details to use all site features</p>
+            <button className="hidden" onClick={handleLoginClick}>Sign In</button>
+          </div>
+          <div className={`toggle-panel toggle-right ${activeContainer}`}>
+            <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all site features</p>
+            <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
           </div>
         </div>
-        {action ==="Sign Up"?<div></div>: <div className="forgot-password">Lost Password? <span>Click Here!</span></div>}
-        <div className="submit-container">
-          <div className={action ==="Login"?"submit gray":"submit" } onClick={()=>{setAction("Sign Up")}}>Sign Up</div>
-          <div className={action==="Sign Up" ? "submit gray" : "submit"} onClick={()=> {setAction("Login")}}>Login</div>
-        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default LoginSignup
+export default Login;
