@@ -13,7 +13,7 @@ function Login() {
   };
 
   return (
-    <div className={`container ${activeContainer}`}>
+    <div className={`login-signup-container ${activeContainer}`}>
       <div className="form-container sign-up">
         <form>
           <h1>Create Account</h1>
