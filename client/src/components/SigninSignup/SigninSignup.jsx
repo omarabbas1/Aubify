@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import './LoginSignup.css'; // Import CSS styles
+import './SigninSignup.css';
 
-function Login() {
+function SigninSignup() {
   const [activeContainer, setActiveContainer] = useState('');
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [signupError, setSignupError] = useState('');
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [signinEmail, setSigninEmail] = useState('');
+  const [signinPassword, setSigninPassword] = useState('');
+  const [signinError, setSigninError] = useState('');
 
   const handleRegisterClick = () => {
     setActiveContainer('active');
     setSignupError('');
   };
 
-  const handleLoginClick = () => {
+  const handleSigninClick = () => {
     setActiveContainer('');
-    setLoginError('');
+    setSigninError('');
   };
 
   const checkUserExists = async (email) => {
@@ -44,6 +44,29 @@ function Login() {
     }
   };
 
+  const checkPassword = async (email, password) => {
+    try {
+      const response = await fetch('http://localhost:8080/checkPassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+
+      const data = await response.json();
+      return data.correctPassword; // Assuming the response contains a boolean value indicating password correctness
+    } catch (error) {
+      console.error('Error checking password:', error);
+      // Handle error, such as displaying a generic error message to the user
+      return false;
+    }
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     // Clear previous errors
@@ -57,7 +80,7 @@ function Login() {
 
     // Client-side validation
     if (!isValidEmail(signupEmail)) {
-      setSignupError('Invalid email format.');
+      setSignupError('Invalid email format. Please use your AUB student email.');
       return;
     }
     if (!isValidPassword(signupPassword)) {
@@ -68,7 +91,7 @@ function Login() {
     // Check if user already exists
     const userExists = await checkUserExists(signupEmail);
     if (userExists) {
-      setSignupError('User already exists. Please login.');
+      setSignupError('User already exists. Please Signin.');
       return;
     }
 
@@ -82,19 +105,31 @@ function Login() {
     setSignupError('');
   };
 
-  const handleLogin = async (e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();
     // Clear previous errors
-    setLoginError('');
+    setSigninError('');
 
-    // Check if user exists
-    const userExists = await checkUserExists(loginEmail);
-    if (!userExists) {
-      setLoginError('User does not exist. Please sign up.');
+    // Client-side validation
+    if (!isValidEmail(signinEmail)) {
+      setSigninError('Invalid email format. Please use your AUB student email.');
       return;
     }
 
-    // Proceed with login if user exists
+    // Check if user exists
+    const userExists = await checkUserExists(signinEmail);
+    if (!userExists) {
+      setSigninError('User does not exist. Please sign up.');
+      return;
+    }
+
+    const correctPassword = await checkPassword(signinEmail, signinPassword);
+    if (!correctPassword) {
+      setSigninError('Incorrect password.');
+      return;
+    }
+
+    // Proceed with login if user exists and password is correct
     // You can implement your login logic here
   };
 
@@ -117,24 +152,24 @@ function Login() {
   };
 
   return (
-    <div className={`login-signup-container ${activeContainer}`}>
+    <div className={`signin-signup-container ${activeContainer}`}>
       <div className="form-container sign-up">
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
-          <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} />
-          <input type="email" placeholder="Email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
-          <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} />
+          <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required />
+          <input type="email" placeholder="Email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
+          <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
           <button type="submit">Sign Up</button>
           {signupError && <p className="error">{signupError}</p>}
         </form>
       </div>
       <div className="form-container sign-in">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignin}>
           <h1>Sign In</h1>
-          <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-          <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+          <input type="email" placeholder="Email" value={signinEmail} onChange={(e) => setSigninEmail(e.target.value)} required />
+          <input type="password" placeholder="Password" value={signinPassword} onChange={(e) => setSigninPassword(e.target.value)} required />
           <button type="submit">Sign In</button>
-          {loginError && <p className="error">{loginError}</p>}
+          {signinError && <p className="error">{signinError}</p>}
         </form>
       </div>
       <div className="toggle-container">
@@ -142,7 +177,7 @@ function Login() {
           <div className={`toggle-panel toggle-left ${activeContainer}`}>
             <h1>Welcome Back!</h1>
             <p>Enter your personal details to use all site features</p>
-            <button className="hidden" onClick={handleLoginClick}>Sign In</button>
+            <button className="hidden" onClick={handleSigninClick}>Sign In</button>
           </div>
           <div className={`toggle-panel toggle-right ${activeContainer}`}>
             <h1>Hello, Student!</h1>
@@ -155,4 +190,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SigninSignup;
