@@ -1,0 +1,28 @@
+.verification-success-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .verification-success-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .verification-success-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .verification-success-container .home-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #840032;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .verification-success-container .home-link:hover {
+    background-color: #5e0125;
+  }  

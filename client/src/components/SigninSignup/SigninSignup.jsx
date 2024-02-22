@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SigninSignup.css';
 
 function SigninSignup() {
@@ -10,6 +11,7 @@ function SigninSignup() {
   const [signinEmail, setSigninEmail] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
   const [signinError, setSigninError] = useState('');
+  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     setActiveContainer('active');
@@ -98,11 +100,8 @@ function SigninSignup() {
     // Proceed with signup if all validations pass
     // You can implement your signup logic here
   
-    // Clear the input fields and reset the error after successful signup
-    setSignupName('');
-    setSignupEmail('');
-    setSignupPassword('');
-    setSignupError('');
+    // Redirect to email verification page after successful signup
+    navigate('/email-verification'); // Use useNavigate to redirect
   };
 
   const handleSignin = async (e) => {
