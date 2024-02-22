@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-          <Route path='/signin_signup' element={<SigninSignup/>}/>
+          <Route path='/' element={<SigninSignup/>}/>
           <Route path='/email_verification' element={<EmailVerification/>}/>
           <Route path='/verification_success' element={<VerificationSuccess/>}/>
         </Routes>
