@@ -7,7 +7,7 @@ function VerificationSuccess() {
     <div className="verification-success-container">
       <h1>Verification Successful!</h1>
       <p>Your email has been successfully verified.</p>
-      <Link to="/" className="home-link">Go to Homepage</Link>
+      <Link to="/homepage" className="home-link">Go to Homepage</Link>
     </div>
   );
 }
