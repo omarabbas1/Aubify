@@ -69,28 +69,28 @@ function SigninSignup({ user, setUser }) {
     }
   };
 
-  const getToken = async (email, password) => {
-    try {
-      const response = await fetch('http://localhost:8080/getToken', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
+  // const getToken = async (email, password) => {
+  //   try {
+  //     const response = await fetch('http://localhost:8080/getToken', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({ email, password })
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok.');
+  //     }
 
-      const data = await response.json();
-      return data.accessToken; // Assuming the response contains the access token
-    } catch (error) {
-      console.error('Error fetching token:', error);
-      // Handle error, such as displaying a generic error message to the user
-      return null;
-    }
-  };
+  //     const data = await response.json();
+  //     return data.accessToken; // Assuming the response contains the access token
+  //   } catch (error) {
+  //     console.error('Error fetching token:', error);
+  //     // Handle error, such as displaying a generic error message to the user
+  //     return null;
+  //   }
+  // };
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -156,15 +156,15 @@ function SigninSignup({ user, setUser }) {
 
     // Proceed with login if user exists and password is correct
     // You can implement your login logic here
-    const token = await getToken(signinEmail, signinPassword);
-    if (token) {
-      // Store token in localStorage
-      window.localStorage.setItem('token', token);
-      // Store user data in the user state after successful sign-in
-      setUser({ email: signinEmail, password: signinPassword });
-      // Redirect to home page after successful sign-in
-      navigate('/homepage');
-    }
+    // const token = await getToken(signinEmail, signinPassword);
+    // if (token) {
+    //   // Store token in localStorage
+    //   window.localStorage.setItem('token', token);
+    //   // Store user data in the user state after successful sign-in
+    //   setUser({ email: signinEmail, password: signinPassword });
+    //   // Redirect to home page after successful sign-in
+    //   navigate('/homepage');
+    // }
   };
 
   const handlePasswordChange = (e) => {
