@@ -147,7 +147,7 @@ function SigninSignup({ user, setUser }) {
     // You can implement your signup logic here
   
     // Redirect to email verification page after successful signup
-    navigate('/email-verification'); // Use useNavigate to redirect
+    navigate('/email_verification'); // Use useNavigate to redirect
 
     // Store user data in the user state after successful signup
     // setUser({ email: signupEmail, password: signupPassword });
