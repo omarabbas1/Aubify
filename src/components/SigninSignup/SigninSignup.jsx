@@ -69,6 +69,29 @@ function SigninSignup({ user, setUser }) {
     }
   };
 
+  const checkUserVerified = async (email) => {
+    try {
+      const response = await fetch('http://localhost:8080/checkUserVerified', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+  
+      const data = await response.json();
+      return data.isVerified; // Assuming the response contains a boolean value indicating user verification status
+    } catch (error) {
+      console.error('Error checking user verification status:', error);
+      // Handle error, such as displaying a generic error message to the user
+      return false;
+    }
+  };  
+
   // const getToken = async (email, password) => {
   //   try {
   //     const response = await fetch('http://localhost:8080/getToken', {
@@ -180,6 +203,12 @@ function SigninSignup({ user, setUser }) {
       return;
     }
 
+    const isVerified = await checkUserVerified(signinEmail); // Assuming you have a function to check user verification status
+    if (!isVerified) {
+      setSigninError('User is not verified. Please verify your email.');
+      return;
+    }
+
     // Proceed with login if user exists and password is correct
     // You can implement your login logic here
     // const token = await getToken(signinEmail, signinPassword);
@@ -189,7 +218,7 @@ function SigninSignup({ user, setUser }) {
     //   // Store user data in the user state after successful sign-in
     //   setUser({ email: signinEmail, password: signinPassword });
     //   // Redirect to home page after successful sign-in
-    //   navigate('/homepage');
+      navigate('/homepage');
     // }
   };
 
