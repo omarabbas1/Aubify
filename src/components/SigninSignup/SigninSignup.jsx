@@ -127,7 +127,7 @@ function SigninSignup({ user, setUser }) {
     navigate('/email-verification'); // Use useNavigate to redirect
 
     // Store user data in the user state after successful signup
-    setUser({ email: signupEmail, password: signupPassword });
+    // setUser({ email: signupEmail, password: signupPassword });
   };
 
   const handleSignin = async (e) => {
