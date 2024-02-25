@@ -92,6 +92,29 @@ function SigninSignup({ user, setUser }) {
   //   }
   // };
 
+  const saveUserData = async (name, email, password) => {
+    try {
+      const userData = { name, email, password };
+      const response = await fetch('http://localhost:8080/saveUserData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+  
+      // Handle success if needed
+      console.log('User data saved successfully!');
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      // Handle error, such as displaying a generic error message to the user
+    }
+  };  
+
   const handleSignup = async (e) => {
     e.preventDefault();
     // Clear previous errors
@@ -128,6 +151,9 @@ function SigninSignup({ user, setUser }) {
 
     // Store user data in the user state after successful signup
     // setUser({ email: signupEmail, password: signupPassword });
+
+    // Save user data to the backend
+    await saveUserData(signupName, signupEmail, signupPassword);
   };
 
   const handleSignin = async (e) => {
