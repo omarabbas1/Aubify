@@ -189,7 +189,7 @@ function SigninSignup({ user, setUser }) {
     //   // Store user data in the user state after successful sign-in
     //   setUser({ email: signinEmail, password: signinPassword });
     //   // Redirect to home page after successful sign-in
-    //   navigate('/homepage');
+      navigate('/homepage');
     // }
   };
 
