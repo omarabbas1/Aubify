@@ -205,7 +205,7 @@ function SigninSignup({ user, setUser }) {
 
     const isVerified = await checkUserVerified(signinEmail); // Assuming you have a function to check user verification status
     if (!isVerified) {
-      setSigninError('/email_verification');
+      navigate('/email_verification')
       return;
     }
 
