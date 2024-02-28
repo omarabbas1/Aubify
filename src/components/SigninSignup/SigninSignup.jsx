@@ -246,7 +246,7 @@ function SigninSignup({ user, setUser }) {
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
           <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required />
-          <input type="email" placeholder="Email" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
+          <input type="email" placeholder="Email~ AUBnet@mail.aub.edu" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
           <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
           <button type="submit">Sign Up</button>
           {signupError && <p className="error">{signupError}</p>}
