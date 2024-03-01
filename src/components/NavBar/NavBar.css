@@ -1,0 +1,52 @@
+.navbar {
+    position: fixed; /* Set the navbar position to fixed */
+    top: 0; /* Position the navbar at the top of the viewport */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure the navbar is above other content */
+    background-color: #333; /* Navbar background color */
+    color: #fff; /* Text color */
+    padding: 10px 20px; /* Padding around navbar */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    width: 40px; /* Adjust the width of the logo image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Spacing between logo and website name */
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-center input[type="text"] {
+    width: 400px;
+    padding: 8px; /* Adjust padding */
+    border-radius: 5px; /* Add border radius */
+    border: 1px solid #0b0a0a; /* Add border */
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-name {
+    margin-right: 10px; /* Spacing between user name and sign out button */
+  }
+  
+  .sign-out-button {
+    background-color: #840032; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: not-allowed; /* Change cursor to indicate button is not clickable */
+  }
+  
+  
