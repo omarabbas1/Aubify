@@ -18,16 +18,16 @@ const Posts = ({ handleSubmitPost }) => {
   };
 
   return (
-    <div>
+    <div className='post-container'>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="content">Content:</label>
+        <label htmlFor="content"></label>
         <textarea
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
         ></textarea>
-        <button type="submit">Submit</button>
+        <button type="submit">Post</button>
       </form>
 
       <div className="post-list">

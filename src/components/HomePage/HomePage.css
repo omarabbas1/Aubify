@@ -1,0 +1,30 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  height: 88vh; /* Ensure the home page takes the full height of the viewport */
+}
+  
+  .home-page .navbar {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .home-page .posts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Adjust styles for smaller screens if needed */
+  @media (max-width: 768px) {
+    .home-page .posts {
+      padding: 20px;
+    }
+  }  
