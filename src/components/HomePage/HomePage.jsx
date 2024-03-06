@@ -1,4 +1,3 @@
-// HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
@@ -78,7 +77,7 @@ const HomePage = () => {
           onChange={(e) => setNewPostContent(e.target.value)}
           placeholder="What's on your mind?"
         />
-        <button onClick={handleCreatePost}>Post</button>
+         <button type="submit" onClick={handleCreatePost}>Post</button>
 
         <div className="post-list">
           <h2>Posts:</h2>
