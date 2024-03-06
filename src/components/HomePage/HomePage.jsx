@@ -1,41 +1,62 @@
-import React, { useState } from 'react';
+// HomePage.jsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../UserContext'; // Go up two levels
+import { useUser } from '../../UserContext';
+
 const HomePage = () => {
+  const [posts, setPosts] = useState([]);
+  const [newPostContent, setNewPostContent] = useState('');
+  const [newCommentContent, setNewCommentContent] = useState('');
+  const navigate = useNavigate();
+  const { username, setUsername } = useUser();
 
-  const { username } = useUser();
+  useEffect(() => {
+    // Attempt to retrieve the username from localStorage upon component mount
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+    fetchPosts();
+  }, []);
 
- const [postList, setPostList] = useState([]);
-  const [content, setContent] = useState('');
-
-  const navigate = useNavigate(); // Initialize useNavigate
-
-  const handleSubmitPost = (newPostContent) => {
-    setPostList([...postList, { content: newPostContent, comments: [] }]);
-    setContent('');
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/posts');
+      setPosts(response.data);
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    }
   };
 
-  const handleAddComment = (postId, newComment) => {
-    setPostList(
-      postList.map((post, index) => {
-        if (index === postId) {
-          return {
-            ...post,
-            comments: [...post.comments, newComment]
-          };
-        }
-        return post;
-      })
-    );
+  const handleCreatePost = async () => {
+    try {
+      await axios.post('http://localhost:8080/posts', { content: newPostContent });
+      setNewPostContent('');
+      fetchPosts();
+    } catch (error) {
+      console.error('Failed to create post:', error);
+    }
+  };
+
+  const handleAddComment = async (postId, comment) => {
+    try {
+      await axios.post(`http://localhost:8080/posts/${postId}/comments`, { content: comment });
+      fetchPosts(); // Refresh the list of posts to include the new comment
+    } catch (error) {
+      console.error('Failed to add comment:', error);
+    }
   };
 
   const handleSignOut = () => {
-      navigate('/')
-    }; 
+    localStorage.removeItem('username'); // Clear username from localStorage on sign out
+    navigate('/');
+  };
 
   return (
     <div className="home-page">
+      {/* Navbar and other components remain unchanged */}
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
@@ -50,38 +71,26 @@ const HomePage = () => {
           <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button> {/* Sign out button */}
         </div>
       </nav>
-      
-      {/* Posts */}
-      
       <div className='post-container'>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmitPost(content);
-        }}>
-          <h1>Add a Post:</h1>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-          <button type="submit">Post</button>
-        </form>
+        <h1>Add a Post:</h1>
+        <textarea
+          value={newPostContent}
+          onChange={(e) => setNewPostContent(e.target.value)}
+          placeholder="What's on your mind?"
+        />
+        <button onClick={handleCreatePost}>Post</button>
 
         <div className="post-list">
           <h2>Posts:</h2>
-          {postList.map((post, index) => (
-            <div key={index} className="post" >
+          {posts.map((post) => (
+            <div key={post._id} className="post">
               <p>{post.content}</p>
-              {/* Comment Container */}
               <div className="comment-container">
                 <h3>Comments:</h3>
-                <CommentInput postId={index} handleAddComment={handleAddComment} />
-                <ul>
-                  {post.comments.map((comment, i) => (
-                    <li key={i}>{comment}</li>
-                  ))}
-                </ul>
+                {post.comments.map((comment, index) => (
+                  <p key={index}>{comment.content}</p>
+                ))}
+                <CommentInput postId={post._id} handleAddComment={handleAddComment} />
               </div>
             </div>
           ))}
@@ -94,8 +103,8 @@ const HomePage = () => {
 const CommentInput = ({ postId, handleAddComment }) => {
   const [comment, setComment] = useState('');
 
-  const handleSubmitComment = (event) => {
-    event.preventDefault();
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
     handleAddComment(postId, comment);
     setComment('');
   };
