@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SigninSignup.css';
+import { useUser } from '../../UserContext'; // Go up two levels
 
 function SigninSignup({ user, setUser }) {
   const [activeContainer, setActiveContainer] = useState('');
@@ -11,6 +12,7 @@ function SigninSignup({ user, setUser }) {
   const [signinEmail, setSigninEmail] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
   const [signinError, setSigninError] = useState('');
+  const { setUsername } = useUser();
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
@@ -181,8 +183,7 @@ function SigninSignup({ user, setUser }) {
 
   const handleSignin = async (e) => {
     e.preventDefault();
-    // Clear previous errors
-    setSigninError('');
+    setSigninError(''); // Clear previous errors
 
     // Client-side validation
     if (!isValidEmail(signinEmail)) {
@@ -197,30 +198,50 @@ function SigninSignup({ user, setUser }) {
       return;
     }
 
+    // Check if the password is correct
     const correctPassword = await checkPassword(signinEmail, signinPassword);
     if (!correctPassword) {
       setSigninError('Incorrect password.');
       return;
     }
 
-    const isVerified = await checkUserVerified(signinEmail); // Assuming you have a function to check user verification status
+    // Check if the user is verified
+    const isVerified = await checkUserVerified(signinEmail);
     if (!isVerified) {
       navigate('/email_verification')
       return;
     }
 
-    // Proceed with login if user exists and password is correct
-    // You can implement your login logic here
-    // const token = await getToken(signinEmail, signinPassword);
-    // if (token) {
-    //   // Store token in localStorage
-    //   window.localStorage.setItem('token', token);
-    //   // Store user data in the user state after successful sign-in
-    //   setUser({ email: signinEmail, password: signinPassword });
-    //   // Redirect to home page after successful sign-in
-      navigate('/homepage');
-    // }
-  };
+    // Proceed with login if user exists, password is correct, and user is verified
+    try {
+      const response = await fetch('http://localhost:8080/handleSignin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: signinEmail }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch username');
+      }
+
+      const data = await response.json();
+      if (data.success && data.userName) {
+        // Assuming setUsername updates the username in your global state/context
+        setUsername(data.userName); // Update username in context with the name fetched from backend
+
+        navigate('/homepage'); // Navigate to homepage after successful sign-in
+      } else {
+        // Handle case where username is not found or another error occurred
+        setSigninError('Failed to get username. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error fetching username:', error);
+      setSigninError('An error occurred. Please try again.');
+    }
+};
+
 
   const handlePasswordChange = (e) => {
     setSignupPassword(e.target.value);

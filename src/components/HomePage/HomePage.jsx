@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../UserContext'; // Go up two levels
 const HomePage = () => {
+
+  const { username } = useUser();
 
  const [postList, setPostList] = useState([]);
   const [content, setContent] = useState('');
@@ -43,7 +46,7 @@ const HomePage = () => {
           <input type="text" placeholder="Search..." /> {/* Search bar */}
         </div>
         <div className="navbar-right">
-          <span className="user-name">User Name</span> 
+          <span className="user-name">Welcome, {username}!</span> 
           <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button> {/* Sign out button */}
         </div>
       </nav>
