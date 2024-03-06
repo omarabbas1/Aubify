@@ -53,11 +53,12 @@
 /* Post container styles */
 
 .post {
-  background-color: #f9f9f9;
+  background-color: #840032 ;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
   word-wrap: break-word; /* Enable word wrapping for long words */
+  font-family: "Times New Roman", Times, serif;
 }
 
 
@@ -70,34 +71,25 @@
   right: 0; /* Align the container to the right */
   bottom: 0; /* Align the container to the bottom */
   overflow-y: auto;
-  background-color: linear-gradient(to top, #ffffff, #840032);;
+  background-color: linear-gradient(to top, #ffffff, #840032);
 }
 
 .post-container .post p {
   max-width: 100%; /* Limit the width of the post content */
   word-wrap: break-word; /* Enable word wrapping for long words */
+  font-family: "Times New Roman", Times, serif;
 }
 
 .post-container form {
   margin-bottom: 20px;
 }
 
-.post-container label {
-  margin-right: 10px;
-}
-
-.post-heading {
+.post-container h1 {
   font-size: 24px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   color: #070505; /* Change the color to match your design */
-  margin-bottom: 10px; /* Add some spacing between the label and the input */
-}
-
-.post-container input[type="text"] {
-  width: calc(100% - 90px); /* Adjust the width of the input */
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  
 }
 
 .post-container button[type="submit"] {
@@ -105,7 +97,7 @@
   color: #fff;
   border: none;
   padding: 8px 16px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -114,38 +106,35 @@
 }
 
 .post-list h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.post {
-  background-color: #f9f9f9;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  font-size: 25px;
+  margin-bottom: 5px;
 }
 
 .post p {
-  margin-bottom: 10px;
+  background-color: #840032;
+}
+
+.comment-container {
+  background-color: #840032; /* Background color for the comment container */
+  padding: 10px;
+}
+
+.comment-container h3 {
+  font-size: 18px; /* Adjust the font size as needed */
+  margin-bottom: 10px; /* Add some spacing between the heading and comments */
 }
 
 .comment-form {
   margin-top: 10px;
 }
 
-.comment-form input[type="text"] {
-  width: calc(100% - 80px);
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #cccccc;
-}
-
 .comment-form button[type="submit"] {
-  background-color: #840032;
-  color: #fff;
+  background-color:  #180202;
+  color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 5px;
+  margin-top: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -157,4 +146,25 @@
 .post-container .post-list ul li {
   max-width: 100%; /* Limit the width of the comment content */
   word-wrap: break-word; /* Enable word wrapping for long words */
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+/* Post and Comment text areas */
+.post-container textarea,
+.comment-form textarea {
+  width: 300px; /* Set a medium width for the text area */
+  min-width: 200px; /* Set a minimum width to prevent it from becoming too narrow */
+  max-width: 100%; /* Allow the text area to elongate if necessary */
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  
+  font-family: "Times New Roman", Times, serif; /* Set the font family */
+ /* Add some bottom margin for spacing */
+}
+.post-container textarea:focus,
+.comment-form textarea:focus {
+  border-color: #840032; /* Change border color on focus */
 }

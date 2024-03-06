@@ -53,10 +53,9 @@ const HomePage = () => {
           e.preventDefault();
           handleSubmitPost(content);
         }}>
-          <label htmlFor="content" className="post-heading">Add a Post:</label>
-          <input
+          <h1>Add a Post:</h1>
+          <textarea
             id="content"
-            type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
@@ -67,14 +66,18 @@ const HomePage = () => {
         <div className="post-list">
           <h2>Posts:</h2>
           {postList.map((post, index) => (
-            <div key={index} className="post">
+            <div key={index} className="post" >
               <p>{post.content}</p>
-              <CommentInput postId={index} handleAddComment={handleAddComment} />
-              <ul>
-                {post.comments.map((comment, i) => (
-                  <li key={i}>{comment}</li>
-                ))}
-              </ul>
+              {/* Comment Container */}
+              <div className="comment-container">
+                <h3>Comments:</h3>
+                <CommentInput postId={index} handleAddComment={handleAddComment} />
+                <ul>
+                  {post.comments.map((comment, i) => (
+                    <li key={i}>{comment}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -82,7 +85,6 @@ const HomePage = () => {
     </div>
   );
 };
-
 
 const CommentInput = ({ postId, handleAddComment }) => {
   const [comment, setComment] = useState('');
@@ -94,9 +96,8 @@ const CommentInput = ({ postId, handleAddComment }) => {
   };
 
   return (
-    <form onSubmit={handleSubmitComment}>
-      <input
-        type="text"
+    <form onSubmit={handleSubmitComment} className="comment-form">
+      <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Add a comment..."
