@@ -230,7 +230,8 @@ function SigninSignup({ user, setUser }) {
       if (data.success && data.userName) {
         // Assuming setUsername updates the username in your global state/context
         setUsername(data.userName); // Update username in context with the name fetched from backend
-
+        const username = data.userName; // Make sure to extract the username from the response or based on your logic
+        localStorage.setItem('username', username); // Save username to localStorage
         navigate('/homepage'); // Navigate to homepage after successful sign-in
       } else {
         // Handle case where username is not found or another error occurred
