@@ -75,7 +75,7 @@ const HomePage = () => {
           placeholder="What's on your mind?"
           rows={4}
         />
-        <button onClick={handleCreatePost}>Post</button>
+         <button type="submit" onClick={handleCreatePost}>Post</button>
 
         <div className="post-list">
           <h2>Posts:</h2>

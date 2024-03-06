@@ -86,9 +86,9 @@
 }
 
 .post-container h1 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff; /* White text */
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #070505; /* Change the color to match your design */
   margin-bottom: 10px;
   text-align: center;
 }

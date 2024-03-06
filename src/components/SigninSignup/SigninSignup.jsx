@@ -167,18 +167,35 @@ function SigninSignup({ user, setUser }) {
       setSignupError('User already exists. Please Signin.');
       return;
     }
-
-    // Proceed with signup if all validations pass
-    // You can implement your signup logic here
-  
-    // Redirect to email verification page after successful signup
-    navigate('/email_verification'); // Use useNavigate to redirect
-
-    // Store user data in the user state after successful signup
-    // setUser({ email: signupEmail, password: signupPassword });
-
-    // Save user data to the backend
     await saveUserData(signupName, signupEmail, signupPassword);
+    try {
+      const response = await fetch('http://localhost:8080/handleSignup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: signinEmail }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch username');
+      }
+
+      const data = await response.json();
+      if (data.success && data.userName) {
+        // Assuming setUsername updates the username in your global state/context
+        setUsername(data.userName); // Update username in context with the name fetched from backend
+        const username = data.userName; // Make sure to extract the username from the response or based on your logic
+        localStorage.setItem('username', username); // Save username to localStorage
+        navigate('/email_verification'); // Navigate to homepage after successful sign-in
+      } else {
+        // Handle case where username is not found or another error occurred
+        setSigninError('Failed to get username. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error fetching username:', error);
+      setSigninError('An error occurred. Please try again.');
+    }
   };
 
   const handleSignin = async (e) => {
