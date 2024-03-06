@@ -124,17 +124,6 @@
   margin-top: 10px;
 }
 
-/* Comment text area with black border */
-.comment-form textarea {
-  width: calc(100% - 18px); /* Adjust width to consider border width */
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #000; /* Black border */
-  margin-bottom: 10px;
-  font-family: "Times New Roman", Times, serif;
-  resize: none; /* Disable textarea resizing */
-}
-
 .comment-form button[type="submit"] {
   background-color: #840032;
   color: #fff;
@@ -162,7 +151,7 @@
   width: 100%;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #fff; /* White border */
+  border: 1px solid dark black; /* White border */
   margin-bottom: 10px;
   font-family: "Times New Roman", Times, serif;
   resize: none; /* Disable textarea resizing */
