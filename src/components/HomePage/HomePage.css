@@ -1,3 +1,4 @@
+/* HomePage.css */
 /* Navbar styles */
 .navbar {
   position: fixed;
@@ -5,8 +6,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: #333;
-  color: #fff;
+  background-color: #000000; /* Main color */
+  color: #fff; /* White text */
   padding: 10px 20px;
   width: 100%;
   display: flex;
@@ -29,7 +30,7 @@
   width: 400px;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #0b0a0a;
+  border: 1px solid #fff; /* White border */
 }
 
 .navbar-right {
@@ -42,8 +43,8 @@
 }
 
 .sign-out-button {
-  background-color: #840032;
-  color: #fff;
+  background-color: #840032; 
+  color: #fff; 
   border: none;
   padding: 8px 16px;
   border-radius: 5px;
@@ -51,32 +52,32 @@
 }
 
 /* Post container styles */
-
 .post {
-  background-color: #840032 ;
+  background-color: #fff; /* White background */
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
-  word-wrap: break-word; /* Enable word wrapping for long words */
+  word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
 }
 
-
 .post-container {
-  margin-top: 60px; /* Adjust this value according to the height of your navbar */
+  /* margin-top: 00px; */
   padding: 20px;
-  position: absolute; /* Set position to absolute */
-  top: 60px; /* Set top position to match the height of the navbar */
-  left: 0; /* Align the container to the left */
-  right: 0; /* Align the container to the right */
-  bottom: 0; /* Align the container to the bottom */
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow-y: auto;
-  background-color: linear-gradient(to top, #ffffff, #840032);
+  background-color: #840032; /* Main color background */
+  color: #fff; /* White text */
 }
 
 .post-container .post p {
-  max-width: 100%; /* Limit the width of the post content */
-  word-wrap: break-word; /* Enable word wrapping for long words */
+  max-width: 100%;
+  word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -85,15 +86,15 @@
 }
 
 .post-container h1 {
-  font-size: 24px; /* Adjust the font size as needed */
-  font-weight: bold; /* Make the text bold */
-  color: #070505; /* Change the color to match your design */
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff; /* White text */
   margin-bottom: 10px;
-  
+  text-align: center;
 }
 
-.post-container button[type="submit"] {
-  background-color: #840032;
+.post-container button {
+  background-color: #530120;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -108,29 +109,37 @@
 .post-list h2 {
   font-size: 25px;
   margin-bottom: 5px;
-}
-
-.post p {
-  background-color: #840032;
+  text-align: center;
 }
 
 .comment-container {
-  background-color: #840032; /* Background color for the comment container */
+  background-color: #fff; /* White background */
   padding: 10px;
 }
 
 .comment-container h3 {
-  font-size: 18px; /* Adjust the font size as needed */
-  margin-bottom: 10px; /* Add some spacing between the heading and comments */
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .comment-form {
   margin-top: 10px;
 }
 
+/* Comment text area with black border */
+.comment-form textarea {
+  width: calc(100% - 18px); /* Adjust width to consider border width */
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #000; /* Black border */
+  margin-bottom: 10px;
+  font-family: "Times New Roman", Times, serif;
+  resize: none; /* Disable textarea resizing */
+}
+
 .comment-form button[type="submit"] {
-  background-color:  #180202;
-  color: white;
+  background-color: #840032;
+  color: #fff;
   border: none;
   padding: 8px 16px;
   margin-top: 5px;
@@ -139,32 +148,29 @@
 }
 
 .post-list ul {
-  list-style-type: decimal; /* Display list items with numbers */
-  margin-left: 20px; /* Add some left margin for indentation */
+  list-style-type: decimal;
+  margin-left: 20px;
 }
 
 .post-container .post-list ul li {
-  max-width: 100%; /* Limit the width of the comment content */
-  word-wrap: break-word; /* Enable word wrapping for long words */
+  max-width: 100%;
+  word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
 }
-
 
 /* Post and Comment text areas */
 .post-container textarea,
 .comment-form textarea {
-  width: 300px; /* Set a medium width for the text area */
-  min-width: 200px; /* Set a minimum width to prevent it from becoming too narrow */
-  max-width: 100%; /* Allow the text area to elongate if necessary */
+  width: 100%;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 5px;
-  
-  font-family: "Times New Roman", Times, serif; /* Set the font family */
- /* Add some bottom margin for spacing */
+  border: 1px solid #fff; /* White border */
+  margin-bottom: 10px;
+  font-family: "Times New Roman", Times, serif;
+  resize: none; /* Disable textarea resizing */
 }
+
 .post-container textarea:focus,
 .comment-form textarea:focus {
-  border-color: #840032; /* Change border color on focus */
+  border-color: #840032; /* Main color border */
 }

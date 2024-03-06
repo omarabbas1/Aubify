@@ -1,4 +1,3 @@
-// HomePage.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
@@ -8,17 +7,16 @@ import { useUser } from '../../UserContext';
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
-  const [newCommentContent, setNewCommentContent] = useState('');
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
 
   useEffect(() => {
-    // Attempt to retrieve the username from localStorage upon component mount
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
     }
     fetchPosts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchPosts = async () => {
@@ -43,32 +41,30 @@ const HomePage = () => {
   const handleAddComment = async (postId, comment) => {
     try {
       await axios.post(`http://localhost:8080/posts/${postId}/comments`, { content: comment });
-      fetchPosts(); // Refresh the list of posts to include the new comment
+      fetchPosts();
     } catch (error) {
       console.error('Failed to add comment:', error);
     }
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem('username'); // Clear username from localStorage on sign out
+    localStorage.removeItem('username');
     navigate('/');
   };
 
   return (
     <div className="home-page">
-      {/* Navbar and other components remain unchanged */}
-      {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-left">
           <img src="/aubify-logo.jpg" alt="Logo" className="navbar-logo" /> 
           <span className="website-name">Aubify</span> 
         </div>
         <div className="navbar-center">
-          <input type="text" placeholder="Search..." /> {/* Search bar */}
+          <input type="text" placeholder="Search..." />
         </div>
         <div className="navbar-right">
           <span className="user-name">Welcome, {username}!</span> 
-          <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button> {/* Sign out button */}
+          <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button>
         </div>
       </nav>
       <div className='post-container'>
@@ -77,6 +73,7 @@ const HomePage = () => {
           value={newPostContent}
           onChange={(e) => setNewPostContent(e.target.value)}
           placeholder="What's on your mind?"
+          rows={4}
         />
         <button onClick={handleCreatePost}>Post</button>
 
@@ -111,12 +108,12 @@ const CommentInput = ({ postId, handleAddComment }) => {
 
   return (
     <form onSubmit={handleSubmitComment} className="comment-form">
-      <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        placeholder="Add a comment..."
-        required
-      />
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Add a comment..."
+          required
+        />
       <button type="submit">Comment</button>
     </form>
   );
