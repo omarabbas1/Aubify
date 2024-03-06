@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './HomePage.css';
-
+import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
 
  const [postList, setPostList] = useState([]);
   const [content, setContent] = useState('');
-  
+
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const handleSubmitPost = (newPostContent) => {
     setPostList([...postList, { content: newPostContent, comments: [] }]);
     setContent('');
@@ -25,9 +27,9 @@ const HomePage = () => {
     );
   };
 
-  /* const handleSignOut = () => {
-      / Handle sign out logic here
-    };  */
+  const handleSignOut = () => {
+      navigate('/')
+    }; 
 
   return (
     <div className="home-page">
@@ -42,7 +44,7 @@ const HomePage = () => {
         </div>
         <div className="navbar-right">
           <span className="user-name">User Name</span> 
-          <button className="sign-out-button" disabled>Sign Out</button> {/* Sign out button */}
+          <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button> {/* Sign out button */}
         </div>
       </nav>
       
