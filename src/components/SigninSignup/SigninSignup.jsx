@@ -167,7 +167,11 @@ function SigninSignup({ user, setUser }) {
       setSignupError('User already exists. Please Signin.');
       return;
     }
+
+    navigate('/email_verification');
+
     await saveUserData(signupName, signupEmail, signupPassword);
+
     try {
       const response = await fetch('http://localhost:8080/handleSignup', {
         method: 'POST',
@@ -180,14 +184,12 @@ function SigninSignup({ user, setUser }) {
       if (!response.ok) {
         throw new Error('Failed to fetch username');
       }
-
       const data = await response.json();
       if (data.success && data.userName) {
         // Assuming setUsername updates the username in your global state/context
         setUsername(data.userName); // Update username in context with the name fetched from backend
         const username = data.userName; // Make sure to extract the username from the response or based on your logic
         localStorage.setItem('username', username); // Save username to localStorage
-        navigate('/email_verification'); // Navigate to homepage after successful sign-in
       } else {
         // Handle case where username is not found or another error occurred
         setSigninError('Failed to get username. Please try again.');
