@@ -172,32 +172,40 @@ function SigninSignup({ user, setUser }) {
 
     await saveUserData(signupName, signupEmail, signupPassword);
 
+    // After saving user data but before navigating
     try {
       const response = await fetch('http://localhost:8080/handleSignup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: signinEmail }),
+        body: JSON.stringify({ email: signupEmail }), // Use signupEmail here
       });
-
+    
       if (!response.ok) {
-        throw new Error('Failed to fetch username');
+        throw new Error('Failed to fetch user data');
       }
       const data = await response.json();
-      if (data.success && data.userName) {
-        // Assuming setUsername updates the username in your global state/context
-        setUsername(data.userName); // Update username in context with the name fetched from backend
-        const username = data.userName; // Make sure to extract the username from the response or based on your logic
-        localStorage.setItem('username', username); // Save username to localStorage
+      if (data.success) {
+        // Save username in localStorage
+        localStorage.setItem('username', data.userName);
+        setUsername(data.userName); // This assumes setUsername is the method to update context or state
+        
+        // Check if the user's email is verified
+        if (data.emailVerified) {
+          // Navigate to homepage or proceed as verified user
+          navigate('/homepage');
+        }
       } else {
-        // Handle case where username is not found or another error occurred
-        setSigninError('Failed to get username. Please try again.');
+        // Handle case where user data is not returned or another error occurred
+        setSignupError(data.message || 'Failed to get user data. Please try again.');
       }
     } catch (error) {
-      console.error('Error fetching username:', error);
-      setSigninError('An error occurred. Please try again.');
+      console.error('Error fetching user data:', error);
+      setSignupError('An error occurred. Please try again.');
     }
+    
+
   };
 
   const handleSignin = async (e) => {
