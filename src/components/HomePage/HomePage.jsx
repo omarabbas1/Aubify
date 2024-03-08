@@ -7,6 +7,7 @@ import { useUser } from '../../UserContext';
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
 
@@ -19,14 +20,19 @@ const HomePage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    fetchPosts();
+  }, [searchTerm]);
+
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/posts');
+      const response = await axios.get(`http://localhost:8080/posts?searchTerm=${searchTerm}`);
       setPosts(response.data);
     } catch (error) {
       console.error('Failed to fetch posts:', error);
     }
   };
+
 
   const handleCreatePost = async () => {
     try {
@@ -118,5 +124,5 @@ const CommentInput = ({ postId, handleAddComment }) => {
     </form>
   );
 };
-
+//Hussein
 export default HomePage;
