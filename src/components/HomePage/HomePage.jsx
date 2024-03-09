@@ -31,6 +31,10 @@ const HomePage = () => {
     // TODO: Implement the share logic
   };
 
+  const handleCommentClick = (postId) => {
+    navigate(`/posts/${postId}/comments`);
+  };
+
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
@@ -128,7 +132,7 @@ const HomePage = () => {
                   <img src={downvoteIcon} alt="Downvote" />
                   <span className="interaction-count">{post.downvotes || 0}</span>
                 </button>
-                <button className="interaction-button">
+                <button className="interaction-button" onClick={() => handleCommentClick(post._id)}>
                   <img src={commentIcon} alt="Comments" />
                   <span className="interaction-count">{post.comments.length}</span>
                 </button>
