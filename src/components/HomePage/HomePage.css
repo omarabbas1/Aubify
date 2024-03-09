@@ -66,21 +66,26 @@
 
 /* Styles for the post title input */
 .post-title-input {
-  width: 10%; 
+  width: 25%; 
   margin: 10px ; /* Center horizontally */
-  margin-left: 12.5%;
+  margin-left: 20%;
   display: block;
   padding: 10px;
   border-radius: 15px;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
   background-color: #fff; 
+  font-size: 25px;
 }
 
 .post-title-input, .post-content-input {
   box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
+.post-content-input{
+  max-width: 60%;
+  font-size: 25px;
+}
 
 /* Styles for the post content textarea */
 .post-content-input {
@@ -197,7 +202,7 @@
   width: 75%;
   padding: 8px;
   border-radius: 15px;
-  border: 1px solid dark black; /* White border */
+  border: 1px solid dark black; 
   margin-bottom: 10px;
   font-family: "Times New Roman", Times, serif;
   resize: none; /* Disable textarea resizing */
@@ -207,8 +212,6 @@
 .comment-form textarea:focus {
   border-color: #840032; /* Main color border */
 }
-
-/* ... (keep your existing styles) ... */
 
 .post-header {
   font-size: 1.2rem;
@@ -242,11 +245,5 @@
 .submit-post-button {
   display: block; /* Convert button to block-level to allow margin manipulation */
   width: fit-content; /* Shrink wrap the button content */
-  margin-left: 84%; /* Align button to the left */
-   /* Space above the button */
-  /* Your existing button styles */
+  margin-left: 76.5%; /* Align button to the left */
 }
-
-
-/* ... (any additional styles you may want to add) ... */
-
