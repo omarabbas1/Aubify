@@ -100,21 +100,21 @@ const HomePage = () => {
         </div>
       </nav>
       <div className='post-container'>
-        <h1>Add a Post:</h1>
-        <input
-          type="text"
-          placeholder="Post Title"
-          value={newPostTitle}
-          onChange={(e) => setNewPostTitle(e.target.value)}
-          className="post-title-input"
-        />
-        <textarea
-          placeholder="What's on your mind?"
-          value={newPostContent}
-          onChange={(e) => setNewPostContent(e.target.value)}
-          className="post-content-input"
-        />
-        <button onClick={handleCreatePost}>Post</button>
+      <h1>Add a Post:</h1>
+  <input
+    type="text"
+    placeholder="Post Title"
+    className="post-title-input"
+    value={newPostTitle}
+    onChange={(e) => setNewPostTitle(e.target.value)}
+  />
+  <textarea
+    placeholder="What's on your mind?"
+    className="post-content-input"
+    value={newPostContent}
+    onChange={(e) => setNewPostContent(e.target.value)}
+  />
+  <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
 
         <div className="post-list">
           {/* ... */}

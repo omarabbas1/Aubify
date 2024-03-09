@@ -53,23 +53,57 @@
 .post {
   background-color: #fff; /* White background */
   padding: 10px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  max-width: 75%;
+  max-width: 50%; /* Adjust width to your preference */
+  margin: 20px auto; /* Center the post */
+  border-radius: 25px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
+  display: block; /* Ensure it's a block-level element */
+  width: 100%; /* Adjust width as needed */
+  margin-bottom: 20px;
 }
 
-.post-title-input{
-  background-color: #fff; /* White background */
+/* Styles for the post title input */
+.post-title-input {
+  width: 50%; /* Same width as posts */
+  margin: 20px auto; /* Center horizontally */
+  display: block;
   padding: 10px;
   border-radius: 15px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
+  background-color: #fff; /* White background */
 }
+
+.post-title-input, .post-content-input {
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+
+/* Styles for the post content textarea */
+.post-content-input {
+  width: 100%; /* Same width as posts */
+  height: 100px; /* Larger height */
+  margin: 20px auto; /* Center horizontally with space below */
+  display: block;
+  padding: 10px;
+  border-radius: 15px;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+  background-color: #fff; /* White background */
+  border: 1px solid #ccc; /* Added border for better visibility */
+}
+
+/* Adjust the button alignment */
+.content-button-container {
+  width: 50%; /* Same width as your content input for alignment */
+  margin: 0 auto; /* Center this container */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns children (content input and button) to the left within this container */
+}
+
 
 .post-container {
   /* margin-top: 00px; */
@@ -204,6 +238,14 @@
   height: 20px;
   margin-right: 5px;
 }
+.submit-post-button {
+  display: block; /* Convert button to block-level to allow margin manipulation */
+  width: fit-content; /* Shrink wrap the button content */
+  margin-left: 0; /* Align button to the left */
+  margin-top: 20px; /* Space above the button */
+  /* Your existing button styles */
+}
+
 
 /* ... (any additional styles you may want to add) ... */
 
