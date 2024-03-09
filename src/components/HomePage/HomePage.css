@@ -92,8 +92,8 @@
 }
 
 .post-container button {
-  background-color: #530120;
-  color: #fff;
+  background-color: white;
+  color: #530120;
   border: none;
   padding: 8px 16px;
   border-radius: 20px;
@@ -161,3 +161,38 @@
 .comment-form textarea:focus {
   border-color: #840032; /* Main color border */
 }
+
+/* ... (keep your existing styles) ... */
+
+.post-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.post-interactions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #e1e1e1;
+}
+
+.interaction-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem; /* Size of the text next to icons */
+}
+
+.interaction-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+/* ... (any additional styles you may want to add) ... */
+
