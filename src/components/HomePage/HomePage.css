@@ -53,8 +53,19 @@
 .post {
   background-color: #fff; /* White background */
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   margin-bottom: 20px;
+  max-width: 75%;
+  word-wrap: break-word;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+}
+
+.post-title-input{
+  background-color: #fff; /* White background */
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 10px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
@@ -84,7 +95,7 @@
 }
 
 .post-container h1 {
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 62px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   color: #fff; /* Change the color to match your design */
   margin-bottom: 10px;
@@ -148,9 +159,9 @@
 /* Post and Comment text areas */
 .post-container textarea,
 .comment-form textarea {
-  width: 100%;
+  width: 75%;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: 1px solid dark black; /* White border */
   margin-bottom: 10px;
   font-family: "Times New Roman", Times, serif;
