@@ -51,7 +51,7 @@
 
 /* Post container styles */
 .post {
-  background-color: #fff; /* White background */
+  background-color: #fff; 
   padding: 10px;
   max-width: 50%; /* Adjust width to your preference */
   margin: 20px auto; /* Center the post */
@@ -66,14 +66,15 @@
 
 /* Styles for the post title input */
 .post-title-input {
-  width: 50%; /* Same width as posts */
-  margin: 20px auto; /* Center horizontally */
+  width: 10%; 
+  margin: 10px ; /* Center horizontally */
+  margin-left: 12.5%;
   display: block;
   padding: 10px;
   border-radius: 15px;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
-  background-color: #fff; /* White background */
+  background-color: #fff; 
 }
 
 .post-title-input, .post-content-input {
@@ -241,8 +242,8 @@
 .submit-post-button {
   display: block; /* Convert button to block-level to allow margin manipulation */
   width: fit-content; /* Shrink wrap the button content */
-  margin-left: 0; /* Align button to the left */
-  margin-top: 20px; /* Space above the button */
+  margin-left: 84%; /* Align button to the left */
+   /* Space above the button */
   /* Your existing button styles */
 }
 
