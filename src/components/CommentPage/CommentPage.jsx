@@ -25,6 +25,10 @@ const CommentPage = () => {
   }, [postId]);
 
   const handleAddComment = async () => {
+    if (newComment.trim() === '') {
+      alert('Please enter the content for the comment.');
+      return;
+    }
     try {
       const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
         method: 'POST',

@@ -70,8 +70,11 @@ const HomePage = () => {
 
 
   const handleCreatePost = async () => {
+    if (newPostTitle.trim() === '' || newPostContent.trim() === '') {
+      alert('Please enter both title and content for the post.');
+      return;
+    }
     try {
-      // Include the title when creating a new post
       await axios.post('http://localhost:8080/posts', { title: newPostTitle, content: newPostContent });
       setNewPostTitle('');
       setNewPostContent('');
@@ -150,5 +153,4 @@ const HomePage = () => {
   );
 };
 
-//Hussein
 export default HomePage;
