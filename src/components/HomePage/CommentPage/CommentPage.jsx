@@ -53,7 +53,7 @@ const CommentPage = () => {
         <div key={post._id} className="post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
-          <div className="post-interactions">
+          <div className="comment-interactions">
             <button className="interaction-button">
               <img src={upvoteIcon} alt="Upvote" />
               <span className="interaction-count">{post.upvotes || 0}</span>
@@ -74,26 +74,36 @@ const CommentPage = () => {
       ) : (
         <p>Loading post...</p>
       )}
-      <div className="comments-container">
-        <h3>Comments:</h3>
-        <div className="comments-list">
-        {post && post.comments.map((comment, index) => (
-          <div key={index} className="comment">
-            <p>{comment}</p>
-          </div>
-        ))}
-      </div>
-      <div className="add-comment">
+             <div className="add-comment">
+             <h3>Comments:</h3>
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Write your comment here..."
         />
-        <button onClick={handleAddComment}>Comment</button>
+        <button onClick={handleAddComment} type="submit">Comment</button>
+      </div>
+      <div className="comments-container">
+        <div className="comments-list">
+          {post && post.comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <p>{comment}</p>
+              <div className="comment-interactions">
+                <button className="interaction-button">
+                  <img src={upvoteIcon} alt="Upvote" />
+                </button>
+                <button className="interaction-button">
+                  <img src={downvoteIcon} alt="Downvote" />
+                </button>
+                <button className="interaction-button">
+                  <img src={shareIcon} alt="Share" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-   </div>
   );
 };
-
 export default CommentPage;
