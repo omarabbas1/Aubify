@@ -48,7 +48,7 @@ const CommentPage = () => {
 
   return (
     <div className="comment-page">
-      <h3>Post</h3>
+      <h3>Post:</h3>
       {post ? (
         <div key={post._id} className="post">
           <h2>{post.title}</h2>
@@ -74,8 +74,9 @@ const CommentPage = () => {
       ) : (
         <p>Loading post...</p>
       )}
-      <div className="comments">
-        <h3>Comments</h3>
+      <div className="comments-container">
+        <h3>Comments:</h3>
+        <div className="comments-list">
         {post && post.comments.map((comment, index) => (
           <div key={index} className="comment">
             <p>{comment}</p>
@@ -91,6 +92,7 @@ const CommentPage = () => {
         <button onClick={handleAddComment}>Comment</button>
       </div>
     </div>
+   </div>
   );
 };
 

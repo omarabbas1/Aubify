@@ -81,15 +81,6 @@ const HomePage = () => {
     }
   };
 
-  const handleAddComment = async (postId, comment) => {
-    try {
-      await axios.post(`http://localhost:8080/posts/${postId}/comments`, { content: comment });
-      fetchPosts();
-    } catch (error) {
-      console.error('Failed to add comment:', error);
-    }
-  };
-
   const handleSignOut = () => {
     localStorage.removeItem('username');
     navigate('/');
@@ -128,6 +119,7 @@ const HomePage = () => {
   <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
 
         <div className="post-list">
+          <h1> Posts: </h1>
           {/* ... */}
           {posts.map((post) => (
             <div key={post._id} className="post">
@@ -156,28 +148,6 @@ const HomePage = () => {
         </div>
         </div>
     </div>
-  );
-};
-
-const CommentInput = ({ postId, handleAddComment }) => {
-  const [comment, setComment] = useState('');
-
-  const handleSubmitComment = (e) => {
-    e.preventDefault();
-    handleAddComment(postId, comment);
-    setComment('');
-  };
-
-  return (
-    <form onSubmit={handleSubmitComment} className="comment-form">
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Add a comment..."
-          required
-        />
-      <button type="submit">Comment</button>
-    </form>
   );
 };
 
