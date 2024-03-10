@@ -171,6 +171,7 @@ function SigninSignup({ user, setUser }) {
     navigate('/email_verification');
 
     await saveUserData(signupName, signupEmail, signupPassword);
+    localStorage.setItem('userEmail', signupEmail);
 
     // After saving user data but before navigating
     try {
@@ -239,6 +240,7 @@ function SigninSignup({ user, setUser }) {
       return;
     }
 
+    localStorage.setItem('userEmail', signupEmail);
     // Proceed with login if user exists, password is correct, and user is verified
     try {
       const response = await fetch('http://localhost:8080/handleSignin', {
