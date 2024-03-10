@@ -5,7 +5,7 @@ import SigninSignup from './components/SigninSignup/SigninSignup';
 import EmailVerification from './components/EmailVerification/EmailVerification';
 import VerificationSuccess from './components/EmailVerification/VerificationSuccess';
 import HomePage from './components/HomePage/HomePage';
-import CommentPage from './components/HomePage/CommentPage/CommentPage';
+import CommentPage from './components/CommentPage/CommentPage';
 
 function App() {
   return (

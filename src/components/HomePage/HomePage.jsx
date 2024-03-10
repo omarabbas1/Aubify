@@ -120,7 +120,6 @@ const HomePage = () => {
 
         <div className="post-list">
           <h1> Posts: </h1>
-          {/* ... */}
           {posts.map((post) => (
             <div key={post._id} className="post">
               <h2>{post.title}</h2> {/* Post title */}

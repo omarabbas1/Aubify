@@ -78,7 +78,6 @@
   border-radius: 25px;
 }
 
-/* Styles for the post title input */
 .post-title-input {
   width: 25%; 
   margin: 10px ; /* Center horizontally */
@@ -90,18 +89,9 @@
   color: #840032; /* Main color text */
   background-color: #fff; 
   font-size: 25px;
+  box-sizing: border-box;
 }
 
-.post-title-input, .post-content-input {
-  box-sizing: border-box; /* Ensures padding and border are included in the width */
-}
-
-.post-content-input{
-  max-width: 60%;
-  font-size: 25px;
-}
-
-/* Styles for the post content textarea */
 .post-content-input {
   width: 100%; /* Same width as posts */
   height: 100px; /* Larger height */
@@ -112,7 +102,11 @@
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
   background-color: #fff; /* White background */
-  border: 1px solid #ccc; /* Added border for better visibility */
+  border: 2px solid black; /* Added border for better visibility */
+  max-width: 60%;
+  font-size: 25px;
+  box-sizing: border-box;
+  resize: none;
 }
 
 /* Adjust the button alignment */
@@ -216,23 +210,6 @@
   font-family: "Times New Roman", Times, serif;
 }
 
-/* Post and Comment text areas */
-.post-container textarea,
-.comment-form textarea {
-  width: 75%;
-  padding: 8px;
-  border-radius: 15px;
-  border: 1px solid dark black; 
-  margin-bottom: 10px;
-  font-family: "Times New Roman", Times, serif;
-  resize: none; /* Disable textarea resizing */
-}
-
-.post-container textarea:focus,
-.comment-form textarea:focus {
-  border-color: #840032; /* Main color border */
-}
-
 .post-header {
   font-size: 1.2rem;
   font-weight: bold;
@@ -265,5 +242,5 @@
 .submit-post-button {
   display: block; /* Convert button to block-level to allow margin manipulation */
   width: fit-content; /* Shrink wrap the button content */
-  margin-left: 76.5%; /* Align button to the left */
+  margin-left: 75%; /* Align button to the left */
 }
