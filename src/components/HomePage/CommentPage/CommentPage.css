@@ -38,6 +38,8 @@
   margin-top: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .comments-container {
@@ -73,6 +75,7 @@
 
 .comment p {
   font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
 }
 
 .add-comment textarea {
