@@ -57,6 +57,7 @@
   .navbar-center input[type="text"] {
     width: 100%; /* Take full width on small screens */
     max-width: none; /* No maximum width */
+    display: none;
   }
 }
 
@@ -139,10 +140,6 @@
   font-size: 24px;
 }
 
-.post-container form {
-  margin-bottom: 20px;
-}
-
 .post-container h1 {
   font-size: 62px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
@@ -151,13 +148,17 @@
   text-align: center;
 }
 
-.post-container button {
+.submit-post-button {
+  display: block; /* Convert button to block-level to allow margin manipulation */
+  width: fit-content; /* Shrink wrap the button content */
+  margin-left: 71.7%; /* Align button to the left */
   background-color: white;
   color: #530120;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 30px; 
   border-radius: 20px;
   cursor: pointer;
+  font-size: 18px;
 }
 
 .post-list {
@@ -173,30 +174,6 @@
   font-size: 25px;
   margin-bottom: 5px;
   text-align: center;
-}
-
-.comment-container {
-  background-color: #fff; /* White background */
-  padding: 10px; 
-}
-
-.comment-container h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.comment-form {
-  margin-top: 10px;
-}
-
-.comment-form button[type="submit"] {
-  background-color: #840032;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  margin-top: 5px;
-  border-radius: 20px;
-  cursor: pointer;
 }
 
 .post-list ul {
@@ -221,7 +198,6 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 10px;
-  border-top: 1px solid #e1e1e1;
 }
 
 .interaction-button {
@@ -238,9 +214,4 @@
   width: 20px;
   height: 20px;
   margin-right: 5px;
-}
-.submit-post-button {
-  display: block; /* Convert button to block-level to allow margin manipulation */
-  width: fit-content; /* Shrink wrap the button content */
-  margin-left: 75%; /* Align button to the left */
 }
