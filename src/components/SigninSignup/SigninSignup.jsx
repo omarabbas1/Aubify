@@ -240,7 +240,7 @@ function SigninSignup({ user, setUser }) {
       return;
     }
 
-    localStorage.setItem('userEmail', signupEmail);
+    localStorage.setItem('userEmail', signinEmail);
     // Proceed with login if user exists, password is correct, and user is verified
     try {
       const response = await fetch('http://localhost:8080/handleSignin', {
