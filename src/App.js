@@ -5,6 +5,7 @@ import SigninSignup from './components/SigninSignup/SigninSignup';
 import EmailVerification from './components/EmailVerification/EmailVerification';
 import VerificationSuccess from './components/EmailVerification/VerificationSuccess';
 import HomePage from './components/HomePage/HomePage';
+import CommentPage from './components/HomePage/CommentPage/CommentPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/email_verification' element={<EmailVerification/>}/>
           <Route path='/verification_success' element={<VerificationSuccess/>}/>
           <Route path='/homepage' element={<HomePage/>}/>
+          <Route path='/posts/:postId/comments' element={<CommentPage/>}/>
         </Routes>
       </Router>
     </UserProvider>
