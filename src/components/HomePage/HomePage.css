@@ -53,15 +53,18 @@
 .post {
   background-color: #fff; 
   padding: 10px;
-  max-width: 50%; /* Adjust width to your preference */
   margin: 20px auto; /* Center the post */
   border-radius: 25px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
   display: block; /* Ensure it's a block-level element */
-  width: 100%; /* Adjust width as needed */
   margin-bottom: 20px;
+}
+
+.post-list .post{
+  width: 50%;
+  border-radius: 25px;
 }
 
 /* Styles for the post title input */
@@ -163,7 +166,7 @@
 
 .comment-container {
   background-color: #fff; /* White background */
-  padding: 10px;
+  padding: 10px; 
 }
 
 .comment-container h3 {

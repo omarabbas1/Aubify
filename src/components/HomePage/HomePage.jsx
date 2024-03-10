@@ -16,14 +16,25 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
   const [newPostTitle, setNewPostTitle] = useState('');
-  const handleUpvote = postId => {
-    console.log('Upvoted post:', postId);
-    // TODO: Implement the upvote logic
+  
+  const handleUpvote = async (postId) => {
+    const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
+    try {
+      await axios.post(`http://localhost:8080/posts/${postId}/upvote`, { userEmail });
+      fetchPosts(); // Refresh the posts to reflect the new upvote count
+    } catch (error) {
+      console.error('Failed to upvote post:', error);
+    }
   };
-
-  const handleDownvote = postId => {
-    console.log('Downvoted post:', postId);
-    // TODO: Implement the downvote logic
+  
+  const handleDownvote = async (postId) => {
+    const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
+    try {
+      await axios.post(`http://localhost:8080/posts/${postId}/downvote`, { userEmail });
+      fetchPosts(); // Refresh the posts to reflect the new downvote count
+    } catch (error) {
+      console.error('Failed to downvote post:', error);
+    }
   };
 
   const handleShare = postId => {
@@ -124,13 +135,13 @@ const HomePage = () => {
               <p>{post.content}</p> {/* Post content */}
               <div className="post-interactions">
                 {/* Interaction buttons */}
-                <button className="interaction-button">
-                  <img src={upvoteIcon} alt="Upvote" />
-                  <span className="interaction-count">{post.upvotes || 0}</span>
+                <button className="interaction-button" onClick={() => handleUpvote(post._id)}>
+                <img src={upvoteIcon} alt="Upvote" />
+                <span className="interaction-count">{post.upvotes || 0}</span>
                 </button>
-                <button className="interaction-button">
-                  <img src={downvoteIcon} alt="Downvote" />
-                  <span className="interaction-count">{post.downvotes || 0}</span>
+                <button className="interaction-button" onClick={() => handleDownvote(post._id)}>
+                <img src={downvoteIcon} alt="Downvote" />
+                <span className="interaction-count">{post.downvotes || 0}</span>
                 </button>
                 <button className="interaction-button" onClick={() => handleCommentClick(post._id)}>
                   <img src={commentIcon} alt="Comments" />
