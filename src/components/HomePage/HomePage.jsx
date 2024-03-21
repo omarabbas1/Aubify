@@ -3,10 +3,10 @@ import axios from 'axios';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../UserContext';
-import upvoteIcon from '../icons/upvote.png'; // Add your icons in the public/assets/icons/ directory
-import downvoteIcon from '../icons/downvote.png';
-import commentIcon from '../icons/comment.png';
-import shareIcon from '../icons/share.png';
+import upvoteIcon from '../Icons/upvote.png'; // Add your icons in the public/assets/icons/ directory
+import downvoteIcon from '../Icons/downvote.png';
+import commentIcon from '../Icons/comment.png';
+import shareIcon from '../Icons/share.png';
 import Navbar from '../NavBar/Navbar';
 
 
