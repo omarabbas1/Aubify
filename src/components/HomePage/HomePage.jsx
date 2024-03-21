@@ -7,6 +7,7 @@ import upvoteIcon from '../icons/upvote.png'; // Add your icons in the public/as
 import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
+import Navbar from '../NavBar/Navbar';
 
 
 const HomePage = () => {
@@ -104,19 +105,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <nav className="navbar">
-        <div className="navbar-left">
-          <img src="/aubify-logo.jpg" alt="Logo" className="navbar-logo" /> 
-          <span className="website-name">Aubify</span> 
-        </div>
-        <div className="navbar-center">
-          <input type="text" placeholder="Search..." />
-        </div>
-        <div className="navbar-right">
-          <span className="user-name">Welcome, {username}!</span> 
-          <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button>
-        </div>
-      </nav>
+      <Navbar/>
       <div className='post-container'>
       <h1>Add a Post:</h1>
   <input

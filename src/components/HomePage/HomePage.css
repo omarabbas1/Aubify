@@ -1,66 +1,3 @@
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: #000000; /* Main color */
-  color: #fff; /* White text */
-  padding: 10px 20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.navbar-logo {
-  width: 40px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-center input[type="text"] {
-  width: calc(100% + 120px); /* Adjusted width */
-  max-width: 400px; /* Limit width on larger screens */
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #fff; /* White border */
-  margin-bottom: 10px; /* Add some space at the bottom */
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.user-name {
-  margin-right: 10px;
-}
-
-.sign-out-button {
-  background-color: #840032; 
-  color: #fff; 
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Media Query for smaller screens */
-@media screen and (max-width: 768px) {
-  .navbar-center input[type="text"] {
-    width: 100%; /* Take full width on small screens */
-    max-width: none; /* No maximum width */
-    display: none;
-  }
-}
-
 /* Filter container styles */
 .filter-container {
   display: flex;
@@ -158,6 +95,10 @@
   overflow-y: auto;
   background-color: #840032; /* Main color background */
   color: #fff; /* White text */
+}
+
+.post-container .post {
+  margin-top: 2%;
 }
 
 .post-container .post p {

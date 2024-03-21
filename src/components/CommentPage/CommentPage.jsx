@@ -6,6 +6,7 @@ import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
+import Navbar from '../NavBar/Navbar';
 const CommentPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
@@ -116,6 +117,7 @@ const fetchPosts = async () => {
 
   return (
     <div className="comment-page">
+      <Navbar/>
       <h3>Post:</h3>
       {post ? (
         <div key={post._id} className="post">

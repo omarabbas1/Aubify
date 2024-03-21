@@ -13,6 +13,7 @@
   max-width: 100%; /* Ensure heading doesn't exceed container width */
   overflow-wrap: break-word; /* Allow heading to break to next line if needed */
   text-align: center; /* Align heading to the left */
+  margin-top: 3%;
 }
 .comment-page .post {
   background-color: #f0f0f0;
@@ -60,7 +61,6 @@
 .comment-page .comment {
   background-color: #fff; /* White background */
   padding: 10px;
-  margin-top: 10px;
   border-radius: 15px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
