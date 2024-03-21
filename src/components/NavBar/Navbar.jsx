@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import './NavBar.css';
@@ -6,6 +6,13 @@ import './NavBar.css';
 const Navbar = () => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem('username');

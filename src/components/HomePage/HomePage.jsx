@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../UserContext';
 import upvoteIcon from '../Icons/upvote.png'; // Add your icons in the public/assets/icons/ directory
 import downvoteIcon from '../Icons/downvote.png';
 import commentIcon from '../Icons/comment.png';
@@ -15,7 +14,6 @@ const HomePage = () => {
   const [newPostContent, setNewPostContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const { username, setUsername } = useUser();
   const [newPostTitle, setNewPostTitle] = useState('');
   
   const handleUpvote = async (postId) => {
@@ -48,14 +46,6 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
     fetchPosts();
   }, [searchTerm]);
 
@@ -82,11 +72,6 @@ const HomePage = () => {
     } catch (error) {
       console.error('Failed to create post:', error);
     }
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem('username');
-    navigate('/');
   };
 
   const fetchPostsFiltered = async (filter) => {
