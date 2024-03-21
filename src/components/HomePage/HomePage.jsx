@@ -121,7 +121,7 @@ const HomePage = () => {
             <label htmlFor="filter">Filter by:</label>
             <select value={currentFilter} onChange={handleFilterChange}>
               <option value="relevance">Relevance</option>
-              <option value="date_added">Most Recent</option>
+              <option value="most_recent">Most Recent</option>
             </select>
           </div>
           {posts.map((post) => (
