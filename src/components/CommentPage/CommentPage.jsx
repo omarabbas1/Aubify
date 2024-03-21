@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './CommentPage.css';
-import upvoteIcon from '../Icons/upvote.png';
-import downvoteIcon from '../Icons/downvote.png';
-import commentIcon from '../Icons/comment.png';
-import shareIcon from '../Icons/share.png';
+import upvoteIcon from '../icons/upvote.png';
+import downvoteIcon from '../icons/downvote.png';
+import commentIcon from '../icons/comment.png';
+import shareIcon from '../icons/share.png';
 import Navbar from '../NavBar/Navbar';
 const CommentPage = () => {
   const { postId } = useParams();

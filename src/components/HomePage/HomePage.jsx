@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import upvoteIcon from '../Icons/upvote.png'; // Add your icons in the public/assets/icons/ directory
-import downvoteIcon from '../Icons/downvote.png';
-import commentIcon from '../Icons/comment.png';
-import shareIcon from '../Icons/share.png';
+import upvoteIcon from '../icons/upvote.png'; // Add your icons in the public/assets/icons/ directory
+import downvoteIcon from '../icons/downvote.png';
+import commentIcon from '../icons/comment.png';
+import shareIcon from '../icons/share.png';
 import Navbar from '../NavBar/Navbar';
 
 
@@ -15,6 +15,7 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const [newPostTitle, setNewPostTitle] = useState('');
+  const [currentFilter, setCurrentFilter] = useState(''); 
   
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
@@ -46,7 +47,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
+  const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
+  setCurrentFilter(savedFilter);
+  fetchPostsFiltered(savedFilter);
+
   }, [searchTerm]);
 
   const fetchPosts = async () => {
@@ -76,17 +80,21 @@ const HomePage = () => {
 
   const fetchPostsFiltered = async (filter) => {
     try {
+      // Include the filter in the request as a query parameter
       const response = await axios.get(`http://localhost:8080/posts?filter=${filter}`);
       setPosts(response.data);
     } catch (error) {
       console.error('Failed to fetch posts:', error);
     }
-  };  
-
+  };
+  
   const handleFilterChange = (event) => {
     const selectedFilter = event.target.value;
+    localStorage.setItem('selectedFilter', selectedFilter);
+    setCurrentFilter(selectedFilter);
     fetchPostsFiltered(selectedFilter);
   };
+  
 
   return (
     <div className="home-page">
@@ -111,7 +119,7 @@ const HomePage = () => {
           <h1> Posts: </h1>
           <div className='filter-container'>
             <label htmlFor="filter">Filter by:</label>
-            <select id="filter" onChange={handleFilterChange}>
+            <select value={currentFilter} onChange={handleFilterChange}>
               <option value="relevance">Relevance</option>
               <option value="date_added">Most Recent</option>
             </select>
