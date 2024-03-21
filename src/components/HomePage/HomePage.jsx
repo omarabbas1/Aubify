@@ -52,7 +52,6 @@ const HomePage = () => {
       setUsername(storedUsername);
     }
     fetchPosts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -89,6 +88,20 @@ const HomePage = () => {
     navigate('/');
   };
 
+  const fetchPostsFiltered = async (filter) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/posts?filter=${filter}`);
+      setPosts(response.data);
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    }
+  };  
+
+  const handleFilterChange = (event) => {
+    const selectedFilter = event.target.value;
+    fetchPostsFiltered(selectedFilter);
+  };
+
   return (
     <div className="home-page">
       <nav className="navbar">
@@ -120,13 +133,19 @@ const HomePage = () => {
     onChange={(e) => setNewPostContent(e.target.value)}
   />
   <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
-
         <div className="post-list">
           <h1> Posts: </h1>
+          <div className='filter-container'>
+            <label htmlFor="filter">Filter by:</label>
+            <select id="filter" onChange={handleFilterChange}>
+              <option value="relevance">Relevance</option>
+              <option value="date_added">Most Recent</option>
+            </select>
+          </div>
           {posts.map((post) => (
             <div key={post._id} className="post">
-              <h2>{post.title}</h2> {/* Post title */}
-              <p>{post.content}</p> {/* Post content */}
+              <h2>{post.title}</h2>
+              <p>{post.content}</p>
               <div className="post-interactions">
                 {/* Interaction buttons */}
                 <button className="interaction-button" onClick={() => handleUpvote(post._id)}>

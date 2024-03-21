@@ -61,6 +61,33 @@
   }
 }
 
+/* Filter container styles */
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  margin-bottom: 20px; /* Add some space below the filter container */
+  width: 100%; /* Ensure the filter container takes full width */
+  font-size: 20px;
+}
+
+.filter-container label {
+  color: #fff; /* White text color */
+  margin-right: 10px; /* Add some space between label and select box */
+}
+
+.filter-container select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #fff; /* White border */
+  background-color: #840032; /* Main color */
+  color: #fff; /* White text color */
+  cursor: pointer;
+  max-width: 135px; /* Adjust as needed */
+  width: 100%; /* Ensure select takes full width */
+  font-size: 15px;
+}
+
 /* Post container styles */
 .post {
   background-color: #fff; 
