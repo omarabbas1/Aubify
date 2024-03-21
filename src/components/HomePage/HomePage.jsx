@@ -18,10 +18,11 @@ const HomePage = () => {
   const [currentFilter, setCurrentFilter] = useState(''); 
   
   const handleUpvote = async (postId) => {
-    const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
+    const userEmail = localStorage.getItem('userEmail');
+    const savedFilter = localStorage.getItem('selectedFilter');
     try {
       await axios.post(`http://localhost:8080/posts/${postId}/upvote`, { userEmail });
-      fetchPosts(); // Refresh the posts to reflect the new upvote count
+      fetchPostsFiltered(savedFilter) // Refresh the posts to reflect the new upvote count
     } catch (error) {
       console.error('Failed to upvote post:', error);
     }
@@ -29,9 +30,10 @@ const HomePage = () => {
   
   const handleDownvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
+    const savedFilter = localStorage.getItem('selectedFilter');
     try {
       await axios.post(`http://localhost:8080/posts/${postId}/downvote`, { userEmail });
-      fetchPosts(); // Refresh the posts to reflect the new downvote count
+      fetchPostsFiltered(savedFilter); // Refresh the posts to reflect the new downvote count
     } catch (error) {
       console.error('Failed to downvote post:', error);
     }
@@ -68,11 +70,12 @@ const HomePage = () => {
       alert('Please enter both title and content for the post.');
       return;
     }
+    const savedFilter = localStorage.getItem('selectedFilter');
     try {
       await axios.post('http://localhost:8080/posts', { title: newPostTitle, content: newPostContent });
       setNewPostTitle('');
       setNewPostContent('');
-      fetchPosts();
+      fetchPostsFiltered(savedFilter);
     } catch (error) {
       console.error('Failed to create post:', error);
     }
