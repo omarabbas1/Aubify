@@ -121,12 +121,13 @@
   width: fit-content; /* Shrink wrap the button content */
   margin-left: 71.7%; /* Align button to the left */
   background-color: white;
-  color: #530120;
+  color: #840032;
   border: none;
   padding: 10px 30px; 
   border-radius: 20px;
   cursor: pointer;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .post-list {
