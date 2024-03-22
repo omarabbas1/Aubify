@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FAQ.css';
-import Navbar from '../NavBar/Navbar';
+import NavBar from '../NavBar/NavBar';
 
 const FAQ = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -54,6 +54,7 @@ const FAQ = () => {
 
   return (
     <div className="faq-container">
+        <NavBar/>
         <h1>Frequently Asked Questions</h1>
         <div className="faq-list">
             {/* Map through the FAQ data to render questions and answers */}

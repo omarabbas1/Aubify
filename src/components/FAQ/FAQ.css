@@ -27,10 +27,11 @@
     border: 1px solid #ccc; /* Border around each FAQ item */
     border-radius: 5px;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px;
     background-color: #fff; /* White background color */
-    margin: 2%;
     cursor: pointer;
+    width: 70%;
+    margin-left: 15%; 
 }
 
 /* Question container styles */
@@ -52,6 +53,7 @@
 /* Expand icon styles */
 .expand-icon {
     font-size: 18px;
+    color: #840032;
 }
 
 /* Answer styles */

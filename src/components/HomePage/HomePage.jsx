@@ -6,7 +6,7 @@ import upvoteIcon from '../icons/upvote.png'; // Add your icons in the public/as
 import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
-import Navbar from '../NavBar/Navbar';
+import NavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 
 
@@ -102,7 +102,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Navbar/>
+      <NavBar/>
       <div className='post-container'>
       <h1>Add a Post:</h1>
   <input

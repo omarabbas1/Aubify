@@ -48,6 +48,6 @@ const Navbar = () => {
     <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut}/>
      </>
   );
-};
+}; 
 
 export default Navbar;
