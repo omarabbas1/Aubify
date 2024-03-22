@@ -31,7 +31,7 @@
     background-color: #fff; /* White background color */
     cursor: pointer;
     width: 70%;
-    margin-left: 15%; 
+    margin: 20px auto;
 }
 
 /* Question container styles */

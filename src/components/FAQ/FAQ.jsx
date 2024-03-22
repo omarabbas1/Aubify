@@ -59,8 +59,8 @@ const FAQ = () => {
         <div className="faq-list">
             {/* Map through the FAQ data to render questions and answers */}
             {faqData.map((item, index) => (
-            <div key={index} className="faq-item">
-                <div className="question-container" onClick={() => toggleAnswer(index)}>
+            <div key={index} className="faq-item" onClick={() => toggleAnswer(index)}>
+                <div className="question-container">
                 <span className="question">{item.question}</span>
                 <span className="expand-icon">{expandedIndex === index ? "-" : "+"}</span>
                 </div>
