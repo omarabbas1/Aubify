@@ -24,6 +24,7 @@
   .navbar-left {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   
   .navbar-center input[type="text"] {

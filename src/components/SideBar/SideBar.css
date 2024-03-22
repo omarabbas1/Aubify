@@ -1,9 +1,9 @@
 .sidebar {
     height: 100%;
-    width: 250px;
+    width: 20%;
     position: fixed;
     top: 60px; 
-    left: -250px; 
+    left: -20%; 
     background-color: #000000; 
     padding-top: 20px;
     z-index: 999; 
@@ -42,12 +42,6 @@
     color: #840032;
 }
 
-.menu-options {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
 .menu-option {
     background-color: #840032; 
     color: #fff; 
@@ -63,6 +57,7 @@
     overflow: hidden; 
     text-overflow: ellipsis; 
     transition: background-color 0.3s, color 0.3s;
+    margin-left: 5%;
 }
 
 .menu-option:hover {
