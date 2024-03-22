@@ -1,0 +1,90 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 60px; 
+    left: -250px; 
+    background-color: #000000; 
+    padding-top: 20px;
+    z-index: 999; 
+    transition: left 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto; 
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    position: relative; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000; 
+}
+
+.sidebar-header h2 {
+    color: #fff;
+    margin: 0;
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #840032;
+}
+
+.menu-options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-option {
+    background-color: #840032; 
+    color: #fff; 
+    padding: 15px 20px; 
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 40px); 
+    text-align: center;
+    font-size: 16px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-option:hover {
+    background-color: #840032; 
+    color: #fff; 
+    overflow: visible; 
+    text-overflow: clip;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 150px; /* Further reduce width for smaller screens */
+        padding-right: 5px; /* Reduce padding to accommodate smaller width */
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .sidebar {
+        width: 140px; /* Adjusted width for medium-sized screens */
+    }
+}

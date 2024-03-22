@@ -12,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .navbar-logo {
@@ -41,15 +42,6 @@
   
   .user-name {
     margin-right: 10px;
-  }
-  
-  .sign-out-button {
-    background-color: #840032; 
-    color: #fff; 
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
   }
   
   /* Media Query for smaller screens */

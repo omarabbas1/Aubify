@@ -7,6 +7,7 @@ import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
 import Navbar from '../NavBar/Navbar';
+import SideBar from '../SideBar/SideBar';
 
 
 const HomePage = () => {

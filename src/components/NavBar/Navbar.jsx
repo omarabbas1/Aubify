@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import './NavBar.css';
+import SideBar from '../SideBar/SideBar';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -22,10 +24,17 @@ const Navbar = () => {
   const handleSearch = (event) => {
     // Implement search functionality here
   };
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible); // Toggle sidebar visibility
+  };
+  const closeSidebar = () => {
+    setSidebarVisible(false);
+  };
 
   return (
+    <>
     <nav className="navbar">
-      <div className="navbar-left">
+      <div className="navbar-left" onClick={toggleSidebar}>
         <img src="/aubify-logo.jpg" alt="Logo" className="navbar-logo" /> 
         <span className="website-name">Aubify</span> 
       </div>
@@ -34,9 +43,10 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         <span className="user-name">Welcome, {username}!</span> 
-        <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button>
       </div>
     </nav>
+    <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut}/>
+     </>
   );
 };
 
