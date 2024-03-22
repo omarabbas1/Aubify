@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useNavigate, } from 'react-router-dom';
-import './SideBar.css'; // Import your CSS file for styling
+import './SideBar.css';
 
 const SideBar = ({ isOpen, onClose, onSignOut }) => {
     const navigate = useNavigate();
@@ -9,6 +9,10 @@ const SideBar = ({ isOpen, onClose, onSignOut }) => {
         navigate('/homepage'); 
     };
 
+    const handleNavigateToFAQ = () => {
+        navigate('/faq');
+      };
+
     return (
         <div className={`sidebar ${isOpen ? 'active' : ''}`}>
             <div className="sidebar-header">
@@ -16,8 +20,8 @@ const SideBar = ({ isOpen, onClose, onSignOut }) => {
                 <button className="close-button" onClick={onClose}>X</button>
             </div>
             <ul>
-                <li><button className="menu-option" onClick={() => console.log('User Profile clicked')}>User Profile</button></li>
-                <li><button className="menu-option" onClick={() => console.log('FAQ clicked')}>FAQ</button></li>
+                <li><button className="menu-option" onClick={() => console.log('user profile clicked')}>User Profile</button></li>
+                <li><button className="menu-option" onClick={handleNavigateToFAQ}>FAQ</button></li>
                 <li><button className="menu-option" onClick={handleReturnToHomepage}>Return to Homepage</button></li>
                 <li><button className="menu-option" onClick={onSignOut}>Sign Out</button></li>
             </ul>
