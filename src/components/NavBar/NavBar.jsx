@@ -17,10 +17,18 @@ const Navbar = () => {
   }, []);
 
   const handleSignOut = () => {
+    // Remove the username from local storage
     localStorage.removeItem('username');
+    // Redirect to the sign-in/sign-up page
     navigate('/');
-  };
-
+    // Clear the session history
+    window.history.replaceState(null, '', '/');
+    // Prevent further navigation using the back button
+    window.onpopstate = () => {
+        navigate('/');
+        window.history.replaceState(null, '', '/');
+    };
+};
   const handleSearch = (event) => {
     // Implement search functionality here
   };
