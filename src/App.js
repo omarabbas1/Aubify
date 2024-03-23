@@ -7,6 +7,7 @@ import VerificationSuccess from './components/EmailVerification/VerificationSucc
 import HomePage from './components/HomePage/HomePage';
 import CommentPage from './components/CommentPage/CommentPage';
 import FAQ from './components/FAQ/FAQ';
+import UserProfile from './components/UserProfile/UserProfile';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/homepage' element={<HomePage/>}/>
           <Route path='/posts/:postId/comments' element={<CommentPage/>}/>
           <Route path='/faq' element={<FAQ/>}/>
+          <Route path='/userprofile' element={<UserProfile/>}/>
         </Routes>
       </Router>
     </UserProvider>

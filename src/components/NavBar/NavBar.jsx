@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import './NavBar.css';
 import SideBar from '../SideBar/SideBar';
 
-const Navbar = () => {
+const Navbar = ({ showChangePassword }) => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
   const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const location = useLocation();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -38,6 +40,10 @@ const Navbar = () => {
   const closeSidebar = () => {
     setSidebarVisible(false);
   };
+  const handleNavigateToChangePassword = () => {
+    // Navigate the user to the change password page
+    navigate('/changepassword');
+  }
 
   return (
     <>
@@ -51,10 +57,13 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         <span className="user-name">Welcome, {username}!</span> 
+        {showChangePassword && location.pathname === '/userprofile' && ( // Conditionally render change password button
+          <button className="change-password-button" onClick={handleNavigateToChangePassword}>Change Password</button>
+        )}
       </div>
     </nav>
     <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut}/>
-     </>
+    </>
   );
 }; 
 

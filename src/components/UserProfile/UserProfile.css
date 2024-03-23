@@ -1,0 +1,40 @@
+.user-profile-container {
+  background-color: #840032; /* Change background color */
+  position: fixed;
+  top: 60px; /* Adjusted to account for the navbar height */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px); /* Adjusted to account for the navbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff; /* Change text color */
+  padding-top: 20px; /* Added padding to align with the navbar */
+}
+
+.user-profile-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: left; /* Align header to the left */
+  margin-left: 20px; /* Add margin to align with the content */
+}
+
+.user-profile-container h3 {
+  font-size: 20px; /* Adjusted font size for name and mail */
+  margin-bottom: 10px; /* Added margin bottom for separation */
+  text-align: left; /* Align text to the left */
+  margin-left: 20px; /* Add margin to align with the content */
+  display: block; /* Display as block element*/
+}
+
+.user-profile-container .profile-info {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.user-profile-container .profile-info label {
+  margin-right: 10px;
+}
+

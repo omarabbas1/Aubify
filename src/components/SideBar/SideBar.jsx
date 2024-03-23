@@ -13,6 +13,10 @@ const SideBar = ({ isOpen, onClose, onSignOut }) => {
         navigate('/faq');
       };
 
+      const handleNavigateToUserProfile=()=>{
+        navigate('/userprofile');
+      }
+
     return (
         <div className={`sidebar ${isOpen ? 'active' : ''}`}>
             <div className="sidebar-header">
@@ -20,7 +24,7 @@ const SideBar = ({ isOpen, onClose, onSignOut }) => {
                 <button className="close-button" onClick={onClose}>X</button>
             </div>
             <ul>
-                <li><button className="menu-option" onClick={() => console.log('user profile clicked')}>User Profile</button></li>
+                <li><button className="menu-option" onClick={handleNavigateToUserProfile}>User Profile</button></li>
                 <li><button className="menu-option" onClick={handleNavigateToFAQ}>FAQ</button></li>
                 <li><button className="menu-option" onClick={handleReturnToHomepage}>Return to Homepage</button></li>
                 <li><button className="menu-option" onClick={onSignOut}>Sign Out</button></li>
