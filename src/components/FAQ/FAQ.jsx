@@ -7,44 +7,44 @@ const FAQ = () => {
 
   const faqData = [
     {
-      question: 'Question 1: What is Lorem Ipsum?',
-      answer: 'Answer 1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      question: 'Can I apply as a transfer student to another major when I already have a bachelor degree?',
+      answer: 'If you already have a bachelor degree, then you will need to apply as second degree applicant.  Some of the credits taken in the bachelor degree will be transferred to your second degree per department approval',
     },
     {
-      question: 'Question 2: Why do we use it?',
-      answer: 'Answer 2: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+      question: 'How do I pay my tuition fees?',
+      answer: 'The tuition payment will appear on the AUBsis web statement of fees once you have registered for your spring courses. Print the Web statement of fees from your AUBsis, and refer to the Payment module posted in the Moodle section for the different methods of payment. Please note that payment of fees by Credit Cards or Travellers Cheques are currently not accepted. For any additional inquiries regarding the payment of tuition fees, kindly contact jm52@aub.edu.lb or re96@aub.edu.lb',
     },
     {
-      question: 'Question 3: Where does it come from?',
-      answer: 'Answer 3: Contrary to popular belief, Lorem Ipsum is not simply random text.',
+      question: 'I am an AUB graduate and want to apply to AUB for a second degree, do I submit an application to the Office of Admissions like other second degree applicants?',
+      answer: 'AUB graduates who have been away from AUB for less than 2 years after graduation, must contact the Office of the Registrar on: registrar@aub.edu.lb and inquire about their application for second degree.   For all other applicants, they need to submit their second degree application form at the Office of Admissions.',
     },
     {
-      question: 'Question 4: Where can I get some?',
-      answer: 'Answer 4: There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.',
+      question: 'What is the number of credits allowed in the faculty of arts and sciences?',
+      answer: 'Students may normally take up to 17 undergraduate credits or 9 graduate credits per semester (for a maximum of 2 terms).',
     },
     {
-      question: 'Question 5: What is Lorem Ipsum?',
-      answer: 'Answer 5: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      question: 'What diplomas are currently offered at AUB?',
+      answer: 'Some of the diplomas that we offer include: \n-Teaching Diploma Program \n-Diploma in Special Education \n-Diploma in Educational Management and Leadership',
     },
     {
-      question: 'Question 6: Why do we use it?',
-      answer: 'Answer 6: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+      question: 'What do I do if a course I want to take is full? How can I open capacity?',
+      answer: 'If a course you want to enroll in is full, you must ask the chairperson of the department the course is given at to open capacity for you.',
     },
     {
-      question: 'Question 7: Where does it come from?',
-      answer: 'Answer 7: Contrary to popular belief, Lorem Ipsum is not simply random text.',
+      question: 'Can undergraduates take graduate courses?',
+      answer: 'Senior undergraduate students in good academic standing can take graduate classes through submitting a petition which requires the consent of the academic adviser and the course instructor.',
     },
     {
-      question: 'Question 8: Where can I get some?',
-      answer: 'Answer 8: There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.',
+      question: 'How can I audit a course? Will it appear on my transcript?',
+      answer: 'To audit a course, you must get in touch with the course instructor and obtain their approval. An audited course does not appear on your transcript or count towards your credits.',
     },
     {
-      question: 'Question 9: What is Lorem Ipsum?',
-      answer: 'Answer 9: Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      question: 'What is the University\'s policy on student housing?',
+      answer: 'To be eligible to live in AUB Student Housing facilities, you must be enrolled as full/part time student for the Academic Year you are applying to dorms. While all registered AUB students are entitled to apply for accommodation in AUB students\' residences, room reservation is processed according to priority criteria.',
     },
     {
-      question: 'Question 10: Why do we use it?',
-      answer: 'Answer 10: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+      question: 'What is the difference between a double major and a dual degree?',
+      answer: 'A dual degree is when you are pursuing two majors which have different degree structures. You can have a dual degree within the same faculty or from two different faculties Distinctively, a double major is when you pursue two majors with the same degree structure',
     },
   ];
 
