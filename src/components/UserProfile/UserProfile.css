@@ -1,40 +1,63 @@
 .user-profile-container {
-  background-color: #840032; /* Change background color */
+  background-color: #840032;
   position: fixed;
-  top: 60px; /* Adjusted to account for the navbar height */
+  top: 60px;
   left: 0;
   width: 100%;
-  height: calc(100% - 60px); /* Adjusted to account for the navbar height */
+  height: calc(100% - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  padding-top: 20px;
+}
+
+.user-profile-box {
+  width: 540px; /* Increased width of the container */
+  height: 520px; /* Increased height of the container */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.profile-category {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ffffff; /* Change text color */
-  padding-top: 20px; /* Added padding to align with the navbar */
+  text-align: center;
+  transition: background-color 0.3s;
+  width: 260px; /* Increased width of each category */
+  height: 240px; /* Increased height of each category */
+  cursor: pointer;
 }
 
-.user-profile-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: left; /* Align header to the left */
-  margin-left: 20px; /* Add margin to align with the content */
+.profile-category:hover {
+  background-color: #f0f0f0;
 }
 
-.user-profile-container h3 {
-  font-size: 20px; /* Adjusted font size for name and mail */
-  margin-bottom: 10px; /* Added margin bottom for separation */
-  text-align: left; /* Align text to the left */
-  margin-left: 20px; /* Add margin to align with the content */
-  display: block; /* Display as block element*/
+.profile-category h3 {
+  font-size: 28px; /* Decreased font size */
+  margin-bottom: 10px;
+  color: #840032;
+  text-align: center;
+  font-weight: bold;
 }
 
-.user-profile-container .profile-info {
-  margin-bottom: 15px;
+.profile-category .content {
+  flex-grow: 1;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.user-profile-container .profile-info label {
-  margin-right: 10px;
+.profile-category .category-content {
+  font-size: 22px; /* Decreased font size */
+  color: #555555;
 }
-
