@@ -9,8 +9,6 @@ const Navbar = ({ showChangePassword }) => {
   const { username, setUsername } = useUser();
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  const location = useLocation();
-
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
@@ -20,7 +18,7 @@ const Navbar = ({ showChangePassword }) => {
 
   const handleSignOut = () => {
     // Remove the username from local storage
-    localStorage.removeItem('username');
+    localStorage.clear();
     // Redirect to the sign-in/sign-up page
     navigate('/');
     // Clear the session history
@@ -40,10 +38,6 @@ const Navbar = ({ showChangePassword }) => {
   const closeSidebar = () => {
     setSidebarVisible(false);
   };
-  const handleNavigateToChangePassword = () => {
-    // Navigate the user to the change password page
-    navigate('/changepassword');
-  }
 
   return (
     <>
@@ -57,9 +51,6 @@ const Navbar = ({ showChangePassword }) => {
       </div>
       <div className="navbar-right">
         <span className="user-name">Welcome, {username}!</span> 
-        {showChangePassword && location.pathname === '/userprofile' && ( // Conditionally render change password button
-          <button className="change-password-button" onClick={handleNavigateToChangePassword}>Change Password</button>
-        )}
       </div>
     </nav>
     <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut}/>

@@ -1,39 +1,46 @@
 .user-profile-container {
-  background-color: #840032; /* Change background color */
-  position: fixed;
-  top: 60px; /* Adjusted to account for the navbar height */
-  left: 0;
-  width: 100%;
-  height: calc(100% - 60px); /* Adjusted to account for the navbar height */
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  color: white;
+  height: 100vh;
+}
+
+.user-profile-container h1 {
+  margin-top: 15%;
+}
+
+.profile-info {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: #ffffff; /* Change text color */
-  padding-top: 20px; /* Added padding to align with the navbar */
 }
 
-.user-profile-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: left; /* Align header to the left */
-  margin-left: 20px; /* Add margin to align with the content */
-}
-
-.user-profile-container h3 {
-  font-size: 20px; /* Adjusted font size for name and mail */
-  margin-bottom: 10px; /* Added margin bottom for separation */
-  text-align: left; /* Align text to the left */
-  margin-left: 20px; /* Add margin to align with the content */
-  display: block; /* Display as block element*/
-}
-
-.user-profile-container .profile-info {
+.info-item {
   margin-bottom: 15px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
 }
 
-.user-profile-container .profile-info label {
-  margin-right: 10px;
+.info-item p {
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.info-item p.info-title {
+  font-weight: bold;
+}
+
+.profile-info button {
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  border-radius: 5px;
+  color: #840032;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  background-color: white;
 }

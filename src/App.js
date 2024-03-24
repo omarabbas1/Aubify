@@ -8,6 +8,7 @@ import HomePage from './components/HomePage/HomePage';
 import CommentPage from './components/CommentPage/CommentPage';
 import FAQ from './components/FAQ/FAQ';
 import UserProfile from './components/UserProfile/UserProfile';
+import ChangePassword from './components/ChangePassword/ChangePassword';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/posts/:postId/comments' element={<CommentPage/>}/>
           <Route path='/faq' element={<FAQ/>}/>
           <Route path='/userprofile' element={<UserProfile/>}/>
+          <Route path='/change_password' element={<ChangePassword/>}/>
         </Routes>
       </Router>
     </UserProvider>

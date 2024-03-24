@@ -94,29 +94,6 @@ function SigninSignup({ user, setUser }) {
     }
   };  
 
-  // const getToken = async (email, password) => {
-  //   try {
-  //     const response = await fetch('http://localhost:8080/getToken', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({ email, password })
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok.');
-  //     }
-
-  //     const data = await response.json();
-  //     return data.accessToken; // Assuming the response contains the access token
-  //   } catch (error) {
-  //     console.error('Error fetching token:', error);
-  //     // Handle error, such as displaying a generic error message to the user
-  //     return null;
-  //   }
-  // };
-
   const saveUserData = async (name, email, password) => {
     try {
       const userData = { name, email, password };
@@ -292,37 +269,39 @@ function SigninSignup({ user, setUser }) {
   };
 
   return (
-    <div className={`signin-signup-container ${activeContainer}`}>
-      <div className="form-container sign-up">
-        <form onSubmit={handleSignup}>
-          <h1>Create Account</h1>
-          <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required />
-          <input type="email" placeholder="Email ~ AUBnet@mail.aub.edu" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
-          <button type="submit">Sign Up</button>
-          {signupError && <p className="error">{signupError}</p>}
-        </form>
-      </div>
-      <div className="form-container sign-in">
-        <form onSubmit={handleSignin}>
-          <h1>Sign In</h1>
-          <input type="email" placeholder="Email" value={signinEmail} onChange={(e) => setSigninEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" value={signinPassword} onChange={(e) => setSigninPassword(e.target.value)} required />
-          <button type="submit">Sign In</button>
-          {signinError && <p className="error">{signinError}</p>}
-        </form>
-      </div>
-      <div className="toggle-container">
-        <div className="toggle">
-          <div className={`toggle-panel toggle-left ${activeContainer}`}>
-            <h1>Welcome Back!</h1>
-            <p>Enter your personal details to use all site features</p>
-            <button className="hidden" onClick={handleSigninClick}>Sign In</button>
-          </div>
-          <div className={`toggle-panel toggle-right ${activeContainer}`}>
-            <h1>Hello, Student!</h1>
-            <p>Register with your personal details to use all site features</p>
-            <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
+    <div className='signin-signup-main-container'>
+      <div className={`signin-signup-container ${activeContainer}`}>
+        <div className="form-container sign-up">
+          <form onSubmit={handleSignup}>
+            <h1>Create Account</h1>
+            <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required />
+            <input type="email" placeholder="Email ~ AUBnet@mail.aub.edu" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
+            <button type="submit">Sign Up</button>
+            {signupError && <p className="error">{signupError}</p>}
+          </form>
+        </div>
+        <div className="form-container sign-in">
+          <form onSubmit={handleSignin}>
+            <h1>Sign In</h1>
+            <input type="email" placeholder="Email" value={signinEmail} onChange={(e) => setSigninEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" value={signinPassword} onChange={(e) => setSigninPassword(e.target.value)} required />
+            <button type="submit">Sign In</button>
+            {signinError && <p className="error">{signinError}</p>}
+          </form>
+        </div>
+        <div className="toggle-container">
+          <div className="toggle">
+            <div className={`toggle-panel toggle-left ${activeContainer}`}>
+              <h1>Welcome Back!</h1>
+              <p>Enter your personal details to use all site features</p>
+              <button className="hidden" onClick={handleSigninClick}>Sign In</button>
+            </div>
+            <div className={`toggle-panel toggle-right ${activeContainer}`}>
+              <h1>Hello, Student!</h1>
+              <p>Register with your personal details to use all site features</p>
+              <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
+            </div>
           </div>
         </div>
       </div>
