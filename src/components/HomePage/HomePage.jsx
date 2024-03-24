@@ -7,16 +7,17 @@ import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
 import NavBar from '../NavBar/NavBar';
-import SideBar from '../SideBar/SideBar';
 
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
   const [newPostTitle, setNewPostTitle] = useState('');
   const [currentFilter, setCurrentFilter] = useState(''); 
+  const [remainingWords, setRemainingWords] = useState(500);
+  const [remainingTitleWords, setRemainingTitleWords] = useState(50);
+  const navigate = useNavigate();
   
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail');
@@ -64,7 +65,26 @@ const HomePage = () => {
       console.error('Failed to fetch posts:', error);
     }
   };
+  useEffect(() => {
+    // Update remaining characters count when content changes
+    const remaining = Math.max(0, 500 - newPostContent.length);
+    setRemainingWords(remaining);
+  }, [newPostContent]);
 
+  useEffect(() => {
+    // Update remaining characters count when title changes
+    const remainingTitle = Math.max(0, 50 - newPostTitle.length);
+    setRemainingTitleWords(remainingTitle);
+  }, [newPostTitle]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'title') {
+      setNewPostTitle(value.slice(0, 50)); 
+    } else {
+      setNewPostContent(value);
+    }
+  };
 
   const handleCreatePost = async () => {
     if (newPostTitle.trim() === '' || newPostContent.trim() === '') {
@@ -105,19 +125,31 @@ const HomePage = () => {
       <NavBar/>
       <div className='post-container'>
       <h1>Add a Post:</h1>
-  <input
-    type="text"
-    placeholder="Post Title"
-    className="post-title-input"
-    value={newPostTitle}
-    onChange={(e) => setNewPostTitle(e.target.value)}
-  />
+      <input
+  type="text"
+  placeholder="Post Title"
+  className="post-title-input"
+  value={newPostTitle}
+  name="title"
+  onChange={handleInputChange}
+/>
+<div className="remaining-characters">
+  Words Remaining for Title: {remainingTitleWords}
+</div>
   <textarea
-    placeholder="What's on your mind?"
-    className="post-content-input"
-    value={newPostContent}
-    onChange={(e) => setNewPostContent(e.target.value)}
-  />
+  placeholder="What's on your mind?"
+  className="post-content-input"
+  value={newPostContent}
+  onChange={handleInputChange}
+  onKeyDown={(e) => {
+    if (newPostContent.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
+      e.preventDefault();
+    }
+  }}
+></textarea>
+<div className="remaining-Postcharacters">
+  Words Remaining: {remainingWords}
+</div>
   <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
         <div className="post-list">
           <h1> Posts: </h1>
