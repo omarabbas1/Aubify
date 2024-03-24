@@ -134,7 +134,7 @@ const HomePage = () => {
   onChange={handleInputChange}
 />
 <div className="remaining-characters">
-  Words Remaining for Title: {remainingTitleWords}
+  Characters Remaining for Title: {remainingTitleWords}
 </div>
   <textarea
   placeholder="What's on your mind?"
@@ -148,7 +148,7 @@ const HomePage = () => {
   }}
 ></textarea>
 <div className="remaining-Postcharacters">
-  Words Remaining: {remainingWords}
+  Characters Remaining: {remainingWords}
 </div>
   <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
         <div className="post-list">
