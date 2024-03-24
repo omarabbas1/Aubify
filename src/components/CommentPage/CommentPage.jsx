@@ -7,10 +7,14 @@ import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
 import NavBar from '../NavBar/NavBar';
+
+
 const CommentPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState('');
+  const [remainingCharacters, setRemainingCharacters] = useState(250);
+
   useEffect(() => {
     fetchPostAndComments();
   }, [postId]);
@@ -57,6 +61,13 @@ const CommentPage = () => {
     }
   };
   
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    const trimmedValue = value.slice(0, 250); // Limit the input to 250 characters
+    setNewComment(trimmedValue);
+    const remaining = Math.max(0, 250 - trimmedValue.length); // Calculate remaining characters
+    setRemainingCharacters(remaining);
+  };
 
  // Example function to upvote a comment based on its index within the post's comments array
 const handleVoteUpvote = async (postId,commentIndex) => {
@@ -148,9 +159,10 @@ const fetchPosts = async () => {
              <h3>Comments:</h3>
         <textarea
           value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Write your comment here..."
         />
+         <div className="character-limit">Characters Remaining: {remainingCharacters}</div>
         <button onClick={handleAddComment} type="submit">Comment</button>
       </div>
       <div className="comments-container">
