@@ -57,14 +57,6 @@ const HomePage = () => {
 
   }, [searchTerm]);
 
-  const fetchPosts = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/posts?searchTerm=${searchTerm}`);
-      setPosts(response.data);
-    } catch (error) {
-      console.error('Failed to fetch posts:', error);
-    }
-  };
   useEffect(() => {
     // Update remaining characters count when content changes
     const remaining = Math.max(0, 500 - newPostContent.length);
@@ -134,7 +126,7 @@ const HomePage = () => {
   onChange={handleInputChange}
 />
 <div className="remaining-characters">
-  Characters Remaining for Title: {remainingTitleWords}
+  Characters Remaining: {remainingTitleWords}
 </div>
   <textarea
   placeholder="What's on your mind?"

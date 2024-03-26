@@ -1,49 +1,53 @@
 .verification-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .verification-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .verification-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .verification-container label {
-    margin-bottom: 10px;
-  }
-  
-  .verification-container input[type="text"] {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .verification-container button {
-    padding: 10px 20px;
-    background-color: #840032;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .verification-container button:hover {
-    background-color: #5a0224;
-  }
-  
-  .verification-container .error {
-    color: #ff0000;
-    margin-top: 10px;
-  }  
+  width: 400px;
+  margin: auto; /* Center horizontally */
+  position: absolute; /* Position absolutely */
+  top: 50%; /* Move 50% from the top */
+  left: 50%; /* Move 50% from the left */
+  transform: translate(-50%, -50%); /* Center horizontally and vertically */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.verification-title {
+  margin-bottom: 20px;
+}
+
+.verification-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.verification-label {
+  margin-bottom: 10px;
+}
+
+.verification-input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.verification-button {
+  padding: 10px 20px;
+  background-color: #840032;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.verification-button:hover {
+  background-color: #5a0224;
+}
+
+.verification-error {
+  color: #ff0000;
+  margin-top: 10px;
+}

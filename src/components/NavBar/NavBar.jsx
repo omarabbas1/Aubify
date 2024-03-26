@@ -50,7 +50,8 @@ const Navbar = ({ showChangePassword }) => {
         <input type="text" placeholder="Search..." onChange={handleSearch} />
       </div>
       <div className="navbar-right">
-        <span className="user-name">Welcome, {username}!</span> 
+        <p>Welcome,</p>
+        <span className="user-name">{username}</span> 
       </div>
     </nav>
     <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut}/>

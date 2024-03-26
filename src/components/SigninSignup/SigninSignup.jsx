@@ -274,7 +274,7 @@ function SigninSignup({ user, setUser }) {
         <div className="form-container sign-up">
           <form onSubmit={handleSignup}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required />
+            <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required maxLength={25} />
             <input type="email" placeholder="Email ~ AUBnet@mail.aub.edu" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
             <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
             <button type="submit">Sign Up</button>
