@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ChangePassword.css';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -10,6 +12,7 @@ const ChangePassword = () => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [passwordStrong, setPasswordStrong] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if confirm password matches new password
@@ -57,6 +60,7 @@ const ChangePassword = () => {
     // Send the new password to the backend to save it in the database
     const email = localStorage.getItem('userEmail');
     await saveNewPassword(email, newPassword);
+    navigate('/userprofile')
     // Optionally, handle success or failure after saving the new password
   };
 
