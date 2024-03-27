@@ -36,33 +36,39 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Check if current password matches the one in the database
     const currentPasswordMatch = await checkCurrentPassword(currentPassword);
-
+  
     if (!currentPasswordMatch) {
       setPasswordError('Current password is incorrect.');
       return;
     }
-
+  
     // Check if the new password meets strength criteria
     if (!passwordStrong) {
       setPasswordError('New password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.');
       return;
     }
-
+  
     // Check if confirm password matches new password
     if (!passwordMatch) {
       setPasswordError('Passwords do not match.');
       return;
     }
-
+  
+    // Check if current password and new password are the same
+    if (currentPassword === newPassword) {
+      setPasswordError('New password cannot be the same as the current password.');
+      return;
+    }
+  
     // Send the new password to the backend to save it in the database
     const email = localStorage.getItem('userEmail');
     await saveNewPassword(email, newPassword);
     navigate('/userprofile')
     // Optionally, handle success or failure after saving the new password
-  };
+  };  
 
   // Function to check if the current password matches the one in the database
   const checkCurrentPassword = async (password) => {
