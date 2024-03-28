@@ -17,7 +17,20 @@ const HomePage = () => {
   const [currentFilter, setCurrentFilter] = useState(''); 
   const [remainingWords, setRemainingWords] = useState(500);
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
+  const [searchedPosts, setSearchedPosts] = useState([]); // Display posts based on search
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleSearch = (searchTerm) => {
+      // Filter posts based on the search term
+      const filtered = posts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchedPosts(filtered); // Update the filtered posts state
+    };
+  
+    handleSearch(searchTerm);
+  }, [searchTerm, posts]);
   
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail');
@@ -54,7 +67,6 @@ const HomePage = () => {
   const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
   setCurrentFilter(savedFilter);
   fetchPostsFiltered(savedFilter);
-
   }, [searchTerm]);
 
   useEffect(() => {
@@ -110,11 +122,23 @@ const HomePage = () => {
     setCurrentFilter(selectedFilter);
     fetchPostsFiltered(selectedFilter);
   };
-  
+
+  const handleSearch = (searchTerm) => {
+    // If search term is empty, display all posts
+    if (!searchTerm.trim()) {
+      setSearchedPosts(posts);
+    } else {
+      // Filter posts based on the search term
+      const filtered = posts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchedPosts(filtered); // Update the filtered posts state
+    }
+  };
 
   return (
     <div className="home-page">
-      <NavBar/>
+      <NavBar onSearch={handleSearch} />
       <div className='post-container'>
       <h1>Add a Post:</h1>
       <input
@@ -152,7 +176,7 @@ const HomePage = () => {
               <option value="date_added">Most Recent</option>
             </select>
           </div>
-          {posts.map((post) => (
+          {searchedPosts.map((post) => (
             <div key={post._id} className="post">
               <h2>{post.title}</h2>
               <p>{post.content}</p>
