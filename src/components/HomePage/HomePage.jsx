@@ -95,9 +95,16 @@ const HomePage = () => {
       alert('Please enter both title and content for the post.');
       return;
     }
+    const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
     const savedFilter = localStorage.getItem('selectedFilter');
+    
     try {
-      await axios.post('http://localhost:8080/posts', { title: newPostTitle, content: newPostContent });
+      // Include the userEmail in the request body
+      await axios.post('http://localhost:8080/posts', { 
+        title: newPostTitle, 
+        content: newPostContent, 
+        userEmail // Send the user's email with the post data
+      });
       setNewPostTitle('');
       setNewPostContent('');
       fetchPostsFiltered(savedFilter);
@@ -105,6 +112,7 @@ const HomePage = () => {
       console.error('Failed to create post:', error);
     }
   };
+  
 
   const fetchPostsFiltered = async (filter) => {
     try {

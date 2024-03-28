@@ -15,7 +15,6 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    // Fetch user's posts when the component mounts
     const fetchUserPosts = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/user/posts?email=${userEmail}`);
@@ -26,11 +25,15 @@ const UserProfile = () => {
     };
 
     fetchUserPosts();
-  }, []);
+  }, [userEmail]);
+
+  const handlePostClick = (postId) => {
+    navigate(`/posts/${postId}/comments`); // Navigate to the post's page
+  };
 
   return (
     <div className="user-profile-container">
-      <NavBar/>
+      <NavBar />
       <h1>User Profile</h1>
       <div className="profile-info">
         <div className='info-item'>
@@ -47,9 +50,8 @@ const UserProfile = () => {
         <h2>User Posts</h2>
         <ul>
           {userPosts.map(post => (
-            <li key={post.id}>
+            <li key={post._id} onClick={() => handlePostClick(post._id)} style={{ cursor: 'pointer' }}>
               <h3>{post.title}</h3>
-              <p>{post.content}</p>
             </li>
           ))}
         </ul>
