@@ -16,6 +16,14 @@ const Navbar = ({ showChangePassword }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // Check if the user is authenticated
+    if (!isAuthenticated()) {
+      // If not authenticated, redirect to the sign-in page
+      navigate('/');
+    }
+  }, [navigate]);
+
   const handleSignOut = () => {
     // Remove the username from local storage
     localStorage.clear();
@@ -38,6 +46,14 @@ const Navbar = ({ showChangePassword }) => {
   const closeSidebar = () => {
     setSidebarVisible(false);
   };
+
+  const isAuthenticated = () => {
+    // Retrieve the username from localStorage
+    const username = localStorage.getItem('username');
+  
+    // Check if the username exists and is not empty
+    return username !== null && username.trim() !== '';
+  };  
 
   return (
     <>
