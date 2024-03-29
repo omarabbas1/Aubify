@@ -116,25 +116,35 @@ const HomePage = () => {
     }
   };
 
-  const fetchAnonymousId = async () => {
+  const fetchAnonymousId = async (postId) => {
     try {
-      const response = await axios.get('http://localhost:8080/anonymousId');
-      setAnonymousId(response.data);
-      localStorage.setItem('anonymousId', response.data);
+      const response = await axios.get(`http://localhost:8080/posts/${postId}/author/anonymousId`);
+      setAnonymousId(response.data.anonymousId);
     } catch (error) {
       console.error('Error fetching anonymous ID:', error);
     }
   };
+  
 
   const fetchPostsFiltered = async (filter) => {
     try {
-      // Include the filter in the request as a query parameter
       const response = await axios.get(`http://localhost:8080/posts?filter=${filter}`);
-      setPosts(response.data);
+      const postsWithDetails = await Promise.all(response.data.map(async (post) => {
+        try {
+          // Fetch the anonymousId for each post's author
+          const res = await axios.get(`http://localhost:8080/posts/${post._id}/author/anonymousId`);
+          return { ...post, authorAnonymousId: res.data.anonymousId };
+        } catch (error) {
+          console.error('Failed to fetch author anonymous ID for post:', post._id, error);
+          return { ...post, authorAnonymousId: 'Error fetching ID' }; // Or handle this case as needed
+        }
+      }));
+      setPosts(postsWithDetails);
     } catch (error) {
       console.error('Failed to fetch posts:', error);
     }
   };
+  
   
   const handleFilterChange = (event) => {
     const selectedFilter = event.target.value;
@@ -200,9 +210,7 @@ const HomePage = () => {
             
             <div key={post._id} className="post">
                <div className="post-details">
-              <div className="post-anonymous">
-                 Author ID: { anonymousId}
-                 </div>
+               <div>{post.authorAnonymousId}</div>
                 <div className="post-created-at">
                    Created at {new Date(post.createdAt).toDateString()}
                 </div>
