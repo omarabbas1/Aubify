@@ -154,3 +154,9 @@
   justify-content: space-between;
   margin-bottom: 5px;
 }
+
+.loading-post {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 2%;
+}

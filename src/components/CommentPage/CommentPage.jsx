@@ -12,12 +12,13 @@ import NavBar from '../NavBar/NavBar';
 const CommentPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [comment, setComment] = useState(null); // State to store the fetched comment
   const [newComment, setNewComment] = useState('');
   const [remainingCharacters, setRemainingCharacters] = useState(250);
 
   useEffect(() => {
     fetchPostAndComments();
-  }, [postId]);
+  }, []);
 
   const fetchPostAndComments = async () => {
     try {
@@ -32,37 +33,56 @@ const CommentPage = () => {
   
 
   const handleAddComment = async () => {
-    if (newComment.trim() === '') {
-      alert('Please enter the content for the comment.');
-      return;
-    }
-  
-    // Assuming the backend expects an object with a 'content' field for a new comment
-    const commentData = {
-      content: newComment,
-      // Initialize any other fields if necessary, like upvotes, downvotes
-    };
-  
     try {
-      const response = await axios.post(`http://localhost:8080/posts/${postId}/comments`, {
-        comment: commentData, // Sending the comment as an object
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (response.status !== 200) {
+      // Check if the comment content is empty
+      if (newComment.trim() === '') {
+        alert('Please enter the content for the comment.');
+        return;
+      }
+    
+      // Retrieve the user's email from localStorage or your state management solution
+      const userEmail = localStorage.getItem('userEmail');
+      if (!userEmail) {
+        console.error('User email not found. Please ensure the user is logged in.');
+        return; // Optionally, handle this case more gracefully in your UI
+      }
+    
+      // Prepare the comment data to send to the backend
+      const commentData = {
+        content: newComment,
+        userEmail,
+      };
+    
+      // Send a POST request to add the comment
+      const response = await axios.post(
+        `http://localhost:8080/posts/${postId}/comments`,
+        commentData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    
+      // Check if the comment was successfully added (status code 201)
+      if (response.status !== 201) {
         throw new Error('Failed to add comment');
       }
-  
-      const updatedPost = response.data;
-      setPost(updatedPost); // Update the post with the new comment
+    
+      // Update the post with the new comment
+      setPost(response.data);
+      console.log(response.data);
       setNewComment('');
+      // Optionally reset remaining characters counter
+      setRemainingCharacters(250);
     } catch (error) {
       console.error('Failed to add comment:', error);
+      // Optionally, display an error message to the user
+      alert('Failed to add comment. Please try again later.');
     }
   };
+  
+  
   
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -73,27 +93,28 @@ const CommentPage = () => {
   };
 
  // Example function to upvote a comment based on its index within the post's comments array
-const handleVoteUpvote = async (postId,commentIndex) => {
+ const handleVoteUpvote = async (postId, commentId) => {
   try {
-    await axios.post(`http://localhost:8080/posts/${postId}/comments/${commentIndex}/upvote`, {
+    await axios.post(`http://localhost:8080/posts/${postId}/comments/${commentId}/upvote`, {
       userEmail: localStorage.getItem('userEmail'),
     });
     fetchPostAndComments(); // Refresh to show updated vote counts
   } catch (error) {
-    console.error(`Failed to upvote vote on comment:`, error);
+    console.error(`Failed to upvote on comment:`, error);
   }
 };
 
-const handleVoteDownvote = async (postId,commentIndex) => {
+const handleVoteDownvote = async (postId, commentId) => {
   try {
-    await axios.post(`http://localhost:8080/posts/${postId}/comments/${commentIndex}/downvote`, {
+    await axios.post(`http://localhost:8080/posts/${postId}/comments/${commentId}/downvote`, {
       userEmail: localStorage.getItem('userEmail'),
     });
     fetchPostAndComments(); // Refresh to show updated vote counts
   } catch (error) {
-    console.error(`Failed to upvote vote on comment:`, error);
+    console.error(`Failed to downvote on comment:`, error);
   }
 };
+
 
 const handleUpvote = async (postId) => {
   const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
@@ -126,7 +147,7 @@ const handleDownvote = async (postId) => {
                   {post.authorAnonymousId}
                 </div>
                 <div className="post-created-at">
-                  {new Date(post.createdAt).toDateString()}
+                {new Date(post.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}
                 </div>
           </div>
           <h2>{post.title}</h2>
@@ -150,7 +171,7 @@ const handleDownvote = async (postId) => {
           </div>
         </div>
       ) : (
-        <p>Loading post...</p>
+        <p className='loading-post'>Loading post...</p>
       )}
              <div className="add-comment">
              <h3>Comments:</h3>
@@ -163,35 +184,35 @@ const handleDownvote = async (postId) => {
         <button onClick={handleAddComment} type="submit">Comment</button>
       </div>
       <div className="comments-container">
-        <div className="comments-list">
-          {post && post.comments.map((comment, index) => (
-            <div key={index} className="comment">
-              <div className='comment-details'>
-                <div className='comment-anonymousId'>
-                  {comment.authorAnonymousId}
-                </div>
-                <div className="comment-created-at">
-                  {new Date(comment.createdAt).toDateString()}
-                </div>
-              </div>
-              <p>{comment.content}</p>
-              <div className="comment-interactions">
-                <button className="interaction-button" onClick={() => handleVoteUpvote(postId,index)} >
-                <img src={upvoteIcon} alt="Upvote" />
-                <span className="interaction-count">{post.comments[index].upvotes || 0}</span>
-                </button>
-                <button className="interaction-button" onClick={() => handleVoteDownvote(postId,index)} >
-                <img src={downvoteIcon} alt="Downvote" />
-                <span className="interaction-count">{post.comments[index].downvotes || 0}</span>
-                </button>
-                <button className="interaction-button">
-                  <img src={shareIcon} alt="Share" />
-                </button>
-              </div>
-            </div>
-          ))}
+  <div className="comments-list">
+    {post && post.comments.map((comment) => ( // Removed index as it's no longer needed for the key
+      <div key={comment._id} className="comment"> {/* Use comment._id for a unique key */}
+        <div className='comment-details'>
+          <div className='comment-anonymousId'>
+            {comment.author.anonymousId}
+          </div>
+          <div className="comment-created-at">
+          {new Date(comment.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}
+          </div>
+        </div>
+        <p>{comment.content}</p>
+        <div className="comment-interactions">
+          <button className="interaction-button" onClick={() => handleVoteUpvote(postId, comment._id)} >
+            <img src={upvoteIcon} alt="Upvote" />
+            <span className="interaction-count">{comment.upvotes || 0}</span>
+          </button>
+          <button className="interaction-button" onClick={() => handleVoteDownvote(postId, comment._id)} >
+            <img src={downvoteIcon} alt="Downvote" />
+            <span className="interaction-count">{comment.downvotes || 0}</span>
+          </button>
+          <button className="interaction-button">
+            <img src={shareIcon} alt="Share" />
+          </button>
         </div>
       </div>
+    ))}
+  </div>
+</div>
     </div>
   );
 };
