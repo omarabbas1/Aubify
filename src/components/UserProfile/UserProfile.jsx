@@ -11,8 +11,8 @@ const UserProfile = () => {
   const userName = localStorage.getItem('username');
   const userEmail = localStorage.getItem('userEmail');
   const [userPosts, setUserPosts] = useState([]);
+  const [selectedAvatar, setSelectedAvatar] = useState(''); // Initialize selected avatar state
   const [dateCreated, setDateCreated] = useState('');
-  const [selectedAvatar, setSelectedAvatar] = useState(localStorage.getItem('selectedAvatar') || ''); // Retrieve selected avatar from local storage
   const navigate = useNavigate();
 
   const handleChangePassword = () => {
@@ -29,39 +29,46 @@ const UserProfile = () => {
       }
     };
 
+    const fetchAvatar = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user/avatar?email=${userEmail}`);
+        const avatarUrl = response.data.avatarUrl;
+        if (avatarUrl) {
+          setSelectedAvatar(avatarUrl);
+        }
+      } catch (error) {
+        console.error('Failed to fetch avatar:', error);
+      }
+    };
+
     fetchUserPosts();
+    fetchAvatar();
   }, [userEmail]);
 
   useEffect(() => {
     const fetchDateCreated = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/user/date_created');
-        setDateCreated(response.data.date_created);
+        const response = await axios.get(`http://localhost:8080/user/date-created?email=${userEmail}`);
+        setDateCreated(response.data.dateCreated);
       } catch (error) {
         console.error('Failed to fetch date created:', error);
       }
     };
 
     fetchDateCreated();
-  }, []);
+  }, [userEmail]);
 
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}/comments`); // Navigate to the post's page
   };
 
   const handleAvatarClick = (avatarUrl) => {
-    setSelectedAvatar(avatarUrl);
-    localStorage.setItem('selectedAvatar', avatarUrl); // Store selected avatar URL in local storage
-    updateUserAvatar(avatarUrl); // Send request to backend to update user's avatar
-  };
+    setSelectedAvatar(avatarUrl); // Set selected avatar when clicked
 
-  const updateUserAvatar = async (avatarUrl) => {
-    try {
-      await axios.put(`http://localhost:8080/user/avatar`, { email: userEmail, avatarUrl });
-      console.log('User avatar updated successfully');
-    } catch (error) {
-      console.error('Failed to update user avatar:', error);
-    }
+    // Send request to backend to update avatar
+    axios.post('http://localhost:8080/user/update-avatar', { email: userEmail, avatarUrl })
+      .then(() => console.log('Avatar updated successfully'))
+      .catch(error => console.error('Failed to update avatar:', error));
   };
 
   return (
