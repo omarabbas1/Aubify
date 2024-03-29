@@ -94,6 +94,9 @@ const UserProfile = () => {
         </div>
         <button onClick={handleChangePassword}>Change Password</button>
       </div>
+      <div className='animated button'>
+        <button>dummy button</button>
+      </div>
       <div className="avatar-selection">
         <h2>Select Avatar</h2>
         <div className="avatar-grid">
