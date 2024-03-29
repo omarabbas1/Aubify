@@ -134,17 +134,17 @@ const fetchPosts = async () => {
   return (
     <div className="comment-page">
       <NavBar/>
-      {post && (
-  <div className="post-details">
-    <div>{post.authorAnonymousId}</div>
-                <div className="post-created-at">
-                  {new Date(post.createdAt).toDateString()}
-                </div>
-  </div>
-)}
       <h3>Post:</h3>
       {post ? (
         <div key={post._id} className="post">
+          <div className="post-details-comment">
+                <div className='post-anonymousId'>
+                  {post.authorAnonymousId}
+                </div>
+                <div className="post-created-at">
+                  {new Date(post.createdAt).toDateString()}
+                </div>
+          </div>
           <h2>{post.title}</h2>
           <p>{post.content}</p>
           <div className="comment-interactions">

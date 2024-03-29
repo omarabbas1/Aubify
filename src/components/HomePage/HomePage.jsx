@@ -209,8 +209,10 @@ const HomePage = () => {
           {searchedPosts.map((post) => (
             
             <div key={post._id} className="post">
-               <div className="post-details">
-               <div>{post.authorAnonymousId}</div>
+               <div className="post-details-home">
+                <div className='post-anonymousId'>
+                  {post.authorAnonymousId}
+                </div>
                 <div className="post-created-at">
                   {new Date(post.createdAt).toDateString()}
                 </div>
