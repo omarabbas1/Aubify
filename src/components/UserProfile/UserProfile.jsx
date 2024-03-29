@@ -3,11 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UserProfile.css';
 import NavBar from '../NavBar/NavBar';
+import avatar1 from '../avatars/avatar1.png'; // Import avatar images
+import avatar2 from '../avatars/avatar2.png'; // Import avatar images
+import avatar3 from '../avatars/avatar3.jpeg'; // Import avatar images
 
 const UserProfile = () => {
   const userName = localStorage.getItem('username');
   const userEmail = localStorage.getItem('userEmail');
   const [userPosts, setUserPosts] = useState([]);
+  const [dateCreated, setDateCreated] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState(localStorage.getItem('selectedAvatar') || ''); // Retrieve selected avatar from local storage
   const navigate = useNavigate();
 
   const handleChangePassword = () => {
@@ -27,8 +32,36 @@ const UserProfile = () => {
     fetchUserPosts();
   }, [userEmail]);
 
+  useEffect(() => {
+    const fetchDateCreated = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/user/date_created');
+        setDateCreated(response.data.date_created);
+      } catch (error) {
+        console.error('Failed to fetch date created:', error);
+      }
+    };
+
+    fetchDateCreated();
+  }, []);
+
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}/comments`); // Navigate to the post's page
+  };
+
+  const handleAvatarClick = (avatarUrl) => {
+    setSelectedAvatar(avatarUrl);
+    localStorage.setItem('selectedAvatar', avatarUrl); // Store selected avatar URL in local storage
+    updateUserAvatar(avatarUrl); // Send request to backend to update user's avatar
+  };
+
+  const updateUserAvatar = async (avatarUrl) => {
+    try {
+      await axios.put(`http://localhost:8080/user/avatar`, { email: userEmail, avatarUrl });
+      console.log('User avatar updated successfully');
+    } catch (error) {
+      console.error('Failed to update user avatar:', error);
+    }
   };
 
   return (
@@ -44,7 +77,24 @@ const UserProfile = () => {
           <p className='info-title'>Email:</p>
           <p>{userEmail}</p>
         </div>
+        <div className='info-item'>
+          <p className='info-title'>Date Created:</p>
+          <p>{dateCreated}</p>
+        </div>
         <button onClick={handleChangePassword}>Change Password</button>
+      </div>
+      <div className="avatar-selection">
+        <h2>Select Avatar</h2>
+        <div className="avatar-grid">
+          <img src={avatar1} alt="Avatar 1" onClick={() => handleAvatarClick(avatar1)} />
+          <img src={avatar2} alt="Avatar 2" onClick={() => handleAvatarClick(avatar2)} />
+          <img src={avatar3} alt="Avatar 3" onClick={() => handleAvatarClick(avatar3)} />
+          {/* Add more avatars as needed */}
+        </div>
+      </div>
+      <div className="profile-picture">
+        <h2>Profile Picture</h2>
+        {selectedAvatar && <img src={selectedAvatar} alt="Profile" />}
       </div>
       <div className="user-posts">
         <h2>User Posts</h2>
