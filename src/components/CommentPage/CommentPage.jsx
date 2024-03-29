@@ -21,12 +21,23 @@ const CommentPage = () => {
 
   const fetchPostAndComments = async () => {
     try {
+      // Fetch the post
       const postResponse = await axios.get(`http://localhost:8080/posts/${postId}`);
-      setPost(postResponse.data);
+      const fetchedPost = postResponse.data;
+  
+      // Fetch the anonymousId for the post's author
+      const authorAnonymousIdResponse = await axios.get(`http://localhost:8080/users/${fetchedPost.author}/anonymousId`);
+      const authorAnonymousId = authorAnonymousIdResponse.data.anonymousId;
+  
+      // Update the fetched post with authorAnonymousId and createdAt
+      const updatedPost = { ...fetchedPost, authorAnonymousId };
+  
+      setPost(updatedPost);
     } catch (error) {
       console.error('Failed to fetch post:', error);
     }
   };
+  
 
   const handleAddComment = async () => {
     if (newComment.trim() === '') {
@@ -129,6 +140,14 @@ const fetchPosts = async () => {
   return (
     <div className="comment-page">
       <NavBar/>
+      {post && (
+  <div className="post-details">
+    <div>{post.authorAnonymousId}</div>
+    <div className="post-created-at">
+      Created at {new Date(post.createdAt).toDateString()}
+    </div>
+  </div>
+)}
       <h3>Post:</h3>
       {post ? (
         <div key={post._id} className="post">

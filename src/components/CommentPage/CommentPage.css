@@ -29,6 +29,7 @@
 
 .comment-page .post h2 {
   margin: 0;
+  text-align: center;
   padding-bottom: 10px;
   max-width: 100%; /* Ensure heading doesn't exceed container width */
   overflow-wrap: break-word; /* Allow heading to break to next line if needed */
@@ -141,4 +142,9 @@
 .character-limit {
   margin-left: 57.5%;
   margin-bottom: 1%;
+}
+.post-details {
+  display: flex;
+  justify-content: space-between; /* Add space between elements */
+  align-items: center; /* Align items vertically */
 }
