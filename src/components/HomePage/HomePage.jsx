@@ -14,16 +14,28 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [newPostTitle, setNewPostTitle] = useState('');
   const [currentFilter, setCurrentFilter] = useState(''); 
-  const [anonymousId, setAnonymousId] = useState('');
   const [remainingWords, setRemainingWords] = useState(500);
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
   const [searchedPosts, setSearchedPosts] = useState([]); // Display posts based on search
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch anonymousId
-    fetchAnonymousId();
-  }, []);
+    const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
+    setCurrentFilter(savedFilter);
+    fetchPostsFiltered(savedFilter);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    // Update remaining characters count when content changes
+    const remaining = Math.max(0, 500 - newPostContent.length);
+    setRemainingWords(remaining);
+  }, [newPostContent]);
+
+  useEffect(() => {
+    // Update remaining characters count when title changes
+    const remainingTitle = Math.max(0, 50 - newPostTitle.length);
+    setRemainingTitleWords(remainingTitle);
+  }, [newPostTitle]);
 
   useEffect(() => {
     const handleSearch = (searchTerm) => {
@@ -57,32 +69,15 @@ const HomePage = () => {
     }
   };
 
-  const handleShare = postId => {
-    console.log('Shared post:', postId);
-    // TODO: Implement the share logic
-  };
-
   const handleCommentClick = (postId) => {
     navigate(`/posts/${postId}/comments`);
   };
 
-  useEffect(() => {
-    const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
-    setCurrentFilter(savedFilter);
-    fetchPostsFiltered(savedFilter);
-  }, [searchTerm]);
 
-  useEffect(() => {
-    // Update remaining characters count when content changes
-    const remaining = Math.max(0, 500 - newPostContent.length);
-    setRemainingWords(remaining);
-  }, [newPostContent]);
-
-  useEffect(() => {
-    // Update remaining characters count when title changes
-    const remainingTitle = Math.max(0, 50 - newPostTitle.length);
-    setRemainingTitleWords(remainingTitle);
-  }, [newPostTitle]);
+  const handleShare = postId => {
+    console.log('Shared post:', postId);
+    // TODO: Implement the share logic
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -116,16 +111,6 @@ const HomePage = () => {
     }
   };
 
-  const fetchAnonymousId = async (postId) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/posts/${postId}/author/anonymousId`);
-      setAnonymousId(response.data.anonymousId);
-    } catch (error) {
-      console.error('Error fetching anonymous ID:', error);
-    }
-  };
-  
-
   const fetchPostsFiltered = async (filter) => {
     try {
       const response = await axios.get(`http://localhost:8080/posts?filter=${filter}`);
@@ -144,7 +129,6 @@ const HomePage = () => {
       console.error('Failed to fetch posts:', error);
     }
   };
-  
   
   const handleFilterChange = (event) => {
     const selectedFilter = event.target.value;
