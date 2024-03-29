@@ -14,7 +14,6 @@ const CommentPage = () => {
   const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [remainingCharacters, setRemainingCharacters] = useState(250);
-  const [authir, setAuthor] = useState(null);
 
   useEffect(() => {
     fetchPostAndComments();
@@ -22,15 +21,14 @@ const CommentPage = () => {
 
   const fetchPostAndComments = async () => {
     try {
-      const postResponse = await axios.get(`http://localhost:8080/posts/${postId}`);
-      const fetchedPost = postResponse.data;
-      console.log(fetchedPost); // Log to inspect the structure
+      const response = await axios.get(`http://localhost:8080/posts/${postId}`);
+      const fetchedPost = { ...response.data, authorAnonymousId: response.data.author.anonymousId };
+      console.log(fetchedPost);
       setPost(fetchedPost);
     } catch (error) {
       console.error('Failed to fetch post:', error);
     }
   };
-  
   
 
   const handleAddComment = async () => {
@@ -101,7 +99,7 @@ const handleUpvote = async (postId) => {
   const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
   try {
     await axios.post(`http://localhost:8080/posts/${postId}/upvote`, { userEmail });
-    fetchPosts(); // Refresh the posts to reflect the new upvote count
+    fetchPostAndComments(); // Refresh the posts to reflect the new upvote count
   } catch (error) {
     console.error('Failed to upvote post:', error);
   }
@@ -111,23 +109,9 @@ const handleDownvote = async (postId) => {
   const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
   try {
     await axios.post(`http://localhost:8080/posts/${postId}/downvote`, { userEmail });
-    fetchPosts(); // Refresh the posts to reflect the new downvote count
+    fetchPostAndComments(); // Refresh the posts to reflect the new downvote count
   } catch (error) {
     console.error('Failed to downvote post:', error);
-  }
-};
-
-const fetchPosts = async () => {
-  try {
-    // Use the postId from useParams to make a request for a specific post
-    const response = await axios.get(`http://localhost:8080/posts/${postId}`);
-    if (response.status === 200) {
-      setPost(response.data);
-    } else {
-      console.error('Failed to fetch post: Server responded with status', response.status);
-    }
-  } catch (error) {
-    console.error('Failed to fetch post:', error);
   }
 };
 
@@ -203,4 +187,5 @@ const fetchPosts = async () => {
     </div>
   );
 };
+
 export default CommentPage;
