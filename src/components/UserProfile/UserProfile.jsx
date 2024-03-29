@@ -77,7 +77,11 @@ const UserProfile = () => {
       <h1>User Profile</h1>
       <div className="profile-info">
         <div className='info-item'>
-          <p className='info-title'>Name:</p>
+          <p className='info-title'>First Name:</p>
+          <p>{userName}</p>
+        </div>
+        <div className='info-item'>
+          <p className='info-title'>Last Name:</p>
           <p>{userName}</p>
         </div>
         <div className='info-item'>
