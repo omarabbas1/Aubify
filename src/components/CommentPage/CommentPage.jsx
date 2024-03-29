@@ -14,6 +14,7 @@ const CommentPage = () => {
   const [post, setPost] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [remainingCharacters, setRemainingCharacters] = useState(250);
+  const [authir, setAuthor] = useState(null);
 
   useEffect(() => {
     fetchPostAndComments();
@@ -21,22 +22,15 @@ const CommentPage = () => {
 
   const fetchPostAndComments = async () => {
     try {
-      // Fetch the post
       const postResponse = await axios.get(`http://localhost:8080/posts/${postId}`);
       const fetchedPost = postResponse.data;
-  
-      // Fetch the anonymousId for the post's author
-      const authorAnonymousIdResponse = await axios.get(`http://localhost:8080/users/${fetchedPost.author}/anonymousId`);
-      const authorAnonymousId = authorAnonymousIdResponse.data.anonymousId;
-  
-      // Update the fetched post with authorAnonymousId and createdAt
-      const updatedPost = { ...fetchedPost, authorAnonymousId };
-  
-      setPost(updatedPost);
+      console.log(fetchedPost); // Log to inspect the structure
+      setPost(fetchedPost);
     } catch (error) {
       console.error('Failed to fetch post:', error);
     }
   };
+  
   
 
   const handleAddComment = async () => {
@@ -143,9 +137,9 @@ const fetchPosts = async () => {
       {post && (
   <div className="post-details">
     <div>{post.authorAnonymousId}</div>
-    <div className="post-created-at">
-      Created at {new Date(post.createdAt).toDateString()}
-    </div>
+                <div className="post-created-at">
+                  {new Date(post.createdAt).toDateString()}
+                </div>
   </div>
 )}
       <h3>Post:</h3>
