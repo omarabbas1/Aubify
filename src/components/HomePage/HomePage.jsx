@@ -8,17 +8,22 @@ import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
 import NavBar from '../NavBar/NavBar';
 
-
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [newPostContent, setNewPostContent] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [newPostTitle, setNewPostTitle] = useState('');
   const [currentFilter, setCurrentFilter] = useState(''); 
+  const [anonymousId, setAnonymousId] = useState('');
   const [remainingWords, setRemainingWords] = useState(500);
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
   const [searchedPosts, setSearchedPosts] = useState([]); // Display posts based on search
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch anonymousId
+    fetchAnonymousId();
+  }, []);
 
   useEffect(() => {
     const handleSearch = (searchTerm) => {
@@ -34,10 +39,9 @@ const HomePage = () => {
   
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail');
-    const savedFilter = localStorage.getItem('selectedFilter');
     try {
       await axios.post(`http://localhost:8080/posts/${postId}/upvote`, { userEmail });
-      fetchPostsFiltered(savedFilter) // Refresh the posts to reflect the new upvote count
+      fetchPostsFiltered(currentFilter); // Use currentFilter instead of savedFilter
     } catch (error) {
       console.error('Failed to upvote post:', error);
     }
@@ -45,10 +49,9 @@ const HomePage = () => {
   
   const handleDownvote = async (postId) => {
     const userEmail = localStorage.getItem('userEmail'); // Retrieve the user's email
-    const savedFilter = localStorage.getItem('selectedFilter');
     try {
       await axios.post(`http://localhost:8080/posts/${postId}/downvote`, { userEmail });
-      fetchPostsFiltered(savedFilter); // Refresh the posts to reflect the new downvote count
+      fetchPostsFiltered(currentFilter); // Use currentFilter instead of savedFilter
     } catch (error) {
       console.error('Failed to downvote post:', error);
     }
@@ -64,9 +67,9 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-  const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
-  setCurrentFilter(savedFilter);
-  fetchPostsFiltered(savedFilter);
+    const savedFilter = localStorage.getItem('selectedFilter') || 'relevance';
+    setCurrentFilter(savedFilter);
+    fetchPostsFiltered(savedFilter);
   }, [searchTerm]);
 
   useEffect(() => {
@@ -112,7 +115,16 @@ const HomePage = () => {
       console.error('Failed to create post:', error);
     }
   };
-  
+
+  const fetchAnonymousId = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/anonymousId');
+      setAnonymousId(response.data);
+      localStorage.setItem('anonymousId', response.data);
+    } catch (error) {
+      console.error('Error fetching anonymous ID:', error);
+    }
+  };
 
   const fetchPostsFiltered = async (filter) => {
     try {
@@ -126,8 +138,8 @@ const HomePage = () => {
   
   const handleFilterChange = (event) => {
     const selectedFilter = event.target.value;
-    localStorage.setItem('selectedFilter', selectedFilter);
     setCurrentFilter(selectedFilter);
+    localStorage.setItem('selectedFilter', selectedFilter);
     fetchPostsFiltered(selectedFilter);
   };
 
@@ -185,7 +197,16 @@ const HomePage = () => {
             </select>
           </div>
           {searchedPosts.map((post) => (
+            
             <div key={post._id} className="post">
+               <div className="post-details">
+              <div className="post-anonymous">
+                 Author ID: { anonymousId}
+                 </div>
+                <div className="post-created-at">
+                   Created at {new Date(post.createdAt).toDateString()}
+                </div>
+              </div>
               <h2>{post.title}</h2>
               <p>{post.content}</p>
               <div className="post-interactions">

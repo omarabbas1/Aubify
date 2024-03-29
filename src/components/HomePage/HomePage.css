@@ -193,3 +193,8 @@
   margin-bottom: 1%;
 
 }
+.post-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px; /* Adjust the margin as needed */
+}
