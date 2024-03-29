@@ -1,56 +1,103 @@
-.user-profile-container {
+.profile-container {
+  background: #F5F5F5; /* Match the background color from your screenshot */
+  border-radius: 15px;
+  padding: 2rem;
+  width: 90%;
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  margin-top: 10%;
+  margin: 3rem auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-info {
-  margin-bottom: 20px;
+.profile-header {
+  display: flex;
+  justify-content: space-between; /* Adjusted to space-between for date positioning */
+  align-items: center;
+  flex-direction: column; /* Stack items vertically */
 }
 
-.info-item {
-  margin-bottom: 10px;
+.profile-date {
+  align-self: flex-end; /* Align date to the right */
+  margin-top: 1rem; /* Adjust as needed for spacing */
+  margin-right: 1rem; /* Adjust as needed for spacing */
+  order: -1; /* Position it above the profile picture */
 }
 
-.info-title {
-  font-weight: bold;
+.profile-photo-container {
+  text-align: center;
+  margin-top: 2rem; /* Spacing above the profile picture */
 }
 
-.avatar-selection {
-  margin-bottom: 20px;
-}
-
-.avatar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
-}
-
-.avatar-grid img {
-  width: 200px;
-  height: 200px;
+.profile-avatar {
+  width: 120px; /* Adjust as needed */
+  height: 120px; /* Adjust as needed */
   border-radius: 50%;
-  cursor: pointer;
+  margin: 0 auto; /* Center in the middle of the container */
+  display: block; /* Change to block for margin auto to work */
 }
 
-.profile-picture img {
-  max-width: 200px;
-  max-height: 200px;
-  border-radius: 50%;
+.profile-title {
+  text-align: center;
+  margin-bottom: 2rem; /* Spacing below the title */
 }
 
-.user-posts ul {
-  list-style: none;
-  padding: 0;
+.profile-input-group.email-input input {
+  /* ... existing styles ... */
+  width: 100%; /* Adjust as needed */
+  max-width: none; /* Remove max-width restriction */
 }
 
-.user-posts li {
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.user-posts li:hover {
+.profile-info h2 {
+  text-align: center;
+  font-size: 1.8rem;
   color: #333;
-  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
+
+.profile-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: left; /* Align to the left */
+}
+
+.profile-input-group label {
+  font-size: 0.8rem; /* Smaller label font size */
+  color: #666;
+  margin-right: 0.5rem; /* Space between label and input */
+}
+
+.profile-input-group input {
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  flex-grow: 0; /* Prevent input from growing */
+  width: 40%; /* Fixed width, adjust as needed */
+}
+
+/* Style for a row that contains both first name and last name */
+.name-row {
+  display: flex;
+  justify-content: start; /* Align items to the start of the container */
+}
+
+.change-password-button {
+  display: block;
+  width: 100%;
+  background-color: #fa7331; /* Match button color from your screenshot */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.posts-section h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 2rem;
+}
+
+/* Add more styling for posts and other elements as per your design */

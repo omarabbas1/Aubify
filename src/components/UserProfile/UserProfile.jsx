@@ -71,57 +71,44 @@ const UserProfile = () => {
       .catch(error => console.error('Failed to update avatar:', error));
   };
 
+  
   return (
-    <div className="user-profile-container">
-      <NavBar />
-      <h1>User Profile</h1>
+    <div className="profile-container">
+      <div className="profile-header">
+      <div className="profile-date">Dec 1, 2019</div>
+        <img src={avatar1} alt="Profile Avatar" className="profile-avatar" />
+        <div className="profile-header-details">
+        </div>
+      </div>
       <div className="profile-info">
-        <div className='info-item'>
-          <p className='info-title'>First Name:</p>
-          <p>{userName}</p>
+        <h2>Your Profile</h2>
+        {/* Include input fields for profile data here */}
+        <div className="profile-input-group">
+          <label htmlFor="email">Email</label>
+          <input id="email" type="text" value={userEmail} /> {/* Bind value to state */}
         </div>
-        <div className='info-item'>
-          <p className='info-title'>Last Name:</p>
-          <p>{userName}</p>
+        <div className="profile-input-group">
+          <label htmlFor="firstname"></label>
+          <input id="firstname" type="text" value={userName} /> {/* Bind value to state */}
         </div>
-        <div className='info-item'>
-          <p className='info-title'>Email:</p>
-          <p>{userEmail}</p>
+        <div className="profile-input-group">
+          <label htmlFor="lastname"></label>
+          <input id="lastname" type="text" value={userName} /> {/* Bind value to state */}
         </div>
-        <div className='info-item'>
-          <p className='info-title'>Date Created:</p>
-          <p>{dateCreated}</p>
-        </div>
-        <button onClick={handleChangePassword}>Change Password</button>
+        <button className="change-password-button">Change Password</button>
+        {/* More input fields as needed */}
       </div>
-      <div className='animated button'>
-        <button>dummy button</button>
-      </div>
-      <div className="avatar-selection">
-        <h2>Select Avatar</h2>
-        <div className="avatar-grid">
-          <img src={avatar1} alt="Avatar 1" onClick={() => handleAvatarClick(avatar1)} />
-          <img src={avatar2} alt="Avatar 2" onClick={() => handleAvatarClick(avatar2)} />
-          <img src={avatar3} alt="Avatar 3" onClick={() => handleAvatarClick(avatar3)} />
-          {/* Add more avatars as needed */}
-        </div>
-      </div>
-      <div className="profile-picture">
-        <h2>Profile Picture</h2>
-        {selectedAvatar && <img src={selectedAvatar} alt="Profile" />}
-      </div>
-      <div className="user-posts">
-        <h2>User Posts</h2>
-        <ul>
-          {userPosts.map(post => (
+      <div className="posts-section">
+        <h2>Posts</h2>
+        {userPosts.map(post => (
             <li key={post._id} onClick={() => handlePostClick(post._id)} style={{ cursor: 'pointer' }}>
               <h3>{post.title}</h3>
             </li>
           ))}
-        </ul>
       </div>
     </div>
   );
 };
+
 
 export default UserProfile;
