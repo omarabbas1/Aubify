@@ -212,7 +212,7 @@ const HomePage = () => {
                <div className="post-details">
                <div>{post.authorAnonymousId}</div>
                 <div className="post-created-at">
-                   Created at {new Date(post.createdAt).toDateString()}
+                  {new Date(post.createdAt).toDateString()}
                 </div>
               </div>
               <h2>{post.title}</h2>

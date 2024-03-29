@@ -1,103 +1,152 @@
 .profile-container {
-  background: #F5F5F5; /* Match the background color from your screenshot */
+  background: #F5F5F5;
   border-radius: 15px;
   padding: 2rem;
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
+  max-width: 600px;
   margin: 3rem auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 5%;
 }
 
 .profile-header {
   display: flex;
-  justify-content: space-between; /* Adjusted to space-between for date positioning */
+  justify-content: space-between; 
   align-items: center;
-  flex-direction: column; /* Stack items vertically */
-}
-
-.profile-date {
-  align-self: flex-end; /* Align date to the right */
-  margin-top: 1rem; /* Adjust as needed for spacing */
-  margin-right: 1rem; /* Adjust as needed for spacing */
-  order: -1; /* Position it above the profile picture */
-}
-
-.profile-photo-container {
-  text-align: center;
-  margin-top: 2rem; /* Spacing above the profile picture */
+  flex-direction: column;
 }
 
 .profile-avatar {
-  width: 120px; /* Adjust as needed */
-  height: 120px; /* Adjust as needed */
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  margin: 0 auto; /* Center in the middle of the container */
-  display: block; /* Change to block for margin auto to work */
+  margin: 0 auto;
+  display: block;
 }
 
-.profile-title {
-  text-align: center;
-  margin-bottom: 2rem; /* Spacing below the title */
+.profile-input-group .email-input input {
+  width: 100%;
 }
 
-.profile-input-group.email-input input {
-  /* ... existing styles ... */
-  width: 100%; /* Adjust as needed */
-  max-width: none; /* Remove max-width restriction */
-}
-
-.profile-info h2 {
+.profile-header h2 {
   text-align: center;
   font-size: 1.8rem;
   color: #333;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.profile-input-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  justify-content: left; /* Align to the left */
-}
-
-.profile-input-group label {
-  font-size: 0.8rem; /* Smaller label font size */
-  color: #666;
-  margin-right: 0.5rem; /* Space between label and input */
-}
-
-.profile-input-group input {
-  padding: 0.5rem;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  flex-grow: 0; /* Prevent input from growing */
-  width: 40%; /* Fixed width, adjust as needed */
-}
-
-/* Style for a row that contains both first name and last name */
-.name-row {
-  display: flex;
-  justify-content: start; /* Align items to the start of the container */
-}
-
-.change-password-button {
-  display: block;
-  width: 100%;
-  background-color: #fa7331; /* Match button color from your screenshot */
-  color: white;
-  padding: 0.75rem 1rem;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
   margin-top: 1rem;
-  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.email-info,
+.name-info,
+.date-info,
+.change-password-profile-container {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.email-info {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.name-info {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.date-info {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.change-password-profile-container {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.email-info label,
+.name-info label,
+.date-info label {
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.email-info input,
+.name-info input,
+.date-info input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.change-password-profile-container button {
+  background-color: #840032;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: calc(100% - 20px);
+  margin-top: 20px;
 }
 
 .posts-section h2 {
   font-size: 1.5rem;
   color: #333;
   margin-top: 2rem;
+  text-align: center;
 }
 
-/* Add more styling for posts and other elements as per your design */
+.avatar-selection h2 {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatar-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.avatar-option {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-post-conatiner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 25px;
+  overflow-y: auto;
+  max-height: 170px;
+  margin-top: 2rem;
+}
+
+.profile-post-conatiner h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user-profile-post {
+  width: 100%;
+  text-align: center;
+  background-color: #840032;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 25px;
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: 20px;
+}
