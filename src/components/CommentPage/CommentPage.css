@@ -143,14 +143,14 @@
   margin-left: 57.5%;
   margin-bottom: 1%;
 }
-.post-details {
-  display: flex;
-  justify-content: space-between; /* Add space between elements */
-  align-items: center; /* Align items vertically */
-}
 
 .post-details-comment {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px; /* Adjust the margin as needed */
+}
+
+.comment-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }

@@ -166,6 +166,14 @@ const handleDownvote = async (postId) => {
         <div className="comments-list">
           {post && post.comments.map((comment, index) => (
             <div key={index} className="comment">
+              <div className='comment-details'>
+                <div className='comment-anonymousId'>
+                  {comment.authorAnonymousId}
+                </div>
+                <div className="comment-created-at">
+                  {new Date(comment.createdAt).toDateString()}
+                </div>
+              </div>
               <p>{comment.content}</p>
               <div className="comment-interactions">
                 <button className="interaction-button" onClick={() => handleVoteUpvote(postId,index)} >
