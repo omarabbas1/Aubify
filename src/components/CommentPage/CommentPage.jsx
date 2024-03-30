@@ -178,7 +178,7 @@ const handleDownvote = async (postId) => {
             {comment.author.anonymousId}
           </div>
           <div className="comment-created-at">
-            {new Date(comment.createdAt).toDateString()}
+          {new Date(comment.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}
           </div>
         </div>
         <p>{comment.content}</p>
