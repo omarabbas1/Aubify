@@ -79,13 +79,14 @@ const HomePage = () => {
   };
 
   const handleCreatePost = async () => {
+    const userEmail = localStorage.getItem('userEmail');
     if (newPostTitle.trim() === '' || newPostContent.trim() === '') {
       alert('Please enter both title and content for the post.');
       return;
     }
     const savedFilter = localStorage.getItem('selectedFilter');
     try {
-      await axios.post('http://localhost:8080/posts', { title: newPostTitle, content: newPostContent });
+      await axios.post('http://localhost:8080/posts', { title: newPostTitle, content: newPostContent, userEmail: userEmail });
       setNewPostTitle('');
       setNewPostContent('');
       fetchPostsFiltered(savedFilter);

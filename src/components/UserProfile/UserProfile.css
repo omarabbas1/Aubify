@@ -4,6 +4,7 @@
   margin: auto;
   color: white;
   height: 100vh;
+  
 }
 
 .user-profile-container h1 {
@@ -43,4 +44,187 @@
   font-weight: bold;
   margin-top: 10px;
   background-color: white;
+}
+
+.profile-activity {
+  margin-top: 50px;
+  
+}
+.activity-title{
+  font-weight: bold;
+  margin-left: 5px;
+  font-size: 25px;
+}
+.profile-activity-posts{
+  margin-top: 35px;
+  
+}
+
+
+/* Post container styles */
+.post {
+  background-color: #fff; 
+  padding: 10px;
+  margin: 20px auto; /* Center the post */
+  border-radius: 25px;
+  word-wrap: break-word;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+  display: block; /* Ensure it's a block-level element */
+  margin-bottom: 20px;
+}
+
+.post-list .post{
+  width: 50%;
+  border-radius: 25px;
+}
+
+.post-title-input {
+  width: 25%; 
+  margin: 10px ; /* Center horizontally */
+  margin-left: 20%;
+  display: block;
+  padding: 10px;
+  border-radius: 15px;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+  background-color: #fff; 
+  font-size: 25px;
+  box-sizing: border-box;
+}
+
+.post-content-input {
+  width: 100%; /* Same width as posts */
+  height: 100px; /* Larger height */
+  margin: 20px auto; /* Center horizontally with space below */
+  display: block;
+  padding: 10px;
+  border-radius: 15px;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+  background-color: #fff; /* White background */
+  border: 2px solid black; /* Added border for better visibility */
+  max-width: 60%;
+  font-size: 25px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* Adjust the button alignment */
+.content-button-container {
+  width: 50%; /* Same width as your content input for alignment */
+  margin: 0 auto; /* Center this container */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns children (content input and button) to the left within this container */
+}
+
+
+.post-container {
+  /* margin-top: 00px; */
+  padding: 20px;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  background-color: #840032; /* Main color background */
+  color: #fff; /* White text */
+}
+
+.post-container .post {
+  margin-top: 2%;
+}
+
+.post-container .post p {
+  max-width: 100%;
+  word-wrap: break-word;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+}
+
+.post-container h1 {
+  font-size: 62px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #fff; /* Change the color to match your design */
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.submit-post-button {
+  display: block; /* Convert button to block-level to allow margin manipulation */
+  width: fit-content; /* Shrink wrap the button content */
+  margin-left: 71.7%; /* Align button to the left */
+  background-color: white;
+  color: #840032;
+  border: none;
+  padding: 10px 30px; 
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.post-list {
+  margin-top: 20px;
+}
+.post-list h1{
+  font-size: 62px;
+  margin-bottom: 5px;
+  text-align: center;
+
+}
+.post-list h2 {
+  font-size: 25px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.post-list ul {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.post-container .post-list ul li {
+  max-width: 100%;
+  word-wrap: break-word;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.post-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.post-interactions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.interaction-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem; /* Size of the text next to icons */
+}
+
+.interaction-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.remaining-characters{
+  margin-left: 27.5%;
+}
+.remaining-Postcharacters{
+  margin-left: 62%;
+  margin-bottom: 1%;
+
 }
