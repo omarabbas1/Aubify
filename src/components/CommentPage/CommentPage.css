@@ -147,6 +147,8 @@
 .post-details-comment {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2.5%;
+  color: #840032;
 }
 
 .comment-details {
