@@ -215,7 +215,7 @@ const HomePage = () => {
                 </button>
                 <button className="interaction-button" onClick={() => handleCommentClick(post._id)}>
                   <img src={commentIcon} alt="Comments" />
-                  <span className="interaction-count">{post.comments.length}</span>
+                  <span className="interaction-count">{(post.comments || []).length}</span>
                 </button>
                 <button className="interaction-button">
                   <img src={shareIcon} alt="Share" />
