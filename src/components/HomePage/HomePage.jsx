@@ -154,33 +154,33 @@ const HomePage = () => {
     <div className="home-page">
       <NavBar onSearch={handleSearch} />
       <div className='post-container'>
-      <h1>Add a Post:</h1>
-      <input
-  type="text"
-  placeholder="Post Title"
-  className="post-title-input"
-  value={newPostTitle}
-  name="title"
-  onChange={handleInputChange}
-/>
-<div className="remaining-characters">
-  Characters Remaining: {remainingTitleWords}
-</div>
-  <textarea
-  placeholder="What's on your mind?"
-  className="post-content-input"
-  value={newPostContent}
-  onChange={handleInputChange}
-  onKeyDown={(e) => {
-    if (newPostContent.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
-      e.preventDefault();
-    }
-  }}
-></textarea>
-<div className="remaining-Postcharacters">
-  Characters Remaining: {remainingWords}
-</div>
-  <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
+        <h1>Add a Post:</h1>
+        <input
+          type="text"
+          placeholder="Post Title"
+          className="post-title-input"
+          value={newPostTitle}
+          name="title"
+          onChange={handleInputChange}
+        />
+        <div className="remaining-characters">
+          Characters Remaining: {remainingTitleWords}
+        </div>
+          <textarea
+          placeholder="What's on your mind?"
+          className="post-content-input"
+          value={newPostContent}
+          onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (newPostContent.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
+              e.preventDefault();
+            }
+          }}
+        ></textarea>
+        <div className="remaining-Postcharacters">
+          Characters Remaining: {remainingWords}
+        </div>
+        <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
         <div className="post-list">
           <h1> Posts: </h1>
           <div className='filter-container'>
@@ -191,14 +191,13 @@ const HomePage = () => {
             </select>
           </div>
           {searchedPosts.map((post) => (
-            
             <div key={post._id} className="post">
-               <div className="post-details-home">
+                <div className="post-details-home">
                 <div className='post-anonymousId'>
                   {post.authorAnonymousId}
                 </div>
                 <div className="post-created-at">
-                  {new Date(post.createdAt).toDateString()}
+                  {new Date(post.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}
                 </div>
               </div>
               <h2>{post.title}</h2>
@@ -224,7 +223,7 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-        </div>
+      </div>
     </div>
   );
 };

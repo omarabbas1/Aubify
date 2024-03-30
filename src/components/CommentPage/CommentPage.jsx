@@ -18,7 +18,7 @@ const CommentPage = () => {
 
   useEffect(() => {
     fetchPostAndComments();
-  }, [postId]);
+  }, []);
 
   const fetchPostAndComments = async () => {
     try {
@@ -64,6 +64,8 @@ const CommentPage = () => {
       }
     } catch (error) {
       console.error('Failed to add comment:', error);
+      // Optionally, display an error message to the user
+      alert('Failed to add comment. Please try again later.');
     }
   };
   
@@ -131,7 +133,7 @@ const handleDownvote = async (postId) => {
                   {post.authorAnonymousId}
                 </div>
                 <div className="post-created-at">
-                  {new Date(post.createdAt).toDateString()}
+                {new Date(post.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}
                 </div>
           </div>
           <h2>{post.title}</h2>
@@ -155,7 +157,7 @@ const handleDownvote = async (postId) => {
           </div>
         </div>
       ) : (
-        <p>Loading post...</p>
+        <p className='loading-post'>Loading post...</p>
       )}
              <div className="add-comment">
              <h3>Comments:</h3>
