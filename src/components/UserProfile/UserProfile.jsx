@@ -20,43 +20,40 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    const fetchUserPosts = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/user/posts?email=${userEmail}`);
-        setUserPosts(response.data);
-      } catch (error) {
-        console.error('Failed to fetch user posts:', error);
-      }
-    };
-
-    const fetchAvatar = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/user/avatar?email=${userEmail}`);
-        const avatarUrl = response.data.avatarUrl;
-        if (avatarUrl) {
-          setSelectedAvatar(avatarUrl);
-        }
-      } catch (error) {
-        console.error('Failed to fetch avatar:', error);
-      }
-    };
-
     fetchUserPosts();
     fetchAvatar();
-  }, [userEmail]);
-
-  useEffect(() => {
-    const fetchDateCreated = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/user/date-created?email=${userEmail}`);
-        setDateCreated(response.data.dateCreated);
-      } catch (error) {
-        console.error('Failed to fetch date created:', error);
-      }
-    };
-
     fetchDateCreated();
-  }, [userEmail]);
+  }, []);
+
+  const fetchUserPosts = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/posts?email=${userEmail}`);
+      setUserPosts(response.data);
+    } catch (error) {
+      console.error('Failed to fetch user posts:', error);
+    }
+  };
+
+  const fetchDateCreated = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/date-created?email=${userEmail}`);
+      setDateCreated(response.data.dateCreated);
+    } catch (error) {
+      console.error('Failed to fetch date created:', error);
+    }
+  };
+
+  const fetchAvatar = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/avatar?email=${userEmail}`);
+      const avatarUrl = response.data.avatarUrl;
+      if (avatarUrl) {
+        setSelectedAvatar(avatarUrl);
+      }
+    } catch (error) {
+      console.error('Failed to fetch avatar:', error);
+    }
+  };
 
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}/comments`); // Navigate to the post's page
@@ -81,16 +78,16 @@ const UserProfile = () => {
       </div>
       <div className="profile-info">
         <div className="name-info">
-          <label htmlFor="tname">Name</label>
-          <input id="name" type="text" value={userName} />
+          <label htmlFor="name">Name</label>
+          <input id="name" type="text" defaultValue={userName} />
         </div>
         <div className="email-info">
           <label htmlFor="email">Email</label>
-          <input id="email" type="text" value={userEmail} />
+          <input id="email" type="text" defaultValue={userEmail} />
         </div>
         <div className="date-info">
           <label htmlFor="date">Date Created</label>
-          <input id='date' type="text" value={dateCreated + '03/29/2024'} />
+          <input id='date' type="text" defaultValue={dateCreated} />
         </div>
         <div className='change-password-profile-container'>
           <button className="change-password-button" onClick={handleChangePassword}>Change Password</button>
