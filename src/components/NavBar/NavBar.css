@@ -40,7 +40,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    max-width: 250px;
   }
 
   .navbar-right p {
@@ -56,6 +55,7 @@
 
   .navbar-right .navbar-name {
     margin-left: 15px;
+    max-width: 600px;
   }
   
   .user-name {

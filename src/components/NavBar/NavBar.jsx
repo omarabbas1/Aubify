@@ -16,11 +16,13 @@ const Navbar = ({ onSearch }) => {
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
+    console.log("storedUsername:", storedUsername);
     if (storedUsername) {
       setUsername(storedUsername);
     }
     fetchAvatar();
   }, []);
+  
 
   // useEffect(() => {
   //   if (!isAuthenticated()) {
@@ -63,9 +65,9 @@ const Navbar = ({ onSearch }) => {
     setSidebarVisible(false);
   };
 
-  const isAuthenticated = () => {
-    return username !== null && username.trim() !== '';
-  };
+  // const isAuthenticated = () => {
+  //   return username !== null && username.trim() !== '';
+  // };
 
   return (
     <>
@@ -82,7 +84,6 @@ const Navbar = ({ onSearch }) => {
         <div className="navbar-right">
             {userAvatar && <img src={userAvatar} alt="User Avatar" className="user-avatar-home" />}
             <div className='navbar-name'>
-              <p>Welcome,</p>
               <span className="user-name">{username}</span>
             </div>
         </div>
