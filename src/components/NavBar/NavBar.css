@@ -37,13 +37,25 @@
   }
   
   .navbar-right {
-    display: block;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     max-width: 250px;
   }
 
   .navbar-right p {
     text-align: right;
+  }
+
+  .navbar-right img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin: 0px;
+  }
+
+  .navbar-right .navbar-name {
+    margin-left: 15px;
   }
   
   .user-name {

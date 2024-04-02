@@ -196,5 +196,6 @@
 .post-details-home {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px; /* Adjust the margin as needed */
+  margin-top: 5px; 
+  margin-bottom: 10px;
 }

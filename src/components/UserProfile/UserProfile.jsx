@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UserProfile.css';
 import NavBar from '../NavBar/NavBar';
-import avatar1 from '../avatars/avatar1.png'; // Import avatar images
-import avatar2 from '../avatars/avatar2.png'; // Import avatar images
-import avatar3 from '../avatars/avatar3.jpeg'; // Import avatar images
+import avatar1 from '../avatars/avatar1.jpg'; // Import avatar images
+import avatar2 from '../avatars/avatar2.jpg'; // Import avatar images
+import avatar3 from '../avatars/avatar3.jpg'; // Import avatar images
+import avatar4 from '../avatars/avatar4.jpg'; // Import avatar images
 
 const UserProfile = () => {
   const userName = localStorage.getItem('username');
@@ -99,6 +100,7 @@ const UserProfile = () => {
           <img src={avatar1} alt="Avatar 1" onClick={() => handleAvatarClick(avatar1)} className='avatar-option'/>
           <img src={avatar2} alt="Avatar 2" onClick={() => handleAvatarClick(avatar2)} className='avatar-option'/>
           <img src={avatar3} alt="Avatar 3" onClick={() => handleAvatarClick(avatar3)} className='avatar-option'/>
+          <img src={avatar4} alt="Avatar 4" onClick={() => handleAvatarClick(avatar4)} className='avatar-option'/>
         </div>
       </div>
       <div className="posts-section">

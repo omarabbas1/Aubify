@@ -3,52 +3,60 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import './NavBar.css';
 import SideBar from '../SideBar/SideBar';
+import axios from 'axios'; // Import axios for making HTTP requests
 
-const Navbar = ({ onSearch }) => { // Pass onSearch function as a prop
+const Navbar = ({ onSearch }) => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
   const [sidebarVisible, setSidebarVisible] = useState(false);
-  const location = useLocation(); // Get the current location
+  const [userAvatar, setUserAvatar] = useState(''); // Initialize state for user avatar
+  const location = useLocation();
 
-  // Check if the search bar should be visible based on the current location
-  const isSearchVisible = location.pathname === '/homepage';
+  const userEmail = localStorage.getItem('userEmail');
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
     }
+    fetchAvatar();
   }, []);
 
-  useEffect(() => {
-    // Check if the user is authenticated
-    if (!isAuthenticated()) {
-      // If not authenticated, redirect to the sign-in page
-      navigate('/');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (!isAuthenticated()) {
+  //     navigate('/');
+  //   }
+  // }, [navigate]);
 
   const handleSignOut = () => {
-    // Remove the username from local storage
     localStorage.clear();
-    // Redirect to the sign-in/sign-up page
     navigate('/');
-    // Clear the session history
     window.history.replaceState(null, '', '/');
-    // Prevent further navigation using the back button
     window.onpopstate = () => {
       navigate('/');
       window.history.replaceState(null, '', '/');
     };
   };
 
+  const fetchAvatar = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/avatar?email=${userEmail}`);
+      const avatarUrl = response.data.avatarUrl;
+      if (avatarUrl) {
+        setUserAvatar(avatarUrl);
+      }
+    } catch (error) {
+      console.error('Failed to fetch avatar:', error);
+    }
+  };
+
   const handleSearch = (event) => {
-    const searchTerm = event.target.value; // Capture the search term
-    onSearch(searchTerm); // Pass the search term to the parent component
+    const searchTerm = event.target.value;
+    onSearch(searchTerm);
   };
 
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible); // Toggle sidebar visibility
+    setSidebarVisible(!sidebarVisible);
   };
 
   const closeSidebar = () => {
@@ -56,10 +64,6 @@ const Navbar = ({ onSearch }) => { // Pass onSearch function as a prop
   };
 
   const isAuthenticated = () => {
-    // Retrieve the username from localStorage
-    const username = localStorage.getItem('username');
-
-    // Check if the username exists and is not empty
     return username !== null && username.trim() !== '';
   };
 
@@ -70,14 +74,17 @@ const Navbar = ({ onSearch }) => { // Pass onSearch function as a prop
           <img src="/aubify-logo.jpg" alt="Logo" className="navbar-logo" />
           <span className="website-name">Aubify</span>
         </div>
-        {isSearchVisible && (
-          <div className="navbar-center">
+        <div className="navbar-center">
+          {location.pathname === '/homepage' && (
             <input type="text" placeholder="Search..." onChange={handleSearch} />
-          </div>
-        )}
+          )}
+        </div>
         <div className="navbar-right">
-          <p>Welcome,</p>
-          <span className="user-name">{username}</span>
+            {userAvatar && <img src={userAvatar} alt="User Avatar" className="user-avatar-home" />}
+            <div className='navbar-name'>
+              <p>Welcome,</p>
+              <span className="user-name">{username}</span>
+            </div>
         </div>
       </nav>
       <SideBar isOpen={sidebarVisible} onClose={closeSidebar} onSignOut={handleSignOut} />

@@ -147,14 +147,14 @@
 .post-details-comment {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2.5%;
+  margin-bottom: 10px;
   color: #840032;
 }
 
 .comment-details {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .loading-post {
