@@ -6,6 +6,7 @@ import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
+import reportIcon from '../icons/report.png';
 import NavBar from '../NavBar/NavBar';
 
 
@@ -152,6 +153,9 @@ const handleDownvote = async (postId) => {
               <span className="interaction-count">{post.comments ? post.comments.length : 0}</span>
             </button>
             <button className="interaction-button">
+              <img src={reportIcon} alt="Report" />
+            </button>
+            <button className="interaction-button">
               <img src={shareIcon} alt="Share" />
             </button>
           </div>
@@ -191,6 +195,9 @@ const handleDownvote = async (postId) => {
             <img src={downvoteIcon} alt="Downvote" />
             <span className="interaction-count">{comment.downvotes || 0}</span>
           </button>
+          <button className="interaction-button">
+              <img src={reportIcon} alt="Report" />
+            </button>
           <button className="interaction-button">
             <img src={shareIcon} alt="Share" />
           </button>

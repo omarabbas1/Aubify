@@ -9,6 +9,7 @@ import CommentPage from './components/CommentPage/CommentPage';
 import FAQ from './components/FAQ/FAQ';
 import UserProfile from './components/UserProfile/UserProfile';
 import ChangePassword from './components/ChangePassword/ChangePassword';
+import Feedback from './components/Feedback/Feedback';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/faq' element={<FAQ/>}/>
           <Route path='/userprofile' element={<UserProfile/>}/>
           <Route path='/change_password' element={<ChangePassword/>}/>
+          <Route path='/feedback' element={<Feedback/>}/>
         </Routes>
       </Router>
     </UserProvider>

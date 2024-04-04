@@ -16,7 +16,6 @@ const Navbar = ({ onSearch }) => {
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
-    console.log("storedUsername:", storedUsername);
     if (storedUsername) {
       setUsername(storedUsername);
     }

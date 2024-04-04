@@ -6,6 +6,7 @@ import upvoteIcon from '../icons/upvote.png'; // Add your icons in the public/as
 import downvoteIcon from '../icons/downvote.png';
 import commentIcon from '../icons/comment.png';
 import shareIcon from '../icons/share.png';
+import reportIcon from '../icons/report.png';
 import NavBar from '../NavBar/NavBar';
 
 const HomePage = () => {
@@ -14,7 +15,7 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [newPostTitle, setNewPostTitle] = useState('');
   const [currentFilter, setCurrentFilter] = useState(''); 
-  const [remainingWords, setRemainingWords] = useState(500);
+  const [remainingPostWords, setRemainingPostWords] = useState(500);
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
   const [searchedPosts, setSearchedPosts] = useState([]); // Display posts based on search
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const HomePage = () => {
   useEffect(() => {
     // Update remaining characters count when content changes
     const remaining = Math.max(0, 500 - newPostContent.length);
-    setRemainingWords(remaining);
+    setRemainingPostWords(remaining);
   }, [newPostContent]);
 
   useEffect(() => {
@@ -163,7 +164,7 @@ const HomePage = () => {
           name="title"
           onChange={handleInputChange}
         />
-        <div className="remaining-characters">
+        <div className="remaining-title-characters">
           Characters Remaining: {remainingTitleWords}
         </div>
           <textarea
@@ -177,8 +178,8 @@ const HomePage = () => {
             }
           }}
         ></textarea>
-        <div className="remaining-Postcharacters">
-          Characters Remaining: {remainingWords}
+        <div className="remaining-post-characters">
+          Characters Remaining: {remainingPostWords}
         </div>
         <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
         <div className="post-list">
@@ -215,6 +216,9 @@ const HomePage = () => {
                 <button className="interaction-button" onClick={() => handleCommentClick(post._id)}>
                   <img src={commentIcon} alt="Comments" />
                   <span className="interaction-count">{(post.comments || []).length}</span>
+                </button>
+                <button className="interaction-button">
+                  <img src={reportIcon} alt="Report" />
                 </button>
                 <button className="interaction-button">
                   <img src={shareIcon} alt="Share" />
