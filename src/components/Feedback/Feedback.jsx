@@ -8,6 +8,7 @@ const Feedback = () => {
   const [feedback, setFeedback] = useState('');
   const [feedbackList, setFeedbackList] = useState([]);
   const [remainingWords, setRemainingFeedbackWords] = useState(500);
+  const userEmail = localStorage.getItem('userEmail');
 
   useEffect(() => {
     const adminStatus = localStorage.getItem('isAdmin');
@@ -44,7 +45,7 @@ const Feedback = () => {
 
   const handleSendFeedback = async () => {
     try {
-      await axios.post('http://localhost:8080/sendFeedback', { feedback });
+      await axios.post('http://localhost:8080/sendFeedback', { email: userEmail, message: feedback });
       setFeedback('');
     } catch (error) {
       console.error('Error sending feedback:', error);
