@@ -10,12 +10,10 @@ const Feedback = () => {
   const [remainingWords, setRemainingFeedbackWords] = useState(500);
 
   useEffect(() => {
-    // Check if the admin status is stored in local storage
     const adminStatus = localStorage.getItem('isAdmin');
     if (adminStatus !== null) {
       setIsAdmin(adminStatus === 'true');
     } else {
-      // If not found in local storage, default to false
       setIsAdmin(false);
     }
   }, []);
@@ -27,7 +25,6 @@ const Feedback = () => {
   }, []);
 
   useEffect(() => {
-    // Update remaining characters count when content changes
     const remaining = Math.max(0, 500 - feedback.length);
     setRemainingFeedbackWords(remaining);
   }, [feedback]);
@@ -38,25 +35,19 @@ const Feedback = () => {
 
   const fetchFeedbackList = async () => {
     try {
-      // Fetch feedback data from the backend
       const response = await axios.get('http://localhost:8080/getFeedbackList');
       setFeedbackList(response.data);
     } catch (error) {
       console.error('Error fetching feedback list:', error);
-      // Handle error, such as displaying an error message to the user
     }
   };
 
   const handleSendFeedback = async () => {
     try {
-      // Send the feedback to the backend
       await axios.post('http://localhost:8080/sendFeedback', { feedback });
-      // Clear the feedback input after sending
       setFeedback('');
-      // Optionally, you can show a success message or trigger a reload of feedback data
     } catch (error) {
       console.error('Error sending feedback:', error);
-      // Handle error, such as displaying an error message to the user
     }
   };
 
