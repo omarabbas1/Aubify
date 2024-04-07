@@ -7,6 +7,7 @@ import avatar1 from '../avatars/avatar1.jpg'; // Import avatar images
 import avatar2 from '../avatars/avatar2.jpg'; // Import avatar images
 import avatar3 from '../avatars/avatar3.jpg'; // Import avatar images
 import avatar4 from '../avatars/avatar4.jpg'; // Import avatar images
+import { useUser } from '../../UserContext';
 
 const UserProfile = () => {
   const userName = localStorage.getItem('username');
@@ -15,6 +16,7 @@ const UserProfile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(''); // Initialize selected avatar state
   const [dateCreated, setDateCreated] = useState('');
   const navigate = useNavigate();
+  const { userAvatar } = useUser();
 
   const handleChangePassword = () => {
     navigate('/change_password');
@@ -62,7 +64,7 @@ const UserProfile = () => {
 
   const handleAvatarClick = (avatarUrl) => {
     setSelectedAvatar(avatarUrl); // Set selected avatar when clicked
-
+    userAvatar = avatarUrl
     // Send request to backend to update avatar
     axios.post('http://localhost:8080/user/update-avatar', { email: userEmail, avatarUrl })
       .then(() => console.log('Avatar updated successfully'))

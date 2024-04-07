@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Feedback.css'; // Import CSS file
+import './Feedback.css';
 import NavBar from '../NavBar/NavBar';
 
 const Feedback = () => {
@@ -10,20 +10,25 @@ const Feedback = () => {
   const [remainingWords, setRemainingFeedbackWords] = useState(500);
   const userEmail = localStorage.getItem('userEmail');
 
-  useEffect(() => {
-    const adminStatus = localStorage.getItem('isAdmin');
-    if (adminStatus !== null) {
-      setIsAdmin(adminStatus === 'true');
-    } else {
-      setIsAdmin(false);
+  const fetchAdminStatus = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/checkAdminStatus?userEmail=${userEmail}`);
+      setIsAdmin(response.data.isAdmin);
+    } catch (error) {
+      console.error('Error fetching admin status:', error);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchAdminStatus();
+  }, [userEmail]); // Run the effect when userEmail changes
+
 
   useEffect(() => {
     if (isAdmin) {
-        fetchFeedbackList();
+      fetchFeedbackList();
     }
-  }, []);
+  }, [isAdmin]);
 
   useEffect(() => {
     const remaining = Math.max(0, 500 - feedback.length);
@@ -61,7 +66,7 @@ const Feedback = () => {
           <h1 className="interface-title">Users Feedback</h1>
           <ul className="feedback-list">
             {feedbackList.map((item) => (
-              <li key={item.id} className="feedback-item">{item.message}</li>
+              <li key={item._id} className="feedback-item">{item.message}</li>
             ))}
           </ul>
         </div>
