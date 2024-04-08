@@ -28,7 +28,7 @@
 
 /* Post container styles */
 .post {
-  background-color: #fff; 
+  background-color: #fff;
   padding: 10px;
   margin: 20px auto; /* Center the post */
   border-radius: 25px;
@@ -39,21 +39,21 @@
   margin-bottom: 20px;
 }
 
-.post-list .post{
+.post-list .post {
   width: 50%;
   border-radius: 25px;
 }
 
 .post-title-input {
-  width: 25%; 
-  margin: 10px ; /* Center horizontally */
+  width: 25%;
+  margin: 10px; /* Center horizontally */
   margin-left: 20%;
   display: block;
   padding: 10px;
   border-radius: 15px;
   font-family: "Times New Roman", Times, serif;
   color: #840032; /* Main color text */
-  background-color: #fff; 
+  background-color: #fff;
   font-size: 25px;
   box-sizing: border-box;
 }
@@ -83,7 +83,6 @@
   flex-direction: column;
   align-items: flex-start; /* Aligns children (content input and button) to the left within this container */
 }
-
 
 .post-container {
   /* margin-top: 00px; */
@@ -124,7 +123,7 @@
   background-color: white;
   color: #840032;
   border: none;
-  padding: 10px 30px; 
+  padding: 10px 30px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 18px;
@@ -134,11 +133,10 @@
 .post-list {
   margin-top: 20px;
 }
-.post-list h1{
+.post-list h1 {
   font-size: 62px;
   margin-bottom: 5px;
   text-align: center;
-
 }
 .post-list h2 {
   font-size: 25px;
@@ -185,17 +183,21 @@
   height: 20px;
   margin-right: 5px;
 }
-.remaining-title-characters{
+.remaining-title-characters {
   margin-left: 27.5%;
 }
-.remaining-post-characters{
+.remaining-post-characters {
   margin-left: 62%;
   margin-bottom: 1%;
-
 }
 .post-details-home {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px; 
+  margin-top: 5px;
   margin-bottom: 10px;
+}
+
+.error-message-homepage {
+  text-align: center;
+  margin-top: 1%;
 }

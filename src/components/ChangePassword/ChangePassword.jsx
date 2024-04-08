@@ -44,16 +44,15 @@ const ChangePassword = () => {
       setPasswordError('Current password is incorrect.');
       return;
     }
+
+    // Check if confirm password matches new password
+    if (!passwordMatch) {
+      return;
+    }
   
     // Check if the new password meets strength criteria
     if (!passwordStrong) {
       setPasswordError('New password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.');
-      return;
-    }
-  
-    // Check if confirm password matches new password
-    if (!passwordMatch) {
-      setPasswordError('Passwords do not match.');
       return;
     }
   

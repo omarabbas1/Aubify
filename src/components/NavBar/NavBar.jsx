@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import './NavBar.css';
 import SideBar from '../SideBar/SideBar';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 
 const Navbar = ({ onSearch }) => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Navbar = ({ onSearch }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [userAvatar, setUserAvatar] = useState(''); // Initialize state for user avatar
   const location = useLocation();
-
+  const { isAdmin, setIsAdmin } = useUser();
   const userEmail = localStorage.getItem('userEmail');
 
   useEffect(() => {
@@ -23,11 +23,24 @@ const Navbar = ({ onSearch }) => {
   }, []);
   
 
-  // useEffect(() => {
-  //   if (!isAuthenticated()) {
-  //     navigate('/');
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate('/');
+    }
+  }, [navigate, isAdmin]);
+
+  const fetchAdminStatus = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/checkAdminStatus?userEmail=${userEmail}`);
+      setIsAdmin(response.data.isAdmin);
+    } catch (error) {
+      console.error('Error fetching admin status:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAdminStatus();
+  }, [userEmail, isAdmin]); // Run the effect when userEmail changes
 
   const handleSignOut = () => {
     localStorage.clear();
@@ -64,9 +77,9 @@ const Navbar = ({ onSearch }) => {
     setSidebarVisible(false);
   };
 
-  // const isAuthenticated = () => {
-  //   return username !== null && username.trim() !== '';
-  // };
+  const isAuthenticated = () => {
+    return username !== null && username.trim() !== '';
+  };
 
   return (
     <>

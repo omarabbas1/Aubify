@@ -1,20 +1,20 @@
-.interface-title {
+.feedback-page .interface-title {
   font-size: 24px;
   margin-bottom: 10px;
   text-align: center;
   color: white;
 }
 
-.admin-feedback-interface .interface-title {
+.feedback-page .admin-feedback-interface .interface-title {
   margin-top: 6%;
 }
 
-.admin-feedback-interface {
+.feedback-page .admin-feedback-interface {
   padding: 20px;
   border-radius: 5px;
 }
 
-.user-feedback-interface {
+.feedback-page .user-feedback-interface {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -24,7 +24,7 @@
   border-radius: 10px;
 }
 
-.send-feedback-button {
+.feedback-page .send-feedback-button {
   padding: 10px 20px;
   margin-top: 10px;
   cursor: pointer;
@@ -35,7 +35,7 @@
   font-weight: bold;
 }
 
-.feedback-input {
+.feedback-page .feedback-input {
   width: 50%;
   height: 180px;
   margin-top: 10px;
@@ -46,12 +46,12 @@
   font-size: 18px;
 }
 
-.feedback-list {
+.feedback-page .feedback-list {
   margin-top: 30px;
   text-align: center;
 }
 
-.feedback-item {
+.feedback-page .feedback-item {
   background-color: #f0f0f0;
   padding: 15px;
   border-radius: 20px;
@@ -64,7 +64,12 @@
   word-wrap: break-word;
 }
 
-.remaining-feedback-characters {
+.feedback-page .remaining-feedback-characters {
   color: white;
   margin-bottom: 0.33%;
+}
+
+.feedback-page .error-message-feedback {
+  color: white;
+  margin-top: 1%;
 }

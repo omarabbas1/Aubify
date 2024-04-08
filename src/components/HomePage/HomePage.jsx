@@ -17,7 +17,8 @@ const HomePage = () => {
   const [currentFilter, setCurrentFilter] = useState(''); 
   const [remainingPostWords, setRemainingPostWords] = useState(500);
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
-  const [searchedPosts, setSearchedPosts] = useState([]); // Display posts based on search
+  const [searchedPosts, setSearchedPosts] = useState([]);
+  const [postError, setPostError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,11 +84,12 @@ const HomePage = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === 'title') {
-      setNewPostTitle(value.slice(0, 50)); 
+      setNewPostTitle(value.slice(0, 50));
     } else {
       setNewPostContent(value);
     }
-  };
+    setPostError('');
+  };  
 
   const handleCreatePost = async () => {
     if (newPostTitle.trim() === '' || newPostContent.trim() === '') {
@@ -109,7 +111,7 @@ const HomePage = () => {
       fetchPostsFiltered(savedFilter);
     } catch (error) {
       console.error('Failed to create post:', error);
-      alert('You have reached your posting limit for today! try again later');
+      setPostError('You have reached your posting limit for today, please try again later!');
     }
   };
 
@@ -183,6 +185,7 @@ const HomePage = () => {
           Characters Remaining: {remainingPostWords}
         </div>
         <button className="submit-post-button" onClick={() =>  handleCreatePost()} >Post</button>
+        {postError && <div className="error-message-homepage">{postError}</div>}
         <div className="post-list">
           <h1> Posts: </h1>
           <div className='filter-container'>

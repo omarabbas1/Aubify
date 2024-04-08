@@ -2,27 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Feedback.css';
 import NavBar from '../NavBar/NavBar';
+import { useUser } from '../../UserContext';
 
 const Feedback = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [feedbackList, setFeedbackList] = useState([]);
   const [remainingWords, setRemainingFeedbackWords] = useState(500);
+  const [feedbackError, setFeedbackError] = useState('');
+  const { isAdmin } = useUser();
   const userEmail = localStorage.getItem('userEmail');
-
-  const fetchAdminStatus = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/checkAdminStatus?userEmail=${userEmail}`);
-      setIsAdmin(response.data.isAdmin);
-    } catch (error) {
-      console.error('Error fetching admin status:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAdminStatus();
-  }, [userEmail]); // Run the effect when userEmail changes
-
 
   useEffect(() => {
     if (isAdmin) {
@@ -37,6 +25,7 @@ const Feedback = () => {
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
+    setFeedbackError('');
   };
 
   const fetchFeedbackList = async () => {
@@ -54,12 +43,18 @@ const Feedback = () => {
       setFeedback('');
     } catch (error) {
       console.error('Error sending feedback:', error);
+      setFeedbackError('You have reached your limit for sending feedback today, please try again later!');
     }
   };
 
+  // Render nothing if isAdmin is null (initial state)
+  if (isAdmin === null) {
+    return null;
+  }
+
   return (
     <div className="feedback-page">
-        <NavBar/>
+      <NavBar />
       {isAdmin ? (
         // Admin interface
         <div className="admin-feedback-interface">
@@ -74,13 +69,19 @@ const Feedback = () => {
         // User interface
         <div className="user-feedback-interface">
           <h1 className="interface-title">Provide us with your Feedback!</h1>
-          <textarea className="feedback-input" value={feedback} onChange={handleFeedbackChange} onKeyDown={(e) => {
-            if (feedback.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
-              e.preventDefault();
-            }
-          }}/>
+          <textarea
+            className="feedback-input"
+            value={feedback}
+            onChange={handleFeedbackChange}
+            onKeyDown={(e) => {
+              if (feedback.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
+                e.preventDefault();
+              }
+            }}
+          />
           <div className="remaining-feedback-characters">Characters Remaining: {remainingWords}</div>
           <button className="send-feedback-button" onClick={handleSendFeedback}>Send Feedback</button>
+          {feedbackError && <div className="error-message-feedback">{feedbackError}</div>}
         </div>
       )}
     </div>

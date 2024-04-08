@@ -12,7 +12,7 @@ function SigninSignup({ user, setUser }) {
   const [signinEmail, setSigninEmail] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
   const [signinError, setSigninError] = useState('');
-  const { setUsername } = useUser();
+  const { setUsername, setIsAdmin } = useUser();
   const navigate = useNavigate();
 
     // Function to check if the user is an admin based on email
@@ -153,7 +153,8 @@ function SigninSignup({ user, setUser }) {
 
     // Check if user is admin based on email
     const adminStatus = isAdminUser(signupEmail);
-    localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
+    setIsAdmin(adminStatus);
+    // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
 
     navigate('/email_verification');
 
@@ -251,7 +252,8 @@ function SigninSignup({ user, setUser }) {
 
         // Check if user is admin based on email
         const adminStatus = isAdminUser(signinEmail);
-        localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
+        setIsAdmin(adminStatus);
+        // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
 
         navigate('/homepage'); // Navigate to homepage after successful sign-in
       } else {
