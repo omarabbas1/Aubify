@@ -109,6 +109,7 @@ const HomePage = () => {
       fetchPostsFiltered(savedFilter);
     } catch (error) {
       console.error('Failed to create post:', error);
+      alert('You have reached your posting limit for today! try again later');
     }
   };
 
