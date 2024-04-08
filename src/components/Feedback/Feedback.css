@@ -47,13 +47,21 @@
 }
 
 .feedback-list {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 10px;
+  margin-top: 30px;
+  text-align: center;
 }
 
 .feedback-item {
-  margin-bottom: 5px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #840032;
+  word-wrap: break-word;
 }
 
 .remaining-feedback-characters {

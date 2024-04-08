@@ -64,11 +64,11 @@ const Feedback = () => {
         // Admin interface
         <div className="admin-feedback-interface">
           <h1 className="interface-title">Users Feedback</h1>
-          <ul className="feedback-list">
+          <div className="feedback-list">
             {feedbackList.map((item) => (
-              <li key={item._id} className="feedback-item">{item.message}</li>
+              <div key={item._id} className="feedback-item">{item.message}</div>
             ))}
-          </ul>
+          </div>
         </div>
       ) : (
         // User interface

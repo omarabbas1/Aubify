@@ -16,7 +16,7 @@ const UserProfile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(''); // Initialize selected avatar state
   const [dateCreated, setDateCreated] = useState('');
   const navigate = useNavigate();
-  const { userAvatar } = useUser();
+  const { userAvatar, setUserAvatar } = useUser();
 
   const handleChangePassword = () => {
     navigate('/change_password');
@@ -64,7 +64,7 @@ const UserProfile = () => {
 
   const handleAvatarClick = (avatarUrl) => {
     setSelectedAvatar(avatarUrl); // Set selected avatar when clicked
-    userAvatar = avatarUrl
+    setUserAvatar(avatarUrl);
     // Send request to backend to update avatar
     axios.post('http://localhost:8080/user/update-avatar', { email: userEmail, avatarUrl })
       .then(() => console.log('Avatar updated successfully'))
