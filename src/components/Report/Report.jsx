@@ -33,7 +33,7 @@ const ReportedPostsPage = () => {
         {reportedPosts.map((post) => (
           <div
             className="reported-post"
-            key={post.id}
+            key={post._id}
             onClick={() => handlePostClick(post._id)}
           >
             <h2>{post.title}</h2>
