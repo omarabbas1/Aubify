@@ -30,6 +30,7 @@
   margin-bottom: 20px;
   text-align: center;
   width: 50%;
+  cursor: pointer;
 }
 
 /* Style for the title of each reported post */

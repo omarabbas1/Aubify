@@ -183,12 +183,14 @@ const HomePage = () => {
 
   const handleReport = async (postId) => {
     try {
+      const userEmail = localStorage.getItem("userEmail");
       const response = await axios.post(
-        `http://localhost:8080/posts/${postId}/report`
+        `http://localhost:8080/posts/${postId}/report`,
+        { userEmail }
       );
+      setReportedPostId(postId);
       if (response.data.action === "add") {
-        setReportedPostId(postId);
-        setReportMessage("You have succesfully reported this post!");
+        setReportMessage("You have successfully reported this post!");
       } else if (response.data.action === "remove") {
         setReportMessage("Report removed!");
       }
