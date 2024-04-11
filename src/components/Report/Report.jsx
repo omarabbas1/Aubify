@@ -36,7 +36,8 @@ const ReportedPostsPage = () => {
             key={post._id}
             onClick={() => handlePostClick(post._id)}
           >
-            <h2>{post.title}</h2>
+            {/* Display the title and the report count */}
+            <h2>{post.title} - Reports: {post.reportedBy.length || 0}</h2>
           </div>
         ))}
       </div>

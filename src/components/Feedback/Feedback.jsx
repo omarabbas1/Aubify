@@ -62,6 +62,7 @@ const Feedback = () => {
           <div className="feedback-list">
             {feedbackList.map((item) => (
               <div key={item._id} className="feedback-item">{item.message}</div>
+              
             ))}
           </div>
         </div>
