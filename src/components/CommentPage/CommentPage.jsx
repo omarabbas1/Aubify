@@ -177,15 +177,20 @@ const CommentPage = () => {
       console.error("Failed to toggle report:", error);
     }
   };
-
   const handleDeleteAdmin = async (postId) => {
+    if (!window.confirm('Are you sure you want to delete this post?')) return;
+  
     try {
-      await axios.delete(`http://localhost:8080/admin/delete/${postId}`);
+      await axios.delete(`http://localhost:8080/posts/${postId}`, {
+        data: { userEmail: localStorage.getItem('userEmail') } // Axios requires data to be in a 'data' key for DELETE requests
+      });
+      // Refresh the post list to reflect the deletion
       navigate("/homepage");
     } catch (error) {
-      console.error("Failed to delete post:", error);
+      console.error('Failed to delete post:', error);
     }
   };
+  
 
   return (
     <div className="comment-page">
@@ -240,13 +245,10 @@ const CommentPage = () => {
               <img src={shareIcon} alt="Share" />
             </button>
             {isAdmin && (
-              <button
-                className="interaction-button"
-                onClick={() => handleDeleteAdmin(post._id)}
-              >
-                <img src={deleteIcon} alt="Delete" />
-              </button>
-            )}
+  <button className="interaction-button" onClick={() => handleDeleteAdmin(post._id)}>
+    <img src={deleteIcon} alt="Delete" />
+  </button>
+)}
           </div>
           {reportedPostId === post._id && (
             <div className="report-message">{reportMessage}</div>
