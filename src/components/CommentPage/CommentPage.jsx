@@ -84,11 +84,16 @@ const CommentPage = () => {
         throw new Error("Failed to add comment");
       }
     } catch (error) {
-      console.error("Failed to add comment:", error);
-      setCommentError(
-        "You have reached your commenting limit for today, please try again later!"
-      );
+    console.error("Failed to add comment:", error);
+    // Check if the error response indicates a comment limit was reached
+    if (error.response && error.response.status === 429) {
+      setCommentError("You have reached your commenting limit for today on this post, please try again later.");
+    } else {
+      // For other types of errors, you might want to set a different error message
+      setCommentError("An unexpected error occurred while trying to post your comment. Please try again later.");
     }
+  }
+  
   };
 
   const handleInputChange = (event) => {
