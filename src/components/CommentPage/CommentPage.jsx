@@ -16,10 +16,21 @@ const CommentPage = () => {
   const [remainingCharacters, setRemainingCharacters] = useState(250);
   const [reportMessage, setReportMessage] = useState("");
   const [reportedPostId, setReportedPostId] = useState(null);
+  const [commentError, setCommentError] = useState("");
 
   useEffect(() => {
     fetchPostAndComments();
   }, []);
+
+  useEffect(() => {
+    if (reportedPostId) {
+      const timer = setTimeout(() => {
+        setReportedPostId(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [reportedPostId]);
 
   const fetchPostAndComments = async () => {
     try {
@@ -36,7 +47,7 @@ const CommentPage = () => {
 
   const handleAddComment = async () => {
     if (newComment.trim() === "") {
-      alert("Please enter the content for the comment.");
+      setCommentError("Please enter the content for the comment.");
       return;
     }
 
@@ -74,8 +85,9 @@ const CommentPage = () => {
       }
     } catch (error) {
       console.error("Failed to add comment:", error);
-      // Optionally, display an error message to the user
-      alert("Failed to add comment. Please try again later.");
+      setCommentError(
+        "You have reached your commenting limit for today, please try again later!"
+      );
     }
   };
 
@@ -85,6 +97,7 @@ const CommentPage = () => {
     setNewComment(trimmedValue);
     const remaining = Math.max(0, 250 - trimmedValue.length); // Calculate remaining characters
     setRemainingCharacters(remaining);
+    setCommentError("");
   };
 
   // Example function to upvote a comment based on its index within the post's comments array
@@ -231,6 +244,9 @@ const CommentPage = () => {
         <button onClick={handleAddComment} type="submit">
           Comment
         </button>
+        {commentError && (
+          <div className="error-message-commentpage">{commentError}</div>
+        )}
       </div>
       <div className="comments-container">
         <div className="comments-list">
@@ -276,9 +292,6 @@ const CommentPage = () => {
                       <span className="interaction-count">
                         {comment.downvotes || 0}
                       </span>
-                    </button>
-                    <button className="interaction-button">
-                      <img src={reportIcon} alt="Report" />
                     </button>
                     <button className="interaction-button">
                       <img src={shareIcon} alt="Share" />

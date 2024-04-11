@@ -108,7 +108,7 @@ const HomePage = () => {
 
   const handleCreatePost = async () => {
     if (newPostTitle.trim() === "" || newPostContent.trim() === "") {
-      alert("Please enter both title and content for the post.");
+      setPostError("Please enter both title and content for the post.");
       return;
     }
     const userEmail = localStorage.getItem("userEmail"); // Retrieve the user's email
