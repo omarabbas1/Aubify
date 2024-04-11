@@ -1,5 +1,5 @@
 .profile-container {
-  background: #F5F5F5;
+  background: #f5f5f5;
   border-radius: 15px;
   padding: 2rem;
   width: 100%;
@@ -11,7 +11,7 @@
 
 .profile-header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 }
@@ -142,7 +142,6 @@
 
 .user-profile-post {
   width: 100%;
-  text-align: center;
   background-color: #840032;
   color: white;
   cursor: pointer;
@@ -150,4 +149,17 @@
   border-radius: 25px;
   font-family: "Times New Roman", Times, serif;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-profile-post h3 {
+  margin: 0 auto;
+}
+
+.delete-icon-userprofile {
+  width: 20px;
+  height: 20px;
+  justify-self: end;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CommentPage.css";
 import upvoteIcon from "../icons/upvote.png";
@@ -7,7 +7,9 @@ import downvoteIcon from "../icons/downvote.png";
 import commentIcon from "../icons/comment.png";
 import shareIcon from "../icons/share.png";
 import reportIcon from "../icons/report.png";
+import deleteIcon from "../icons/delete-admin.png";
 import NavBar from "../NavBar/NavBar";
+import { useUser } from "../../UserContext";
 
 const CommentPage = () => {
   const { postId } = useParams();
@@ -17,6 +19,8 @@ const CommentPage = () => {
   const [reportMessage, setReportMessage] = useState("");
   const [reportedPostId, setReportedPostId] = useState(null);
   const [commentError, setCommentError] = useState("");
+  const navigate = useNavigate();
+  const { isAdmin } = useUser();
 
   useEffect(() => {
     fetchPostAndComments();
@@ -84,16 +88,14 @@ const CommentPage = () => {
         throw new Error("Failed to add comment");
       }
     } catch (error) {
-    console.error("Failed to add comment:", error);
-    // Check if the error response indicates a comment limit was reached
-    if (error.response && error.response.status === 429) {
-      setCommentError("You have reached your commenting limit for today on this post, please try again later.");
-    } else {
-      // For other types of errors, you might want to set a different error message
-      setCommentError("An unexpected error occurred while trying to post your comment. Please try again later.");
+      console.error("Failed to add comment:", error);
+      // Check if the error response indicates a comment limit was reached
+      if (error.response && error.response.status === 429) {
+        setCommentError(
+          "You have reached your commenting limit for today on this post, please try again later."
+        );
+      }
     }
-  }
-  
   };
 
   const handleInputChange = (event) => {
@@ -176,6 +178,15 @@ const CommentPage = () => {
     }
   };
 
+  const handleDeleteAdmin = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:8080/admin/delete/${postId}`);
+      navigate("/homepage");
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
+  };
+
   return (
     <div className="comment-page">
       <NavBar />
@@ -228,6 +239,14 @@ const CommentPage = () => {
             <button className="interaction-button">
               <img src={shareIcon} alt="Share" />
             </button>
+            {isAdmin && (
+              <button
+                className="interaction-button"
+                onClick={() => handleDeleteAdmin(post._id)}
+              >
+                <img src={deleteIcon} alt="Delete" />
+              </button>
+            )}
           </div>
           {reportedPostId === post._id && (
             <div className="report-message">{reportMessage}</div>

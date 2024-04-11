@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './UserProfile.css';
-import NavBar from '../NavBar/NavBar';
-import avatar1 from '../avatars/avatar1.jpg'; // Import avatar images
-import avatar2 from '../avatars/avatar2.jpg'; // Import avatar images
-import avatar3 from '../avatars/avatar3.jpg'; // Import avatar images
-import avatar4 from '../avatars/avatar4.jpg'; // Import avatar images
-import { useUser } from '../../UserContext';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./UserProfile.css";
+import NavBar from "../NavBar/NavBar";
+import avatar1 from "../avatars/avatar1.jpg";
+import avatar2 from "../avatars/avatar2.jpg";
+import avatar3 from "../avatars/avatar3.jpg";
+import avatar4 from "../avatars/avatar4.jpg";
+import deleteIcon from "../icons/delete-user.png";
+import { useUser } from "../../UserContext";
 
 const UserProfile = () => {
-  const userName = localStorage.getItem('username');
-  const userEmail = localStorage.getItem('userEmail');
+  const userName = localStorage.getItem("username");
+  const userEmail = localStorage.getItem("userEmail");
   const [userPosts, setUserPosts] = useState([]);
-  const [selectedAvatar, setSelectedAvatar] = useState(''); // Initialize selected avatar state
-  const [dateCreated, setDateCreated] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState(""); // Initialize selected avatar state
+  const [dateCreated, setDateCreated] = useState("");
   const navigate = useNavigate();
   const { userAvatar, setUserAvatar } = useUser();
 
   const handleChangePassword = () => {
-    navigate('/change_password');
+    navigate("/change_password");
   };
 
   useEffect(() => {
@@ -30,31 +31,37 @@ const UserProfile = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/posts?email=${userEmail}`);
+      const response = await axios.get(
+        `http://localhost:8080/user/posts?email=${userEmail}`
+      );
       setUserPosts(response.data);
     } catch (error) {
-      console.error('Failed to fetch user posts:', error);
+      console.error("Failed to fetch user posts:", error);
     }
   };
 
   const fetchDateCreated = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/date-created?email=${userEmail}`);
+      const response = await axios.get(
+        `http://localhost:8080/user/date-created?email=${userEmail}`
+      );
       setDateCreated(response.data.dateCreated);
     } catch (error) {
-      console.error('Failed to fetch date created:', error);
+      console.error("Failed to fetch date created:", error);
     }
   };
 
   const fetchAvatar = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/avatar?email=${userEmail}`);
+      const response = await axios.get(
+        `http://localhost:8080/user/avatar?email=${userEmail}`
+      );
       const avatarUrl = response.data.avatarUrl;
       if (avatarUrl) {
         setSelectedAvatar(avatarUrl);
       }
     } catch (error) {
-      console.error('Failed to fetch avatar:', error);
+      console.error("Failed to fetch avatar:", error);
     }
   };
 
@@ -66,17 +73,34 @@ const UserProfile = () => {
     setSelectedAvatar(avatarUrl); // Set selected avatar when clicked
     setUserAvatar(avatarUrl);
     // Send request to backend to update avatar
-    axios.post('http://localhost:8080/user/update-avatar', { email: userEmail, avatarUrl })
-      .then(() => console.log('Avatar updated successfully'))
-      .catch(error => console.error('Failed to update avatar:', error));
+    axios
+      .post("http://localhost:8080/user/update-avatar", {
+        email: userEmail,
+        avatarUrl,
+      })
+      .then(() => console.log("Avatar updated successfully"))
+      .catch((error) => console.error("Failed to update avatar:", error));
   };
 
-  
+  const handleDeleteUser = (postId) => {
+    axios
+      .delete(`http://localhost:8080/user/delete/${postId}`)
+      .then(() => {
+        setUserPosts(userPosts.filter((post) => post._id !== postId));
+        console.log("Post deleted successfully");
+      })
+      .catch((error) => console.error("Failed to delete post:", error));
+  };
+
   return (
     <div className="profile-container">
-      <NavBar/>
+      <NavBar />
       <div className="profile-header">
-        <img src={selectedAvatar} alt="Profile Avatar" className="profile-avatar" />
+        <img
+          src={selectedAvatar}
+          alt="Profile Avatar"
+          className="profile-avatar"
+        />
         <h2>My Profile</h2>
       </div>
       <div className="profile-info">
@@ -90,29 +114,64 @@ const UserProfile = () => {
         </div>
         <div className="date-info">
           <label htmlFor="date">Date Created</label>
-          <input id='date' type="text" defaultValue={dateCreated} />
+          <input id="date" type="text" defaultValue={dateCreated} />
         </div>
-        <div className='change-password-profile-container'>
-          <button className="change-password-button" onClick={handleChangePassword}>Change Password</button>
+        <div className="change-password-profile-container">
+          <button
+            className="change-password-button"
+            onClick={handleChangePassword}
+          >
+            Change Password
+          </button>
         </div>
       </div>
       <div className="avatar-selection">
         <h2>Select Avatar</h2>
         <div className="avatar-grid">
-          <img src={avatar1} alt="Avatar 1" onClick={() => handleAvatarClick(avatar1)} className='avatar-option'/>
-          <img src={avatar2} alt="Avatar 2" onClick={() => handleAvatarClick(avatar2)} className='avatar-option'/>
-          <img src={avatar3} alt="Avatar 3" onClick={() => handleAvatarClick(avatar3)} className='avatar-option'/>
-          <img src={avatar4} alt="Avatar 4" onClick={() => handleAvatarClick(avatar4)} className='avatar-option'/>
+          <img
+            src={avatar1}
+            alt="Avatar 1"
+            onClick={() => handleAvatarClick(avatar1)}
+            className="avatar-option"
+          />
+          <img
+            src={avatar2}
+            alt="Avatar 2"
+            onClick={() => handleAvatarClick(avatar2)}
+            className="avatar-option"
+          />
+          <img
+            src={avatar3}
+            alt="Avatar 3"
+            onClick={() => handleAvatarClick(avatar3)}
+            className="avatar-option"
+          />
+          <img
+            src={avatar4}
+            alt="Avatar 4"
+            onClick={() => handleAvatarClick(avatar4)}
+            className="avatar-option"
+          />
         </div>
       </div>
       <div className="posts-section">
         <h2>My Posts</h2>
-        <div className='profile-post-conatiner'>
-          {userPosts.map(post => (
-              <div key={post._id} onClick={() => handlePostClick(post._id)} className='user-profile-post'>
-                <h3>{post.title}</h3>
-              </div>
-            ))}
+        <div className="profile-post-conatiner">
+          {userPosts.map((post) => (
+            <div
+              key={post._id}
+              onClick={() => handlePostClick(post._id)}
+              className="user-profile-post"
+            >
+              <h3>{post.title}</h3>
+              <img
+                src={deleteIcon}
+                alt="delete"
+                className="delete-icon-userprofile"
+                onClick={() => handleDeleteUser(post._id)}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
