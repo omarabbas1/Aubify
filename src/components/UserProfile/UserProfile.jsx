@@ -82,16 +82,23 @@ const UserProfile = () => {
       .catch((error) => console.error("Failed to update avatar:", error));
   };
 
-  const handleDeleteUser = (postId) => {
-    axios
-      .delete(`http://localhost:8080/user/delete/${postId}`)
-      .then(() => {
-        setUserPosts(userPosts.filter((post) => post._id !== postId));
-        console.log("Post deleted successfully");
-      })
-      .catch((error) => console.error("Failed to delete post:", error));
+  const handleDeleteUser = async (postId, event) => {
+    event.stopPropagation(); // Prevent navigating to the post's comment page
+    const userEmail = localStorage.getItem("userEmail");
+  
+    // Confirm with the user before deletion
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+  
+    try {
+      // Modify the URL to include the query parameter for userEmail
+      await axios.delete(`http://localhost:8080/user/delete/${postId}?userEmail=${encodeURIComponent(userEmail)}`);
+      setUserPosts(userPosts.filter((post) => post._id !== postId));
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
   };
-
+  
   return (
     <div className="profile-container">
       <NavBar />
@@ -168,7 +175,7 @@ const UserProfile = () => {
                 src={deleteIcon}
                 alt="delete"
                 className="delete-icon-userprofile"
-                onClick={() => handleDeleteUser(post._id)}
+                onClick={(event) => handleDeleteUser(post._id, event)}
               />
             </div>
           ))}
