@@ -12,8 +12,14 @@ function SigninSignup({ user, setUser }) {
   const [signinEmail, setSigninEmail] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
   const [signinError, setSigninError] = useState('');
-  const { setUsername } = useUser();
+  const { setUsername, setIsAdmin } = useUser();
   const navigate = useNavigate();
+
+    // Function to check if the user is an admin based on email
+    const isAdminUser = (email) => {
+      const adminEmails = ['ofa15@mail.aub.edu', 'hmh97@mail.aub.edu']; // Define admin emails
+      return adminEmails.includes(email); // Check if email is in the admin list
+    };
 
   const handleRegisterClick = () => {
     setActiveContainer('active');
@@ -145,6 +151,11 @@ function SigninSignup({ user, setUser }) {
       return;
     }
 
+    // Check if user is admin based on email
+    const adminStatus = isAdminUser(signupEmail);
+    setIsAdmin(adminStatus);
+    // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
+
     navigate('/email_verification');
 
     await saveUserData(signupName, signupEmail, signupPassword);
@@ -238,6 +249,12 @@ function SigninSignup({ user, setUser }) {
         setUsername(data.userName); // Update username in context with the name fetched from backend
         const username = data.userName; // Make sure to extract the username from the response or based on your logic
         localStorage.setItem('username', username); // Save username to localStorage
+
+        // Check if user is admin based on email
+        const adminStatus = isAdminUser(signinEmail);
+        setIsAdmin(adminStatus);
+        // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
+
         navigate('/homepage'); // Navigate to homepage after successful sign-in
       } else {
         // Handle case where username is not found or another error occurred
