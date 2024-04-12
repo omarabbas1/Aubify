@@ -124,3 +124,10 @@
   font-size: 20px;
   margin-top: 2%;
 }
+
+.error-message-share {
+  display: grid;
+  text-align: center;
+  place-items: center;
+  height: 100%;
+}
