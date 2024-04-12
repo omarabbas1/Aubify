@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Feedback.css';
-import NavBar from '../NavBar/NavBar';
-import { useUser } from '../../UserContext';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Feedback.css";
+import NavBar from "../NavBar/NavBar";
+import { useUser } from "../../UserContext";
 
 const Feedback = () => {
-  const [feedback, setFeedback] = useState('');
+  const [feedback, setFeedback] = useState("");
   const [feedbackList, setFeedbackList] = useState([]);
   const [remainingWords, setRemainingFeedbackWords] = useState(500);
-  const [feedbackError, setFeedbackError] = useState('');
+  const [feedbackError, setFeedbackError] = useState("");
   const { isAdmin } = useUser();
-  const userEmail = localStorage.getItem('userEmail');
+  const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
     if (isAdmin) {
@@ -25,25 +25,31 @@ const Feedback = () => {
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
-    setFeedbackError('');
+    setFeedbackError("");
   };
 
   const fetchFeedbackList = async () => {
     try {
-      const response = await axios.get('/getFeedbackList');
+      const response = await axios.get("/getFeedbackList");
       setFeedbackList(response.data);
     } catch (error) {
-      console.error('Error fetching feedback list:', error);
+      console.error("Error fetching feedback list:", error);
     }
   };
 
   const handleSendFeedback = async () => {
     try {
-      await axios.post('/sendFeedback', { email: userEmail, message: feedback });
-      setFeedback('');
+      await axios.post("/sendFeedback", {
+        email: userEmail,
+        message: feedback,
+      });
+      setFeedback("");
+      setFeedbackError("Thank you for your feedback!");
     } catch (error) {
-      console.error('Error sending feedback:', error);
-      setFeedbackError('You have reached your limit for sending feedback today, please try again later!');
+      console.error("Error sending feedback:", error);
+      setFeedbackError(
+        "You have reached your limit for sending feedback today, please try again later!"
+      );
     }
   };
 
@@ -61,8 +67,9 @@ const Feedback = () => {
           <h1 className="interface-title">Users Feedback</h1>
           <div className="feedback-list">
             {feedbackList.map((item) => (
-              <div key={item._id} className="feedback-item">{item.message}</div>
-              
+              <div key={item._id} className="feedback-item">
+                {item.message}
+              </div>
             ))}
           </div>
         </div>
@@ -75,14 +82,24 @@ const Feedback = () => {
             value={feedback}
             onChange={handleFeedbackChange}
             onKeyDown={(e) => {
-              if (feedback.length >= 500 && e.key !== 'Backspace' && e.key !== 'Delete') {
+              if (
+                feedback.length >= 500 &&
+                e.key !== "Backspace" &&
+                e.key !== "Delete"
+              ) {
                 e.preventDefault();
               }
             }}
           />
-          <div className="remaining-feedback-characters">Characters Remaining: {remainingWords}</div>
-          <button className="send-feedback-button" onClick={handleSendFeedback}>Send Feedback</button>
-          {feedbackError && <div className="error-message-feedback">{feedbackError}</div>}
+          <div className="remaining-feedback-characters">
+            Characters Remaining: {remainingWords}
+          </div>
+          <button className="send-feedback-button" onClick={handleSendFeedback}>
+            Send Feedback
+          </button>
+          {feedbackError && (
+            <div className="error-message-feedback">{feedbackError}</div>
+          )}
         </div>
       )}
     </div>
