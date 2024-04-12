@@ -94,11 +94,6 @@ const HomePage = () => {
     navigate(`/posts/${postId}/comments`);
   };
 
-  const handleShare = (postId) => {
-    console.log("Shared post:", postId);
-    // TODO: Implement the share logic
-  };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "title") {
@@ -137,9 +132,7 @@ const HomePage = () => {
 
   const fetchPostsFiltered = async (filter) => {
     try {
-      const response = await axios.get(
-        `/posts?filter=${filter}`
-      );
+      const response = await axios.get(`/posts?filter=${filter}`);
       const postsWithDetails = await Promise.all(
         response.data.map(async (post) => {
           try {
@@ -187,10 +180,9 @@ const HomePage = () => {
   const handleReport = async (postId) => {
     try {
       const userEmail = localStorage.getItem("userEmail");
-      const response = await axios.post(
-        `/posts/${postId}/report`,
-        { userEmail }
-      );
+      const response = await axios.post(`/posts/${postId}/report`, {
+        userEmail,
+      });
       setReportedPostId(postId);
       if (response.data.action === "add") {
         setReportMessage("You have successfully reported this post!");
@@ -203,19 +195,26 @@ const HomePage = () => {
   };
 
   const handleDeleteAdmin = async (postId) => {
-    if (!window.confirm('Are you sure you want to delete this post?')) return;
-  
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+
     try {
       await axios.delete(`/posts/${postId}`, {
-        data: { userEmail: localStorage.getItem('userEmail') } // Axios requires data to be in a 'data' key for DELETE requests
+        data: { userEmail: localStorage.getItem("userEmail") }, // Axios requires data to be in a 'data' key for DELETE requests
       });
       // Refresh the post list to reflect the deletion
       fetchPostsFiltered(currentFilter);
     } catch (error) {
-      console.error('Failed to delete post:', error);
+      console.error("Failed to delete post:", error);
     }
   };
-  
+
+  const handleShare = (postId) => {
+    const commentPageLink = `${window.location.origin}/posts/${postId}/share`;
+    navigator.clipboard
+      .writeText(commentPageLink)
+      .then(() => alert("Link copied to clipboard!"))
+      .catch((error) => console.error("Failed to copy link:", error));
+  };
 
   return (
     <div className="home-page">
@@ -317,14 +316,20 @@ const HomePage = () => {
                 >
                   <img src={reportIcon} alt="Report" />
                 </button>
-                <button className="interaction-button">
+                <button
+                  className="interaction-button"
+                  onClick={() => handleShare(post._id)}
+                >
                   <img src={shareIcon} alt="Share" />
                 </button>
                 {isAdmin && (
-  <button className="interaction-button" onClick={() => handleDeleteAdmin(post._id)}>
-    <img src={deleteIcon} alt="Delete" />
-  </button>
-)}
+                  <button
+                    className="interaction-button"
+                    onClick={() => handleDeleteAdmin(post._id)}
+                  >
+                    <img src={deleteIcon} alt="Delete" />
+                  </button>
+                )}
               </div>
               {reportedPostId === post._id && (
                 <div className="report-message">{reportMessage}</div>

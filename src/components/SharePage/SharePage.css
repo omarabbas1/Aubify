@@ -1,0 +1,126 @@
+.share-page {
+  padding: 20px;
+  background-color: #840032; /* Main color background */
+  color: #fff; /* White text */
+  width: 100vw; /* Set width to 100% of viewport width */
+  height: 100vh; /* Set height to 100% of viewport height */
+  margin: 0; /* Remove any default margin */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds viewport height */
+}
+.share-page h3 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  max-width: 100%; /* Ensure heading doesn't exceed container width */
+  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
+  text-align: center; /* Align heading to the left */
+  margin-top: 4%;
+}
+.share-page .post {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  width: 100%; /* Adjusted width to fill the container */
+  max-width: 700px; /* Maximum width to ensure readability */
+  margin-left: auto; /* Center the post */
+  margin-right: auto; /* Center the post */
+  color: #840032; /* Change text color to black for contrast */
+}
+
+.share-page .post h2 {
+  margin: 0;
+  text-align: center;
+  padding-bottom: 10px;
+  max-width: 100%; /* Ensure heading doesn't exceed container width */
+  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
+}
+
+.share-page .post p {
+  margin-top: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.share-page .comments-container {
+  padding: 20px;
+}
+
+.share-page .comments-container h3 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  max-width: 100%; /* Ensure heading doesn't exceed container width */
+  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
+  text-align: center;
+}
+
+.share-page .comments-list {
+  margin-bottom: 20px;
+}
+
+.share-page .comment {
+  background-color: #fff; /* White background */
+  padding: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+  font-family: "Times New Roman", Times, serif;
+  color: #840032; /* Main color text */
+  display: block; /* Ensure it's a block-level element */
+  width: 100%; /* Adjusted width to fill the container */
+  max-width: 700px; /* Maximum width to ensure readability */
+  margin-left: auto; /* Center the comment */
+  margin-right: auto; /* Center the comment */
+  margin-top: 2%;
+}
+
+.share-page .comment p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+}
+
+.share-page .comment-interactions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.share-page .comment-interactions .interaction-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem; /* Size of the text next to icons */
+}
+
+.share-page .comment-interactions .interaction-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.share-page .comment-interactions .interaction-count {
+  margin-right: 10px;
+}
+
+.post-details-comment {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #840032;
+}
+
+.comment-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.loading-post {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 2%;
+}
