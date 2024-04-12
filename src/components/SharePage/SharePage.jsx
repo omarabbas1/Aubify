@@ -116,9 +116,6 @@ const SharePage = () => {
                           {comment.downvotes || 0}
                         </span>
                       </button>
-                      <button className="interaction-button">
-                        <img src={shareIcon} alt="Share" />
-                      </button>
                     </div>
                   </div>
                 )

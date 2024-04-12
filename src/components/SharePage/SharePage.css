@@ -82,18 +82,18 @@
 .share-page .comment-interactions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-top: 10px;
 }
 
 .share-page .comment-interactions .interaction-button {
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: default;
   padding: 8px;
   display: flex;
   align-items: center;
-  font-size: 0.9rem; /* Size of the text next to icons */
+  font-size: 0.9rem;
 }
 
 .share-page .comment-interactions .interaction-button img {

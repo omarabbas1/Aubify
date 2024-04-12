@@ -110,12 +110,9 @@ const CommentPage = () => {
   // Example function to upvote a comment based on its index within the post's comments array
   const handleVoteUpvote = async (postId, commentId) => {
     try {
-      await axios.post(
-        `/posts/${postId}/comments/${commentId}/upvote`,
-        {
-          userEmail: localStorage.getItem("userEmail"),
-        }
-      );
+      await axios.post(`/posts/${postId}/comments/${commentId}/upvote`, {
+        userEmail: localStorage.getItem("userEmail"),
+      });
       fetchPostAndComments(); // Refresh to show updated vote counts
     } catch (error) {
       console.error(`Failed to upvote on comment:`, error);
@@ -124,12 +121,9 @@ const CommentPage = () => {
 
   const handleVoteDownvote = async (postId, commentId) => {
     try {
-      await axios.post(
-        `/posts/${postId}/comments/${commentId}/downvote`,
-        {
-          userEmail: localStorage.getItem("userEmail"),
-        }
-      );
+      await axios.post(`/posts/${postId}/comments/${commentId}/downvote`, {
+        userEmail: localStorage.getItem("userEmail"),
+      });
       fetchPostAndComments(); // Refresh to show updated vote counts
     } catch (error) {
       console.error(`Failed to downvote on comment:`, error);
@@ -163,10 +157,9 @@ const CommentPage = () => {
   const handleReport = async (postId) => {
     try {
       const userEmail = localStorage.getItem("userEmail");
-      const response = await axios.post(
-        `/posts/${postId}/report`,
-        { userEmail }
-      );
+      const response = await axios.post(`/posts/${postId}/report`, {
+        userEmail,
+      });
       setReportedPostId(postId);
       if (response.data.action === "add") {
         setReportMessage("You have successfully reported this post!");
@@ -178,19 +171,26 @@ const CommentPage = () => {
     }
   };
   const handleDeleteAdmin = async (postId) => {
-    if (!window.confirm('Are you sure you want to delete this post?')) return;
-  
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+
     try {
       await axios.delete(`/posts/${postId}`, {
-        data: { userEmail: localStorage.getItem('userEmail') } // Axios requires data to be in a 'data' key for DELETE requests
+        data: { userEmail: localStorage.getItem("userEmail") }, // Axios requires data to be in a 'data' key for DELETE requests
       });
       // Refresh the post list to reflect the deletion
       navigate("/homepage");
     } catch (error) {
-      console.error('Failed to delete post:', error);
+      console.error("Failed to delete post:", error);
     }
   };
-  
+
+  const handleShare = (postId) => {
+    const commentPageLink = `${window.location.origin}/posts/${postId}/share`;
+    navigator.clipboard
+      .writeText(commentPageLink)
+      .then(() => alert("Link copied to clipboard!"))
+      .catch((error) => console.error("Failed to copy link:", error));
+  };
 
   return (
     <div className="comment-page">
@@ -241,14 +241,20 @@ const CommentPage = () => {
             >
               <img src={reportIcon} alt="Report" />
             </button>
-            <button className="interaction-button">
+            <button
+              className="interaction-button"
+              onClick={() => handleShare(post._id)}
+            >
               <img src={shareIcon} alt="Share" />
             </button>
             {isAdmin && (
-  <button className="interaction-button" onClick={() => handleDeleteAdmin(post._id)}>
-    <img src={deleteIcon} alt="Delete" />
-  </button>
-)}
+              <button
+                className="interaction-button"
+                onClick={() => handleDeleteAdmin(post._id)}
+              >
+                <img src={deleteIcon} alt="Delete" />
+              </button>
+            )}
           </div>
           {reportedPostId === post._id && (
             <div className="report-message">{reportMessage}</div>
@@ -318,9 +324,6 @@ const CommentPage = () => {
                       <span className="interaction-count">
                         {comment.downvotes || 0}
                       </span>
-                    </button>
-                    <button className="interaction-button">
-                      <img src={shareIcon} alt="Share" />
                     </button>
                   </div>
                 </div>
