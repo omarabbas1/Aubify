@@ -32,7 +32,7 @@ const UserProfile = () => {
   const fetchUserPosts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/user/posts?email=${userEmail}`
+        `/user/posts?email=${userEmail}`
       );
       setUserPosts(response.data);
     } catch (error) {
@@ -43,7 +43,7 @@ const UserProfile = () => {
   const fetchDateCreated = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/user/date-created?email=${userEmail}`
+        `/user/date-created?email=${userEmail}`
       );
       setDateCreated(response.data.dateCreated);
     } catch (error) {
@@ -54,7 +54,7 @@ const UserProfile = () => {
   const fetchAvatar = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/user/avatar?email=${userEmail}`
+        `/user/avatar?email=${userEmail}`
       );
       const avatarUrl = response.data.avatarUrl;
       if (avatarUrl) {
@@ -74,7 +74,7 @@ const UserProfile = () => {
     setUserAvatar(avatarUrl);
     // Send request to backend to update avatar
     axios
-      .post("http://localhost:8080/user/update-avatar", {
+      .post("/user/update-avatar", {
         email: userEmail,
         avatarUrl,
       })
@@ -91,7 +91,7 @@ const UserProfile = () => {
   
     try {
       // Modify the URL to include the query parameter for userEmail
-      await axios.delete(`http://localhost:8080/user/delete/${postId}?userEmail=${encodeURIComponent(userEmail)}`);
+      await axios.delete(`/user/delete/${postId}?userEmail=${encodeURIComponent(userEmail)}`);
       setUserPosts(userPosts.filter((post) => post._id !== postId));
       console.log("Post deleted successfully");
     } catch (error) {

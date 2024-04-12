@@ -30,7 +30,7 @@ const Feedback = () => {
 
   const fetchFeedbackList = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/getFeedbackList');
+      const response = await axios.get('/getFeedbackList');
       setFeedbackList(response.data);
     } catch (error) {
       console.error('Error fetching feedback list:', error);
@@ -39,7 +39,7 @@ const Feedback = () => {
 
   const handleSendFeedback = async () => {
     try {
-      await axios.post('http://localhost:8080/sendFeedback', { email: userEmail, message: feedback });
+      await axios.post('/sendFeedback', { email: userEmail, message: feedback });
       setFeedback('');
     } catch (error) {
       console.error('Error sending feedback:', error);

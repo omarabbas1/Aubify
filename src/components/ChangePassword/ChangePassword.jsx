@@ -73,7 +73,7 @@ const ChangePassword = () => {
   const checkCurrentPassword = async (password) => {
     try {
       const email = localStorage.getItem('userEmail');
-      const response = await axios.post('http://localhost:8080/checkCurrentPassword', { email, password });
+      const response = await axios.post('/checkCurrentPassword', { email, password });
       return response.data.currentPasswordMatch;
     } catch (error) {
       console.error('Error checking current password:', error);
@@ -84,7 +84,7 @@ const ChangePassword = () => {
   // Function to save the new password in the database
   const saveNewPassword = async (email, newPassword) => {
     try {
-      await axios.post('http://localhost:8080/saveNewPassword', { email, newPassword });
+      await axios.post('/saveNewPassword', { email, newPassword });
       console.log('New password saved successfully.');
       // Optionally, handle success or failure after saving the new password
     } catch (error) {

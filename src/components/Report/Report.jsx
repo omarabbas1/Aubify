@@ -14,7 +14,7 @@ const ReportedPostsPage = () => {
 
   const fetchReportedPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/reportedPosts");
+      const response = await axios.get("/reportedPosts");
       setReportedPosts(response.data);
     } catch (error) {
       console.error("Error fetching reported posts:", error);

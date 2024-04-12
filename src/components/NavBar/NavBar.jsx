@@ -26,7 +26,7 @@ const Navbar = ({ onSearch }) => {
   const fetchAdminStatus = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/checkAdminStatus?userEmail=${userEmail}`
+        `/checkAdminStatus?userEmail=${userEmail}`
       );
       setIsAdmin(response.data.isAdmin);
     } catch (error) {
@@ -51,7 +51,7 @@ const Navbar = ({ onSearch }) => {
   const fetchAvatar = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/user/avatar?email=${userEmail}`
+        `/user/avatar?email=${userEmail}`
       );
       const avatarUrl = response.data.avatarUrl;
       if (avatarUrl) {

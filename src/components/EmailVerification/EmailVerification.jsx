@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './EmailVerification.css';
+import axios from 'axios';
 
 function EmailVerification() {
   const [verificationCode, setVerificationCode] = useState('');
@@ -13,15 +14,9 @@ function EmailVerification() {
 
     try {
       // Make a request to your backend to verify the code
-      const response = await fetch('http://localhost:8080/verifyEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ verificationCode }),
-      });
+      const response = await axios.post('/verifyEmail', { verificationCode })
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Verification failed');
       }
 

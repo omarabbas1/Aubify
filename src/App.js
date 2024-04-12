@@ -11,8 +11,10 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 import Feedback from "./components/Feedback/Feedback";
 import Report from "./components/Report/Report";
+import axios  from "axios";
 
 function App() {
+  axios.defaults.baseURL="https://aubify-b.onrender.com/"
   return (
     <UserProvider>
       <Router>

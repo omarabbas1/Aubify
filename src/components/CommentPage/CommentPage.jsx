@@ -38,7 +38,7 @@ const CommentPage = () => {
 
   const fetchPostAndComments = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/posts/${postId}`);
+      const response = await axios.get(`/posts/${postId}`);
       const fetchedPost = {
         ...response.data,
         authorAnonymousId: response.data.author.anonymousId,
@@ -70,7 +70,7 @@ const CommentPage = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/posts/${postId}/comments`,
+        `/posts/${postId}/comments`,
         commentData,
         {
           headers: {
@@ -111,7 +111,7 @@ const CommentPage = () => {
   const handleVoteUpvote = async (postId, commentId) => {
     try {
       await axios.post(
-        `http://localhost:8080/posts/${postId}/comments/${commentId}/upvote`,
+        `/posts/${postId}/comments/${commentId}/upvote`,
         {
           userEmail: localStorage.getItem("userEmail"),
         }
@@ -125,7 +125,7 @@ const CommentPage = () => {
   const handleVoteDownvote = async (postId, commentId) => {
     try {
       await axios.post(
-        `http://localhost:8080/posts/${postId}/comments/${commentId}/downvote`,
+        `/posts/${postId}/comments/${commentId}/downvote`,
         {
           userEmail: localStorage.getItem("userEmail"),
         }
@@ -139,7 +139,7 @@ const CommentPage = () => {
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem("userEmail"); // Retrieve the user's email
     try {
-      await axios.post(`http://localhost:8080/posts/${postId}/upvote`, {
+      await axios.post(`/posts/${postId}/upvote`, {
         userEmail,
       });
       fetchPostAndComments(); // Refresh the posts to reflect the new upvote count
@@ -151,7 +151,7 @@ const CommentPage = () => {
   const handleDownvote = async (postId) => {
     const userEmail = localStorage.getItem("userEmail"); // Retrieve the user's email
     try {
-      await axios.post(`http://localhost:8080/posts/${postId}/downvote`, {
+      await axios.post(`/posts/${postId}/downvote`, {
         userEmail,
       });
       fetchPostAndComments(); // Refresh the posts to reflect the new downvote count
@@ -164,7 +164,7 @@ const CommentPage = () => {
     try {
       const userEmail = localStorage.getItem("userEmail");
       const response = await axios.post(
-        `http://localhost:8080/posts/${postId}/report`,
+        `/posts/${postId}/report`,
         { userEmail }
       );
       setReportedPostId(postId);
@@ -181,7 +181,7 @@ const CommentPage = () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
   
     try {
-      await axios.delete(`http://localhost:8080/posts/${postId}`, {
+      await axios.delete(`/posts/${postId}`, {
         data: { userEmail: localStorage.getItem('userEmail') } // Axios requires data to be in a 'data' key for DELETE requests
       });
       // Refresh the post list to reflect the deletion

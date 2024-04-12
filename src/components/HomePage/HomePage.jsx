@@ -69,7 +69,7 @@ const HomePage = () => {
   const handleUpvote = async (postId) => {
     const userEmail = localStorage.getItem("userEmail");
     try {
-      await axios.post(`http://localhost:8080/posts/${postId}/upvote`, {
+      await axios.post(`/posts/${postId}/upvote`, {
         userEmail,
       });
       fetchPostsFiltered(currentFilter); // Use currentFilter instead of savedFilter
@@ -81,7 +81,7 @@ const HomePage = () => {
   const handleDownvote = async (postId) => {
     const userEmail = localStorage.getItem("userEmail"); // Retrieve the user's email
     try {
-      await axios.post(`http://localhost:8080/posts/${postId}/downvote`, {
+      await axios.post(`/posts/${postId}/downvote`, {
         userEmail,
       });
       fetchPostsFiltered(currentFilter); // Use currentFilter instead of savedFilter
@@ -119,7 +119,7 @@ const HomePage = () => {
 
     try {
       // Include the userEmail in the request body
-      await axios.post("http://localhost:8080/posts", {
+      await axios.post("/posts", {
         title: newPostTitle,
         content: newPostContent,
         userEmail, // Send the user's email with the post data
@@ -138,14 +138,14 @@ const HomePage = () => {
   const fetchPostsFiltered = async (filter) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/posts?filter=${filter}`
+        `/posts?filter=${filter}`
       );
       const postsWithDetails = await Promise.all(
         response.data.map(async (post) => {
           try {
             // Fetch the anonymousId for each post's author
             const res = await axios.get(
-              `http://localhost:8080/posts/${post._id}/author/anonymousId`
+              `/posts/${post._id}/author/anonymousId`
             );
             return { ...post, authorAnonymousId: res.data.anonymousId };
           } catch (error) {
@@ -188,7 +188,7 @@ const HomePage = () => {
     try {
       const userEmail = localStorage.getItem("userEmail");
       const response = await axios.post(
-        `http://localhost:8080/posts/${postId}/report`,
+        `/posts/${postId}/report`,
         { userEmail }
       );
       setReportedPostId(postId);
@@ -206,7 +206,7 @@ const HomePage = () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
   
     try {
-      await axios.delete(`http://localhost:8080/posts/${postId}`, {
+      await axios.delete(`/posts/${postId}`, {
         data: { userEmail: localStorage.getItem('userEmail') } // Axios requires data to be in a 'data' key for DELETE requests
       });
       // Refresh the post list to reflect the deletion
