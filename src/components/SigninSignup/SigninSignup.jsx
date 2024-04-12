@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './SigninSignup.css';
-import { useUser } from '../../UserContext'; // Go up two levels
-import axios  from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./SigninSignup.css";
+import { useUser } from "../../UserContext"; // Go up two levels
+import axios from "axios";
 
 function SigninSignup({ user, setUser }) {
-  const [activeContainer, setActiveContainer] = useState('');
-  const [signupName, setSignupName] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
-  const [signupError, setSignupError] = useState('');
-  const [signinEmail, setSigninEmail] = useState('');
-  const [signinPassword, setSigninPassword] = useState('');
-  const [signinError, setSigninError] = useState('');
+  const [activeContainer, setActiveContainer] = useState("");
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [signupError, setSignupError] = useState("");
+  const [signinEmail, setSigninEmail] = useState("");
+  const [signinPassword, setSigninPassword] = useState("");
+  const [signinError, setSigninError] = useState("");
   const { setUsername, setIsAdmin } = useUser();
   const navigate = useNavigate();
 
-    // Function to check if the user is an admin based on email
-    const isAdminUser = (email) => {
-      const adminEmails = ['ofa15@mail.aub.edu', 'hmh97@mail.aub.edu']; // Define admin emails
-      return adminEmails.includes(email); // Check if email is in the admin list
-    };
+  // Function to check if the user is an admin based on email
+  const isAdminUser = (email) => {
+    const adminEmails = ["ofa15@mail.aub.edu", "hmh97@mail.aub.edu"]; // Define admin emails
+    return adminEmails.includes(email); // Check if email is in the admin list
+  };
 
   const handleRegisterClick = () => {
-    setActiveContainer('active');
-    setSignupError('');
+    setActiveContainer("active");
+    setSignupError("");
   };
 
   const handleSigninClick = () => {
-    setActiveContainer('');
-    setSigninError('');
+    setActiveContainer("");
+    setSigninError("");
   };
 
   const checkUserExists = async (email) => {
     try {
-      const response = await axios.post('/checkUserExists',  ({ email }))
+      const response = await axios.post("/checkUserExists", { email });
 
       if (response.status !== 200) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
 
       return response.data.exists; // Assuming the response contains a boolean value indicating user existence
     } catch (error) {
-      console.error('Error checking user existence:', error);
+      console.error("Error checking user existence:", error);
       // Handle error, such as displaying a generic error message to the user
       return false;
     }
@@ -50,15 +50,15 @@ function SigninSignup({ user, setUser }) {
 
   const checkPassword = async (email, password) => {
     try {
-      const response = await axios.post('/checkPassword', ({ email, password }))
+      const response = await axios.post("/checkPassword", { email, password });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
+      if (response.status !== 200) {
+        throw new Error("Network response was not ok.");
       }
 
       return response.data.correctPassword; // Assuming the response contains a boolean value indicating password correctness
     } catch (error) {
-      console.error('Error checking password:', error);
+      console.error("Error checking password:", error);
       // Handle error, such as displaying a generic error message to the user
       return false;
     }
@@ -66,62 +66,66 @@ function SigninSignup({ user, setUser }) {
 
   const checkUserVerified = async (email) => {
     try {
-      const response = await axios.post('/checkUserVerified', ({ email }))
-  
+      const response = await axios.post("/checkUserVerified", { email });
+
       if (response.status !== 200) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
-  
+
       return response.data.isVerified; // Assuming the response contains a boolean value indicating user verification status
     } catch (error) {
-      console.error('Error checking user verification status:', error);
+      console.error("Error checking user verification status:", error);
       // Handle error, such as displaying a generic error message to the user
       return false;
     }
-  };  
+  };
 
   const saveUserData = async (name, email, password) => {
     try {
       const userData = { name, email, password };
-      const response = await axios.post('/saveUserData', (userData))
-  
+      const response = await axios.post("/saveUserData", userData);
+
       if (response.status !== 200) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
-  
+
       // Handle success if needed
-      console.log('User data saved successfully!');
+      console.log("User data saved successfully!");
     } catch (error) {
-      console.error('Error saving user data:', error);
+      console.error("Error saving user data:", error);
       // Handle error, such as displaying a generic error message to the user
     }
-  };  
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     // Clear previous errors
-    setSignupError('');
+    setSignupError("");
 
     // Check if name is empty
     if (!signupName.trim()) {
-      setSignupError('Name is required.');
+      setSignupError("Name is required.");
       return;
     }
 
     // Client-side validation
     if (!isValidEmail(signupEmail)) {
-      setSignupError('Invalid email format. Please use your AUB student email.');
+      setSignupError(
+        "Invalid email format. Please use your AUB student email."
+      );
       return;
     }
     if (!isValidPassword(signupPassword)) {
-      setSignupError('Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.');
+      setSignupError(
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character."
+      );
       return;
     }
 
     // Check if user already exists
     const userExists = await checkUserExists(signupEmail);
     if (userExists) {
-      setSignupError('User already exists. Please Signin.');
+      setSignupError("User already exists. Please Signin.");
       return;
     }
 
@@ -130,80 +134,85 @@ function SigninSignup({ user, setUser }) {
     setIsAdmin(adminStatus);
     // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
 
-    navigate('/email_verification');
+    navigate("/email_verification");
 
     await saveUserData(signupName, signupEmail, signupPassword);
-    localStorage.setItem('userEmail', signupEmail);
+    localStorage.setItem("userEmail", signupEmail);
 
     // After saving user data but before navigating
     try {
-      const response = await axios.post('/handleSignup', { email: signupEmail }) // Use signupEmail here
+      const response = await axios.post("/handleSignup", {
+        email: signupEmail,
+      }); // Use signupEmail here
 
-    
       if (response.status !== 200) {
-        throw new Error('Failed to fetch user data');
+        throw new Error("Failed to fetch user data");
       }
       const data = await response.json();
       if (data.success) {
         // Save username in localStorage
-        localStorage.setItem('username', data.userName);
+        localStorage.setItem("username", data.userName);
         setUsername(data.userName); // This assumes setUsername is the method to update context or state
-        
+
         // Check if the user's email is verified
         if (data.emailVerified) {
           // Navigate to homepage or proceed as verified user
-          navigate('/homepage');
+          navigate("/homepage");
         }
       } else {
         // Handle case where user data is not returned or another error occurred
-        setSignupError(data.message || 'Failed to get user data. Please try again.');
+        setSignupError(
+          data.message || "Failed to get user data. Please try again."
+        );
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      setSignupError('An error occurred. Please try again.');
+      console.error("Error fetching user data:", error);
+      setSignupError("An error occurred. Please try again.");
     }
-    
-
   };
 
   const handleSignin = async (e) => {
     e.preventDefault();
-    setSigninError(''); // Clear previous errors
+    setSigninError(""); // Clear previous errors
 
     // Client-side validation
     if (!isValidEmail(signinEmail)) {
-      setSigninError('Invalid email format. Please use your AUB student email.');
+      setSigninError(
+        "Invalid email format. Please use your AUB student email."
+      );
       return;
     }
 
     // Check if user exists
     const userExists = await checkUserExists(signinEmail);
     if (!userExists) {
-      setSigninError('User does not exist. Please sign up.');
+      setSigninError("User does not exist. Please sign up.");
       return;
     }
 
     // Check if the password is correct
     const correctPassword = await checkPassword(signinEmail, signinPassword);
     if (!correctPassword) {
-      setSigninError('Incorrect password.');
+      setSigninError("Incorrect password.");
       return;
     }
 
     // Check if the user is verified
     const isVerified = await checkUserVerified(signinEmail);
     if (!isVerified) {
-      navigate('/email_verification')
+      navigate("/email_verification");
       return;
     }
 
-    localStorage.setItem('userEmail', signinEmail);
+    localStorage.setItem("userEmail", signinEmail);
     // Proceed with login if user exists, password is correct, and user is verified
     try {
-      const response = await axios.post('/handleSignin', ({ email: signinEmail }))
+      const response = await axios.post("/handleSignin", {
+        email: signinEmail,
+      });
 
       if (response.status !== 200) {
-        throw new Error('Failed to fetch username');
+        throw new Error("Failed to fetch username");
       }
 
       const data = await response.json();
@@ -211,29 +220,28 @@ function SigninSignup({ user, setUser }) {
         // Assuming setUsername updates the username in your global state/context
         setUsername(data.userName); // Update username in context with the name fetched from backend
         const username = data.userName; // Make sure to extract the username from the response or based on your logic
-        localStorage.setItem('username', username); // Save username to localStorage
+        localStorage.setItem("username", username); // Save username to localStorage
 
         // Check if user is admin based on email
         const adminStatus = isAdminUser(signinEmail);
         setIsAdmin(adminStatus);
         // localStorage.setItem('isAdmin', adminStatus ? 'true' : 'false');
 
-        navigate('/homepage'); // Navigate to homepage after successful sign-in
+        navigate("/homepage"); // Navigate to homepage after successful sign-in
       } else {
         // Handle case where username is not found or another error occurred
-        setSigninError('Failed to get username. Please try again.');
+        setSigninError("Failed to get username. Please try again.");
       }
     } catch (error) {
-      console.error('Error fetching username:', error);
-      setSigninError('An error occurred. Please try again.');
+      console.error("Error fetching username:", error);
+      setSigninError("An error occurred. Please try again.");
     }
-};
-
+  };
 
   const handlePasswordChange = (e) => {
     setSignupPassword(e.target.value);
     // Clear previous errors when password is being corrected
-    setSignupError('');
+    setSignupError("");
   };
 
   // Function to validate email format
@@ -244,19 +252,39 @@ function SigninSignup({ user, setUser }) {
 
   // Function to validate password format
   const isValidPassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[,~!@#$%^&*()[\]{}:;"'.,<>?/|])[A-Za-z\d,~!@#$%^&*()[\]{}:;"'.,<>?/|]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[,~!@#$%^&*()[\]{}:;"'.,<>?/|])[A-Za-z\d,~!@#$%^&*()[\]{}:;"'.,<>?/|]{8,}$/;
     return passwordRegex.test(password);
   };
 
   return (
-    <div className='signin-signup-main-container'>
+    <div className="signin-signup-main-container">
       <div className={`signin-signup-container ${activeContainer}`}>
         <div className="form-container sign-up">
           <form onSubmit={handleSignup}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" value={signupName} onChange={(e) => setSignupName(e.target.value)} required maxLength={25} />
-            <input type="email" placeholder="Email ~ AUBnet@mail.aub.edu" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" value={signupPassword} onChange={handlePasswordChange} required />
+            <input
+              type="text"
+              placeholder="Name"
+              value={signupName}
+              onChange={(e) => setSignupName(e.target.value)}
+              required
+              maxLength={25}
+            />
+            <input
+              type="email"
+              placeholder="Email ~ AUBnet@mail.aub.edu"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signupPassword}
+              onChange={handlePasswordChange}
+              required
+            />
             <button type="submit">Sign Up</button>
             {signupError && <p className="error">{signupError}</p>}
           </form>
@@ -264,8 +292,20 @@ function SigninSignup({ user, setUser }) {
         <div className="form-container sign-in">
           <form onSubmit={handleSignin}>
             <h1>Sign In</h1>
-            <input type="email" placeholder="Email" value={signinEmail} onChange={(e) => setSigninEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" value={signinPassword} onChange={(e) => setSigninPassword(e.target.value)} required />
+            <input
+              type="email"
+              placeholder="Email"
+              value={signinEmail}
+              onChange={(e) => setSigninEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signinPassword}
+              onChange={(e) => setSigninPassword(e.target.value)}
+              required
+            />
             <button type="submit">Sign In</button>
             {signinError && <p className="error">{signinError}</p>}
           </form>
@@ -275,12 +315,18 @@ function SigninSignup({ user, setUser }) {
             <div className={`toggle-panel toggle-left ${activeContainer}`}>
               <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all site features</p>
-              <button className="hidden" onClick={handleSigninClick}>Sign In</button>
+              <button className="hidden" onClick={handleSigninClick}>
+                Sign In
+              </button>
             </div>
             <div className={`toggle-panel toggle-right ${activeContainer}`}>
               <h1>Hello, Student!</h1>
-              <p>Register with your personal details to use all site features</p>
-              <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
+              <p>
+                Register with your personal details to use all site features
+              </p>
+              <button className="hidden" onClick={handleRegisterClick}>
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
