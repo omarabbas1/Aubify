@@ -215,11 +215,10 @@ function SigninSignup({ user, setUser }) {
         throw new Error("Failed to fetch username");
       }
 
-      const data = await response.json();
-      if (data.success && data.userName) {
+      if (response.success && response.userName) {
         // Assuming setUsername updates the username in your global state/context
-        setUsername(data.userName); // Update username in context with the name fetched from backend
-        const username = data.userName; // Make sure to extract the username from the response or based on your logic
+        setUsername(response.userName); // Update username in context with the name fetched from backend
+        const username = response.userName; // Make sure to extract the username from the response or based on your logic
         localStorage.setItem("username", username); // Save username to localStorage
 
         // Check if user is admin based on email
