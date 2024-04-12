@@ -35,15 +35,11 @@ function SigninSignup({ user, setUser }) {
   const checkUserExists = async (email) => {
     try {
       const response = await axios.post("/checkUserExists", { email });
-
       if (response.status !== 200) {
         throw new Error("Network response was not ok.");
       }
-
       return response.data.exists; // Assuming the response contains a boolean value indicating user existence
     } catch (error) {
-      console.error("Error checking user existence:", error);
-      // Handle error, such as displaying a generic error message to the user
       return false;
     }
   };
@@ -55,7 +51,6 @@ function SigninSignup({ user, setUser }) {
       if (response.status !== 200) {
         throw new Error("Network response was not ok.");
       }
-
       return response.data.correctPassword; // Assuming the response contains a boolean value indicating password correctness
     } catch (error) {
       console.error("Error checking password:", error);
@@ -82,18 +77,29 @@ function SigninSignup({ user, setUser }) {
 
   const saveUserData = async (name, email, password) => {
     try {
-      const userData = { name, email, password };
-      const response = await axios.post("/saveUserData", userData);
+      const response = await axios.post(
+        "/saveUserData",
+        {
+          name: name,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error("Network response was not ok.");
       }
-
-      // Handle success if needed
       console.log("User data saved successfully!");
     } catch (error) {
-      console.error("Error saving user data:", error);
-      // Handle error, such as displaying a generic error message to the user
+      console.error(
+        "Error saving user data:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -148,21 +154,20 @@ function SigninSignup({ user, setUser }) {
       if (response.status !== 200) {
         throw new Error("Failed to fetch user data");
       }
-      const data = await response.json();
-      if (data.success) {
+      if (response.data.success) {
         // Save username in localStorage
-        localStorage.setItem("username", data.userName);
-        setUsername(data.userName); // This assumes setUsername is the method to update context or state
+        localStorage.setItem("username", response.data.userName);
+        setUsername(response.data.userName); // This assumes setUsername is the method to update context or state
 
         // Check if the user's email is verified
-        if (data.emailVerified) {
+        if (response.data.emailVerified) {
           // Navigate to homepage or proceed as verified user
           navigate("/homepage");
         }
       } else {
         // Handle case where user data is not returned or another error occurred
         setSignupError(
-          data.message || "Failed to get user data. Please try again."
+          response.data.message || "Failed to get user data. Please try again."
         );
       }
     } catch (error) {
@@ -215,10 +220,10 @@ function SigninSignup({ user, setUser }) {
         throw new Error("Failed to fetch username");
       }
 
-      if (response.success && response.userName) {
+      if (response.data.success && response.data.userName) {
         // Assuming setUsername updates the username in your global state/context
-        setUsername(response.userName); // Update username in context with the name fetched from backend
-        const username = response.userName; // Make sure to extract the username from the response or based on your logic
+        setUsername(response.data.userName); // Update username in context with the name fetched from backend
+        const username = response.data.userName; // Make sure to extract the username from the response or based on your logic
         localStorage.setItem("username", username); // Save username to localStorage
 
         // Check if user is admin based on email
