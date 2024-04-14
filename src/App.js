@@ -15,7 +15,7 @@ import SharePage from "./components/SharePage/SharePage";
 import axios from "axios";
 
 function App() {
-  axios.defaults.baseURL = "https://aubify-back.onrender.com/";
+  axios.defaults.baseURL = "https://aubify.onrender.com/";
   return (
     <UserProvider>
       <Router>
