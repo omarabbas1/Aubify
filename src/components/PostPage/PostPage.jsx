@@ -4,7 +4,7 @@ import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import "./PostPage.css";
 
-const AddPostPage = () => {
+const PostPage = () => {
   const [newPostTitle, setNewPostTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
   const [remainingTitleWords, setRemainingTitleWords] = useState(50);
@@ -15,11 +15,19 @@ const AddPostPage = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "title") {
-      setNewPostTitle(value.slice(0, 50));
-      setRemainingTitleWords(50 - value.length);
+      // Limit the input to 50 characters
+      const truncatedValue = value.slice(0, 50);
+      setNewPostTitle(truncatedValue);
+      // Update remaining characters count
+      const remainingTitle = Math.max(0, 50 - truncatedValue.length);
+      setRemainingTitleWords(remainingTitle);
     } else {
-      setNewPostContent(value);
-      setRemainingPostWords(500 - value.length);
+      // Limit the input to 500 characters
+      const truncatedValue = value.slice(0, 500);
+      setNewPostContent(truncatedValue);
+      // Update remaining characters count
+      const remainingContent = Math.max(0, 500 - truncatedValue.length);
+      setRemainingPostWords(remainingContent);
     }
     setPostError("");
   };
@@ -67,19 +75,7 @@ const AddPostPage = () => {
         className="post-content-input"
         value={newPostContent}
         onChange={handleInputChange}
-        onKeyDown={(e) => {
-          if (
-            newPostContent.length >= 500 &&
-            e.key !== "Backspace" &&
-            e.key !== "Delete"
-          ) {
-            e.preventDefault();
-          }
-        }}
-      >
-        {newPostContent.length}/500
-      </textarea>
-
+      ></textarea>
       <div className="remaining-post-characters">
         Characters Remaining: {remainingPostWords}
       </div>
@@ -91,4 +87,4 @@ const AddPostPage = () => {
   );
 };
 
-export default AddPostPage;
+export default PostPage;
