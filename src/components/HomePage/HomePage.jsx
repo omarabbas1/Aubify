@@ -13,14 +13,9 @@ import { useUser } from "../../UserContext";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
-  const [newPostContent, setNewPostContent] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [newPostTitle, setNewPostTitle] = useState("");
   const [currentFilter, setCurrentFilter] = useState("");
-  const [remainingPostWords, setRemainingPostWords] = useState(500);
-  const [remainingTitleWords, setRemainingTitleWords] = useState(50);
   const [searchedPosts, setSearchedPosts] = useState([]);
-  const [postError, setPostError] = useState("");
   const [reportMessage, setReportMessage] = useState("");
   const [reportedPostId, setReportedPostId] = useState(null);
   const navigate = useNavigate();
@@ -31,18 +26,6 @@ const HomePage = () => {
     setCurrentFilter(savedFilter);
     fetchPostsFiltered(savedFilter);
   }, [searchTerm]);
-
-  useEffect(() => {
-    // Update remaining characters count when content changes
-    const remaining = Math.max(0, 500 - newPostContent.length);
-    setRemainingPostWords(remaining);
-  }, [newPostContent]);
-
-  useEffect(() => {
-    // Update remaining characters count when title changes
-    const remainingTitle = Math.max(0, 50 - newPostTitle.length);
-    setRemainingTitleWords(remainingTitle);
-  }, [newPostTitle]);
 
   useEffect(() => {
     const handleSearch = (searchTerm) => {
@@ -92,42 +75,6 @@ const HomePage = () => {
 
   const handleCommentClick = (postId) => {
     navigate(`/posts/${postId}/comments`);
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "title") {
-      setNewPostTitle(value.slice(0, 50));
-    } else {
-      setNewPostContent(value);
-    }
-    setPostError("");
-  };
-
-  const handleCreatePost = async () => {
-    if (newPostTitle.trim() === "" || newPostContent.trim() === "") {
-      setPostError("Please enter both title and content for the post.");
-      return;
-    }
-    const userEmail = localStorage.getItem("userEmail"); // Retrieve the user's email
-    const savedFilter = localStorage.getItem("selectedFilter");
-
-    try {
-      // Include the userEmail in the request body
-      await axios.post("/posts", {
-        title: newPostTitle,
-        content: newPostContent,
-        userEmail, // Send the user's email with the post data
-      });
-      setNewPostTitle("");
-      setNewPostContent("");
-      fetchPostsFiltered(savedFilter);
-    } catch (error) {
-      console.error("Failed to create post:", error);
-      setPostError(
-        "You have reached your posting limit for today, please try again later!"
-      );
-    }
   };
 
   const fetchPostsFiltered = async (filter) => {
@@ -220,43 +167,6 @@ const HomePage = () => {
     <div className="home-page">
       <NavBar onSearch={handleSearch} />
       <div className="post-container">
-        <h1>Add a Post:</h1>
-        <input
-          type="text"
-          placeholder="Post Title"
-          className="post-title-input"
-          value={newPostTitle}
-          name="title"
-          onChange={handleInputChange}
-        />
-        <div className="remaining-title-characters">
-          Characters Remaining: {remainingTitleWords}
-        </div>
-        <textarea
-          placeholder="What's on your mind?"
-          className="post-content-input"
-          value={newPostContent}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (
-              newPostContent.length >= 500 &&
-              e.key !== "Backspace" &&
-              e.key !== "Delete"
-            ) {
-              e.preventDefault();
-            }
-          }}
-        ></textarea>
-        <div className="remaining-post-characters">
-          Characters Remaining: {remainingPostWords}
-        </div>
-        <button
-          className="submit-post-button"
-          onClick={() => handleCreatePost()}
-        >
-          Post
-        </button>
-        {postError && <div className="error-message-homepage">{postError}</div>}
         <div className="post-list">
           <h1> Posts: </h1>
           <div className="filter-container">

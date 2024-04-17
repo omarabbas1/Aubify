@@ -12,6 +12,7 @@ import ChangePassword from "./components/ChangePassword/ChangePassword";
 import Feedback from "./components/Feedback/Feedback";
 import Report from "./components/Report/Report";
 import SharePage from "./components/SharePage/SharePage";
+import PostPage from "./components/PostPage/PostPage";
 import axios from "axios";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/report" element={<Report />} />
           <Route path="/posts/:postId/share" element={<SharePage />} />
+          <Route path="/post" element={<PostPage />} />
         </Routes>
       </Router>
     </UserProvider>

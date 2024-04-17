@@ -44,46 +44,6 @@
   border-radius: 25px;
 }
 
-.post-title-input {
-  width: 25%;
-  margin: 10px; /* Center horizontally */
-  margin-left: 20%;
-  display: block;
-  padding: 10px;
-  border-radius: 15px;
-  font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
-  background-color: #fff;
-  font-size: 25px;
-  box-sizing: border-box;
-}
-
-.post-content-input {
-  width: 100%; /* Same width as posts */
-  height: 100px; /* Larger height */
-  margin: 20px auto; /* Center horizontally with space below */
-  display: block;
-  padding: 10px;
-  border-radius: 15px;
-  font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
-  background-color: #fff; /* White background */
-  border: 2px solid black; /* Added border for better visibility */
-  max-width: 60%;
-  font-size: 25px;
-  box-sizing: border-box;
-  resize: none;
-}
-
-/* Adjust the button alignment */
-.content-button-container {
-  width: 50%; /* Same width as your content input for alignment */
-  margin: 0 auto; /* Center this container */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Aligns children (content input and button) to the left within this container */
-}
-
 .post-container {
   /* margin-top: 00px; */
   padding: 20px;
@@ -116,22 +76,8 @@
   text-align: center;
 }
 
-.submit-post-button {
-  display: block; /* Convert button to block-level to allow margin manipulation */
-  width: fit-content; /* Shrink wrap the button content */
-  margin-left: 71.7%; /* Align button to the left */
-  background-color: white;
-  color: #840032;
-  border: none;
-  padding: 10px 30px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .post-list {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .post-list h1 {
   font-size: 62px;
@@ -183,23 +129,12 @@
   height: 20px;
   margin-right: 5px;
 }
-.remaining-title-characters {
-  margin-left: 27.5%;
-}
-.remaining-post-characters {
-  margin-left: 62%;
-  margin-bottom: 1%;
-}
+
 .post-details-home {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
   margin-bottom: 10px;
-}
-
-.error-message-homepage {
-  text-align: center;
-  margin-top: 1%;
 }
 
 .report-message {

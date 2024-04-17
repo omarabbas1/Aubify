@@ -4,6 +4,7 @@ import { useUser } from "../../UserContext";
 import "./NavBar.css";
 import SideBar from "../SideBar/SideBar";
 import menuIcon from "../icons/menu.png";
+import plusIcon from "../icons/plus.png";
 import axios from "axios";
 
 const Navbar = ({ onSearch }) => {
@@ -50,9 +51,7 @@ const Navbar = ({ onSearch }) => {
 
   const fetchAvatar = async () => {
     try {
-      const response = await axios.get(
-        `/user/avatar?email=${userEmail}`
-      );
+      const response = await axios.get(`/user/avatar?email=${userEmail}`);
       const avatarUrl = response.data.avatarUrl;
       if (avatarUrl) {
         setUserAvatar(avatarUrl);
@@ -73,6 +72,10 @@ const Navbar = ({ onSearch }) => {
 
   const closeSidebar = () => {
     setSidebarVisible(false);
+  };
+
+  const handleCreateButton = () => {
+    navigate("/post");
   };
 
   return (
@@ -98,6 +101,12 @@ const Navbar = ({ onSearch }) => {
           )}
         </div>
         <div className="navbar-right">
+          {location.pathname !== "/post" && (
+            <button className="create-post-navbar" onClick={handleCreateButton}>
+              <img src={plusIcon} alt="plus" className="plus-icon" />
+              <span className="create">Create</span>
+            </button>
+          )}
           {userAvatar && (
             <img
               src={userAvatar}
