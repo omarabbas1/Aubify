@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import "./Report.css";
+import SideBar from "../SideBar/SideBar";
 
 const ReportedPostsPage = () => {
   const [reportedPosts, setReportedPosts] = useState([]);
@@ -28,6 +29,7 @@ const ReportedPostsPage = () => {
   return (
     <div className="report-page">
       <NavBar />
+      <SideBar />
       <div className="reported-posts-container">
         <h1>Reported Posts</h1>
         {reportedPosts.map((post) => (

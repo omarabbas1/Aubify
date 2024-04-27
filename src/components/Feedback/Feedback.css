@@ -1,17 +1,20 @@
-.feedback-page .interface-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center;
-  color: white;
+.feedback-page {
+  overflow-x: hidden;
 }
 
-.feedback-page .admin-feedback-interface .interface-title {
-  margin-top: 6%;
+.feedback-page .interface-title {
+  color: black;
+  margin-bottom: 3%;
 }
 
 .feedback-page .admin-feedback-interface {
   padding: 20px;
   border-radius: 5px;
+}
+
+.feedback-page .admin-feedback-interface .interface-title {
+  margin-top: 5%;
+  margin-left: 51.5%;
 }
 
 .feedback-page .user-feedback-interface {
@@ -22,6 +25,7 @@
   height: 100vh;
   padding: 20px;
   border-radius: 10px;
+  margin-left: 23%;
 }
 
 .feedback-page .send-feedback-button {
@@ -29,7 +33,8 @@
   margin-top: 10px;
   cursor: pointer;
   background-color: white;
-  color: #840032;
+  color: black;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -48,29 +53,32 @@
 }
 
 .feedback-page .feedback-list {
-  margin-top: 30px;
   text-align: center;
+  margin-top: 3%;
+  background-color: whitesmoke;
+  width: 100%;
+  margin-left: 12%;
 }
 
 .feedback-page .feedback-item {
-  background-color: #f0f0f0;
+  background-color: white;
   padding: 15px;
   border-radius: 20px;
   margin-bottom: 20px;
   width: 65%;
-  /* max-width: 800px; */
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   margin-left: auto;
   margin-right: auto;
-  color: #840032;
+  color: black;
   word-wrap: break-word;
 }
 
 .feedback-page .remaining-feedback-characters {
-  color: white;
+  color: black;
   margin-bottom: 0.33%;
 }
 
 .feedback-page .error-message-feedback {
-  color: white;
-  margin-top: 1%;
+  color: black;
+  margin-top: 3%;
 }

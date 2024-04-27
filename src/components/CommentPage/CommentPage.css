@@ -1,22 +1,33 @@
 .comment-page {
   padding: 20px;
-  background-color: #840032; /* Main color background */
+  background-color: whitesmoke; /* Main color background */
   color: #fff; /* White text */
-  width: 100vw; /* Set width to 100% of viewport width */
+  width: 100%; /* Set width to 100% of viewport width */
   height: 100vh; /* Set height to 100% of viewport height */
   margin: 0; /* Remove any default margin */
   overflow-y: auto; /* Enable vertical scrolling if content exceeds viewport height */
 }
-.comment-page h3 {
-  font-size: 50px;
+
+.comment-page-container {
+  margin-left: 20%;
+  margin-top: 7%;
+}
+
+.comment-page-container h1 {
+  text-align: center;
+  color: black;
+}
+
+.comment-page-container h2 {
   margin-bottom: 10px;
   max-width: 100%; /* Ensure heading doesn't exceed container width */
   overflow-wrap: break-word; /* Allow heading to break to next line if needed */
   text-align: center; /* Align heading to the left */
   margin-top: 4%;
 }
-.comment-page .post {
-  background-color: #f0f0f0;
+.comment-page-container .post {
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   padding: 15px;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -24,10 +35,10 @@
   max-width: 700px; /* Maximum width to ensure readability */
   margin-left: auto; /* Center the post */
   margin-right: auto; /* Center the post */
-  color: #840032; /* Change text color to black for contrast */
+  color: black; /* Change text color to black for contrast */
 }
 
-.comment-page .post h2 {
+.comment-page-container.post h2 {
   margin: 0;
   text-align: center;
   padding-bottom: 10px;
@@ -35,7 +46,7 @@
   overflow-wrap: break-word; /* Allow heading to break to next line if needed */
 }
 
-.comment-page .post p {
+.comment-page-container .post p {
   margin-top: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -43,11 +54,11 @@
   font-family: "Times New Roman", Times, serif;
 }
 
-.comment-page .comments-container {
+.comment-page-container .comments-container {
   padding: 20px;
 }
 
-.comment-page .comments-container h3 {
+.comment-page-container .comments-container h3 {
   font-size: 50px;
   margin-bottom: 10px;
   max-width: 100%; /* Ensure heading doesn't exceed container width */
@@ -55,17 +66,18 @@
   text-align: center;
 }
 
-.comment-page .comments-list {
+.comment-page-container .comments-list {
   margin-bottom: 20px;
 }
 
-.comment-page .comment {
-  background-color: #fff; /* White background */
+.comment-page-container .comment {
+  background-color: white; /* White background */
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   padding: 10px;
   border-radius: 15px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
+  color: black; /* Main color text */
   display: block; /* Ensure it's a block-level element */
   width: 100%; /* Adjusted width to fill the container */
   max-width: 700px; /* Maximum width to ensure readability */
@@ -91,9 +103,9 @@
   padding: 10px;
   border-radius: 15px;
   font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
-  background-color: #fff; /* White background */
-  border: 1px solid #ccc; /* Added border for better visibility */
+  color: black; /* Main color text */
+  border: 1px solid grey;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   resize: none; /* Disable textarea resizing */
   font-size: 25px;
 }
@@ -102,12 +114,13 @@
 }
 
 .comment-page .add-comment button[type="submit"] {
-  background-color: #fff;
-  color: #840032;
+  background-color: white;
+  color: color;
   border: none;
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   padding: 10px 30px;
   font-size: 18px;
   text-align: center;
@@ -117,10 +130,6 @@
   display: block;
   width: 200px;
   font-weight: bold;
-}
-
-.comment-page .comment-form textarea:focus {
-  border-color: #840032;
 }
 
 .comment-page .comment-interactions {
@@ -156,13 +165,14 @@
   margin-left: auto; /* Align to the left */
   margin-right: auto; /* Align to the right */
   width: 700px; /* Set a width to control the width of the character limit text */
+  color: black;
 }
 
 .post-details-comment {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #840032;
+  color: black;
 }
 
 .comment-details {

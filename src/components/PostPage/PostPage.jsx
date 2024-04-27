@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import "./PostPage.css";
+import SideBar from "../SideBar/SideBar";
 
 const PostPage = () => {
   const [newPostTitle, setNewPostTitle] = useState("");
@@ -58,31 +59,34 @@ const PostPage = () => {
   return (
     <div className="post-page">
       <NavBar />
-      <h1>Add a Post:</h1>
-      <input
-        type="text"
-        placeholder="Post Title"
-        className="post-title-input"
-        value={newPostTitle}
-        name="title"
-        onChange={handleInputChange}
-      />
-      <div className="remaining-title-characters">
-        Characters Remaining: {remainingTitleWords}
+      <SideBar />
+      <div className="post-page-container">
+        <h1>Add a Post:</h1>
+        <input
+          type="text"
+          placeholder="Post Title"
+          className="post-title-input"
+          value={newPostTitle}
+          name="title"
+          onChange={handleInputChange}
+        />
+        <div className="remaining-title-characters">
+          Characters Remaining: {remainingTitleWords}
+        </div>
+        <textarea
+          placeholder="What's on your mind?"
+          className="post-content-input"
+          value={newPostContent}
+          onChange={handleInputChange}
+        ></textarea>
+        <div className="remaining-post-characters">
+          Characters Remaining: {remainingPostWords}
+        </div>
+        <button className="submit-post-button" onClick={handleCreatePost}>
+          Post
+        </button>
+        {postError && <div className="error-message-postpage">{postError}</div>}
       </div>
-      <textarea
-        placeholder="What's on your mind?"
-        className="post-content-input"
-        value={newPostContent}
-        onChange={handleInputChange}
-      ></textarea>
-      <div className="remaining-post-characters">
-        Characters Remaining: {remainingPostWords}
-      </div>
-      <button className="submit-post-button" onClick={handleCreatePost}>
-        Post
-      </button>
-      {postError && <div className="error-message-postpage">{postError}</div>}
     </div>
   );
 };

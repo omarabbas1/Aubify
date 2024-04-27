@@ -9,6 +9,7 @@ import shareIcon from "../icons/share.png";
 import reportIcon from "../icons/report.png";
 import deleteIcon from "../icons/delete-admin.png";
 import NavBar from "../NavBar/NavBar";
+import SideBar from "../SideBar/SideBar";
 import { useUser } from "../../UserContext";
 
 const CommentPage = () => {
@@ -195,140 +196,142 @@ const CommentPage = () => {
   return (
     <div className="comment-page">
       <NavBar />
-      <h3>Post:</h3>
-      {post ? (
-        <div key={post._id} className="post">
-          <div className="post-details-comment">
-            <div className="post-anonymousId">{post.authorAnonymousId}</div>
-            <div className="post-created-at">
-              {new Date(post.createdAt).toLocaleString("en-US", {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-                second: "numeric",
-              })}
+      <SideBar />
+      <div className="comment-page-container">
+        {post ? (
+          <div key={post._id} className="post">
+            <div className="post-details-comment">
+              <div className="post-anonymousId">{post.authorAnonymousId}</div>
+              <div className="post-created-at">
+                {new Date(post.createdAt).toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  second: "numeric",
+                })}
+              </div>
             </div>
-          </div>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          <div className="comment-interactions">
-            <button
-              className="interaction-button"
-              onClick={() => handleUpvote(post._id)}
-            >
-              <img src={upvoteIcon} alt="Upvote" />
-              <span className="interaction-count">{post.upvotes || 0}</span>
-            </button>
-            <button className="interaction-button">
-              <img
-                src={downvoteIcon}
-                alt="Downvote"
-                onClick={() => handleDownvote(post._id)}
-              />
-              <span className="interaction-count">{post.downvotes || 0}</span>
-            </button>
-            <button className="interaction-button">
-              <img src={commentIcon} alt="Comments" />
-              <span className="interaction-count">
-                {post.comments ? post.comments.length : 0}
-              </span>
-            </button>
-            <button
-              className="interaction-button"
-              onClick={() => handleReport(post._id)}
-            >
-              <img src={reportIcon} alt="Report" />
-            </button>
-            <button
-              className="interaction-button"
-              onClick={() => handleShare(post._id)}
-            >
-              <img src={shareIcon} alt="Share" />
-            </button>
-            {isAdmin && (
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
+            <div className="comment-interactions">
               <button
                 className="interaction-button"
-                onClick={() => handleDeleteAdmin(post._id)}
+                onClick={() => handleUpvote(post._id)}
               >
-                <img src={deleteIcon} alt="Delete" />
+                <img src={upvoteIcon} alt="Upvote" />
+                <span className="interaction-count">{post.upvotes || 0}</span>
               </button>
+              <button className="interaction-button">
+                <img
+                  src={downvoteIcon}
+                  alt="Downvote"
+                  onClick={() => handleDownvote(post._id)}
+                />
+                <span className="interaction-count">{post.downvotes || 0}</span>
+              </button>
+              <button className="interaction-button">
+                <img src={commentIcon} alt="Comments" />
+                <span className="interaction-count">
+                  {post.comments ? post.comments.length : 0}
+                </span>
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleReport(post._id)}
+              >
+                <img src={reportIcon} alt="Report" />
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleShare(post._id)}
+              >
+                <img src={shareIcon} alt="Share" />
+              </button>
+              {isAdmin && (
+                <button
+                  className="interaction-button"
+                  onClick={() => handleDeleteAdmin(post._id)}
+                >
+                  <img src={deleteIcon} alt="Delete" />
+                </button>
+              )}
+            </div>
+            {reportedPostId === post._id && (
+              <div className="report-message">{reportMessage}</div>
             )}
           </div>
-          {reportedPostId === post._id && (
-            <div className="report-message">{reportMessage}</div>
+        ) : (
+          <p className="loading-post">Loading post...</p>
+        )}
+        <div className="add-comment">
+          <h1>Comments:</h1>
+          <textarea
+            value={newComment}
+            onChange={handleInputChange}
+            placeholder="Write your comment here..."
+          />
+          <div className="character-limit">
+            Characters Remaining: {remainingCharacters}
+          </div>
+          <button onClick={handleAddComment} type="submit">
+            Comment
+          </button>
+          {commentError && (
+            <div className="error-message-commentpage">{commentError}</div>
           )}
         </div>
-      ) : (
-        <p className="loading-post">Loading post...</p>
-      )}
-      <div className="add-comment">
-        <h3>Comments:</h3>
-        <textarea
-          value={newComment}
-          onChange={handleInputChange}
-          placeholder="Write your comment here..."
-        />
-        <div className="character-limit">
-          Characters Remaining: {remainingCharacters}
-        </div>
-        <button onClick={handleAddComment} type="submit">
-          Comment
-        </button>
-        {commentError && (
-          <div className="error-message-commentpage">{commentError}</div>
-        )}
-      </div>
-      <div className="comments-container">
-        <div className="comments-list">
-          {post &&
-            post.comments.map(
-              (
-                comment // Removed index as it's no longer needed for the key
-              ) => (
-                <div key={comment._id} className="comment">
-                  {" "}
-                  {/* Use comment._id for a unique key */}
-                  <div className="comment-details">
-                    <div className="comment-anonymousId">
-                      {comment.author.anonymousId}
+        <div className="comments-container">
+          <div className="comments-list">
+            {post &&
+              post.comments.map(
+                (
+                  comment // Removed index as it's no longer needed for the key
+                ) => (
+                  <div key={comment._id} className="comment">
+                    {" "}
+                    {/* Use comment._id for a unique key */}
+                    <div className="comment-details">
+                      <div className="comment-anonymousId">
+                        {comment.author.anonymousId}
+                      </div>
+                      <div className="comment-created-at">
+                        {new Date(comment.createdAt).toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "numeric",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          second: "numeric",
+                        })}
+                      </div>
                     </div>
-                    <div className="comment-created-at">
-                      {new Date(comment.createdAt).toLocaleString("en-US", {
-                        year: "numeric",
-                        month: "numeric",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "numeric",
-                        second: "numeric",
-                      })}
+                    <p>{comment.content}</p>
+                    <div className="comment-interactions">
+                      <button
+                        className="interaction-button"
+                        onClick={() => handleVoteUpvote(postId, comment._id)}
+                      >
+                        <img src={upvoteIcon} alt="Upvote" />
+                        <span className="interaction-count">
+                          {comment.upvotes || 0}
+                        </span>
+                      </button>
+                      <button
+                        className="interaction-button"
+                        onClick={() => handleVoteDownvote(postId, comment._id)}
+                      >
+                        <img src={downvoteIcon} alt="Downvote" />
+                        <span className="interaction-count">
+                          {comment.downvotes || 0}
+                        </span>
+                      </button>
                     </div>
                   </div>
-                  <p>{comment.content}</p>
-                  <div className="comment-interactions">
-                    <button
-                      className="interaction-button"
-                      onClick={() => handleVoteUpvote(postId, comment._id)}
-                    >
-                      <img src={upvoteIcon} alt="Upvote" />
-                      <span className="interaction-count">
-                        {comment.upvotes || 0}
-                      </span>
-                    </button>
-                    <button
-                      className="interaction-button"
-                      onClick={() => handleVoteDownvote(postId, comment._id)}
-                    >
-                      <img src={downvoteIcon} alt="Downvote" />
-                      <span className="interaction-count">
-                        {comment.downvotes || 0}
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              )
-            )}
+                )
+              )}
+          </div>
         </div>
       </div>
     </div>

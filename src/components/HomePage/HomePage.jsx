@@ -9,6 +9,7 @@ import shareIcon from "../icons/share.png";
 import reportIcon from "../icons/report.png";
 import deleteIcon from "../icons/delete-admin.png";
 import NavBar from "../NavBar/NavBar";
+import SideBar from "../SideBar/SideBar";
 import { useUser } from "../../UserContext";
 
 const HomePage = () => {
@@ -166,87 +167,83 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <NavBar onSearch={handleSearch} />
-      <div className="post-container">
-        <div className="post-list">
-          <h1> Posts: </h1>
-          <div className="filter-container">
-            <label htmlFor="filter">Filter by:</label>
-            <select value={currentFilter} onChange={handleFilterChange}>
-              <option value="relevance">Relevance</option>
-              <option value="date_added">Most Recent</option>
-            </select>
-          </div>
-          {searchedPosts.map((post) => (
-            <div key={post._id} className="post">
-              <div className="post-details-home">
-                <div className="post-anonymousId">{post.authorAnonymousId}</div>
-                <div className="post-created-at">
-                  {new Date(post.createdAt).toLocaleString("en-US", {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    second: "numeric",
-                  })}
-                </div>
+      <SideBar />
+      <div className="post-list">
+        <div className="filter-container">
+          <label htmlFor="filter">Filter by:</label>
+          <select value={currentFilter} onChange={handleFilterChange}>
+            <option value="relevance">Relevance</option>
+            <option value="date_added">Most Recent</option>
+          </select>
+        </div>
+        {searchedPosts.map((post) => (
+          <div key={post._id} className="post">
+            <div className="post-details-home">
+              <div className="post-anonymousId">{post.authorAnonymousId}</div>
+              <div className="post-created-at">
+                {new Date(post.createdAt).toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  second: "numeric",
+                })}
               </div>
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
-              <div className="post-interactions">
-                {/* Interaction buttons */}
+            </div>
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
+            <div className="post-interactions">
+              {/* Interaction buttons */}
+              <button
+                className="interaction-button"
+                onClick={() => handleUpvote(post._id)}
+              >
+                <img src={upvoteIcon} alt="Upvote" />
+                <span className="interaction-count">{post.upvotes || 0}</span>
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleDownvote(post._id)}
+              >
+                <img src={downvoteIcon} alt="Downvote" />
+                <span className="interaction-count">{post.downvotes || 0}</span>
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleCommentClick(post._id)}
+              >
+                <img src={commentIcon} alt="Comments" />
+                <span className="interaction-count">
+                  {(post.comments || []).length}
+                </span>
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleReport(post._id)}
+              >
+                <img src={reportIcon} alt="Report" />
+              </button>
+              <button
+                className="interaction-button"
+                onClick={() => handleShare(post._id)}
+              >
+                <img src={shareIcon} alt="Share" />
+              </button>
+              {isAdmin && (
                 <button
                   className="interaction-button"
-                  onClick={() => handleUpvote(post._id)}
+                  onClick={() => handleDeleteAdmin(post._id)}
                 >
-                  <img src={upvoteIcon} alt="Upvote" />
-                  <span className="interaction-count">{post.upvotes || 0}</span>
+                  <img src={deleteIcon} alt="Delete" />
                 </button>
-                <button
-                  className="interaction-button"
-                  onClick={() => handleDownvote(post._id)}
-                >
-                  <img src={downvoteIcon} alt="Downvote" />
-                  <span className="interaction-count">
-                    {post.downvotes || 0}
-                  </span>
-                </button>
-                <button
-                  className="interaction-button"
-                  onClick={() => handleCommentClick(post._id)}
-                >
-                  <img src={commentIcon} alt="Comments" />
-                  <span className="interaction-count">
-                    {(post.comments || []).length}
-                  </span>
-                </button>
-                <button
-                  className="interaction-button"
-                  onClick={() => handleReport(post._id)}
-                >
-                  <img src={reportIcon} alt="Report" />
-                </button>
-                <button
-                  className="interaction-button"
-                  onClick={() => handleShare(post._id)}
-                >
-                  <img src={shareIcon} alt="Share" />
-                </button>
-                {isAdmin && (
-                  <button
-                    className="interaction-button"
-                    onClick={() => handleDeleteAdmin(post._id)}
-                  >
-                    <img src={deleteIcon} alt="Delete" />
-                  </button>
-                )}
-              </div>
-              {reportedPostId === post._id && (
-                <div className="report-message">{reportMessage}</div>
               )}
             </div>
-          ))}
-        </div>
+            {reportedPostId === post._id && (
+              <div className="report-message">{reportMessage}</div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

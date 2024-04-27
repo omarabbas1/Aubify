@@ -1,6 +1,6 @@
 .share-page {
   padding: 20px;
-  background-color: #840032; /* Main color background */
+  background-color: whitesmoke; /* Main color background */
   color: #fff; /* White text */
   width: 100vw; /* Set width to 100% of viewport width */
   height: 100vh; /* Set height to 100% of viewport height */
@@ -14,9 +14,11 @@
   overflow-wrap: break-word; /* Allow heading to break to next line if needed */
   text-align: center; /* Align heading to the left */
   margin-top: 4%;
+  color: black;
 }
 .share-page .post {
-  background-color: #f0f0f0;
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   padding: 15px;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -24,7 +26,7 @@
   max-width: 700px; /* Maximum width to ensure readability */
   margin-left: auto; /* Center the post */
   margin-right: auto; /* Center the post */
-  color: #840032; /* Change text color to black for contrast */
+  color: black; /* Change text color to black for contrast */
 }
 
 .share-page .post h2 {
@@ -65,13 +67,14 @@
   border-radius: 15px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
+  color: black; /* Main color text */
   display: block; /* Ensure it's a block-level element */
   width: 100%; /* Adjusted width to fill the container */
   max-width: 700px; /* Maximum width to ensure readability */
   margin-left: auto; /* Center the comment */
   margin-right: auto; /* Center the comment */
   margin-top: 2%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
 }
 
 .share-page .comment p {
@@ -110,7 +113,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #840032;
+  color: black;
 }
 
 .comment-details {

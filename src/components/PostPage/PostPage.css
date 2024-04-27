@@ -1,16 +1,17 @@
-.post-page {
+.post-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   padding: 20px;
+  margin-left: 10%;
 }
 
 .post-page h1 {
   margin-bottom: 20px;
   margin-top: 2%;
-  color: white;
+  color: black;
   font-size: 40px;
 }
 
@@ -23,6 +24,8 @@
   padding: 10px;
   border: none;
   font-size: 18px;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
 }
 
 .post-content-input {
@@ -33,6 +36,8 @@
   resize: none;
   border-radius: 10px;
   padding: 10px;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   font-size: 18px;
 }
 
@@ -42,23 +47,24 @@
   max-width: 600px;
   text-align: left;
   margin-bottom: 10px;
-  color: white;
+  color: black;
 }
 
 .submit-post-button {
   display: block;
   width: 30%;
   background-color: white;
-  color: #840032;
+  color: black;
   border: none;
   padding: 10px 30px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 18px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   font-weight: bold;
 }
 
 .error-message-postpage {
-  color: white;
+  color: black;
   margin-top: 20px;
 }

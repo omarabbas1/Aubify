@@ -4,7 +4,7 @@ import { useUser } from "../../UserContext";
 import "./NavBar.css";
 import SideBar from "../SideBar/SideBar";
 import menuIcon from "../icons/menu.png";
-import plusIcon from "../icons/plus.png";
+import plusIcon from "../icons/plus2.png";
 import axios from "axios";
 
 const Navbar = ({ onSearch }) => {
@@ -66,65 +66,44 @@ const Navbar = ({ onSearch }) => {
     onSearch(searchTerm);
   };
 
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
-
-  const closeSidebar = () => {
-    setSidebarVisible(false);
-  };
-
   const handleCreateButton = () => {
     navigate("/post");
   };
 
   return (
-    <>
-      <nav className="navbar">
-        <div className="navbar-left">
-          <img
-            src={menuIcon}
-            alt="Menu"
-            className="menu-icon"
-            onClick={toggleSidebar}
+    <nav className="navbar">
+      <div className="navbar-left">
+        <img src="/logo.png" alt="Logo" className="navbar-logo" />
+        <span className="website-name">Aubify</span>
+      </div>
+      <div className="navbar-center">
+        {location.pathname === "/homepage" && (
+          <input
+            type="text"
+            placeholder="Search by title..."
+            onChange={handleSearch}
           />
-          <img src="/aubify-logo.jpg" alt="Logo" className="navbar-logo" />
-          <span className="website-name">Aubify</span>
+        )}
+      </div>
+      <div className="navbar-right">
+        {location.pathname !== "/post" && (
+          <button className="create-post-navbar" onClick={handleCreateButton}>
+            <img src={plusIcon} alt="plus" className="plus-icon" />
+            <span className="create">Create</span>
+          </button>
+        )}
+        {userAvatar && (
+          <img
+            src={userAvatar}
+            alt="User Avatar"
+            className="user-avatar-home"
+          />
+        )}
+        <div className="navbar-name">
+          <span className="user-name">{username}</span>
         </div>
-        <div className="navbar-center">
-          {location.pathname === "/homepage" && (
-            <input
-              type="text"
-              placeholder="Search..."
-              onChange={handleSearch}
-            />
-          )}
-        </div>
-        <div className="navbar-right">
-          {location.pathname !== "/post" && (
-            <button className="create-post-navbar" onClick={handleCreateButton}>
-              <img src={plusIcon} alt="plus" className="plus-icon" />
-              <span className="create">Create</span>
-            </button>
-          )}
-          {userAvatar && (
-            <img
-              src={userAvatar}
-              alt="User Avatar"
-              className="user-avatar-home"
-            />
-          )}
-          <div className="navbar-name">
-            <span className="user-name">{username}</span>
-          </div>
-        </div>
-      </nav>
-      <SideBar
-        isOpen={sidebarVisible}
-        onClose={closeSidebar}
-        onSignOut={handleSignOut}
-      />
-    </>
+      </div>
+    </nav>
   );
 };
 

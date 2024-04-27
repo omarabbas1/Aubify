@@ -2,8 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import "./SideBar.css";
+import profileIcon from "../icons/profile.png";
+import faqIcon from "../icons/faq.png";
+import feedbackIcon from "../icons/feedback.png";
+import reportIcon from "../icons/reportside.png";
+import homeIcon from "../icons/home.png";
+import signoutIcon from "../icons/signout.png";
 
-const SideBar = ({ isOpen, onClose, onSignOut }) => {
+const SideBar = () => {
   const navigate = useNavigate();
   const { isAdmin } = useUser();
 
@@ -27,43 +33,46 @@ const SideBar = ({ isOpen, onClose, onSignOut }) => {
     navigate("/report");
   };
 
+  const handleSignOut = () => {
+    localStorage.clear();
+    navigate("/");
+    window.history.replaceState(null, "", "/");
+    window.onpopstate = () => {
+      navigate("/");
+      window.history.replaceState(null, "", "/");
+    };
+  };
+
   return (
-    <div className={`sidebar ${isOpen ? "active" : ""}`}>
-      <div className="sidebar-header"></div>
-      <ul>
-        <li>
-          <button className="menu-option" onClick={handleNavigateToUserProfile}>
-            User Profile
-          </button>
-        </li>
-        <li>
-          <button className="menu-option" onClick={handleNavigateToFAQ}>
-            FAQ
-          </button>
-        </li>
-        <li>
-          <button className="menu-option" onClick={handleNavigateToFeedback}>
-            Feedback
-          </button>
-        </li>
+    <div className="sidebar">
+      <div className="sidebar-wrapper">
+        <div className="menu-option" onClick={handleReturnToHomepage}>
+          <img src={homeIcon} alt="home" className="sidebar-icons" />
+          Home
+        </div>
+        <div className="menu-option" onClick={handleNavigateToFAQ}>
+          <img src={faqIcon} alt="faq" className="sidebar-icons" />
+          FAQ
+        </div>
+        <div className="menu-option" onClick={handleNavigateToFeedback}>
+          <img src={feedbackIcon} alt="feedback" className="sidebar-icons" />
+          Feedback
+        </div>
         {isAdmin && (
-          <li>
-            <button className="menu-option" onClick={handleNavigateToReport}>
-              Report
-            </button>
-          </li>
+          <div className="menu-option" onClick={handleNavigateToReport}>
+            <img src={reportIcon} alt="report" className="sidebar-icons" />
+            Report
+          </div>
         )}
-        <li>
-          <button className="menu-option" onClick={handleReturnToHomepage}>
-            Return to Homepage
-          </button>
-        </li>
-        <li>
-          <button className="menu-option" onClick={onSignOut}>
-            Sign Out
-          </button>
-        </li>
-      </ul>
+        <div className="menu-option" onClick={handleNavigateToUserProfile}>
+          <img src={profileIcon} alt="profile" className="sidebar-icons" />
+          My Profile
+        </div>
+        <div className="menu-option" onClick={handleSignOut}>
+          <img src={signoutIcon} alt="signout" className="sidebar-icons" />
+          Sign Out
+        </div>
+      </div>
     </div>
   );
 };

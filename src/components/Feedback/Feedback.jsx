@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Feedback.css";
 import NavBar from "../NavBar/NavBar";
 import { useUser } from "../../UserContext";
+import SideBar from "../SideBar/SideBar";
 
 const Feedback = () => {
   const [feedback, setFeedback] = useState("");
@@ -38,6 +39,10 @@ const Feedback = () => {
   };
 
   const handleSendFeedback = async () => {
+    if (feedback.trim() === "") {
+      setFeedbackError("Feedback cannot be empty!");
+      return;
+    }
     try {
       await axios.post("/sendFeedback", {
         email: userEmail,
@@ -61,6 +66,7 @@ const Feedback = () => {
   return (
     <div className="feedback-page">
       <NavBar />
+      <SideBar />
       {isAdmin ? (
         // Admin interface
         <div className="admin-feedback-interface">

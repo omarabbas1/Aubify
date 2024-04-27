@@ -7,8 +7,8 @@
 .report-page h1 {
   margin-bottom: 40px;
   margin-top: 7%;
-  color: white;
-  text-align: center;
+  color: black;
+  margin-left: 50%;
 }
 
 /* Style for the container of reported posts */
@@ -25,12 +25,14 @@
   border-radius: 25px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
-  color: #840032;
+  color: black;
   display: block;
   margin-bottom: 20px;
   text-align: center;
-  width: 50%;
+  width: 70%;
   cursor: pointer;
+  margin-left: 26%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
 }
 
 /* Style for the title of each reported post */
