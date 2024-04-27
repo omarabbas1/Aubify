@@ -13,7 +13,7 @@
 
 .faq-container h1 {
   margin-top: 3%;
-  color: black;
+  color: #840032;
   text-align: center;
   margin-left: 26%;
 }
@@ -52,13 +52,13 @@
   font-size: 18px;
   font-weight: bold;
   word-wrap: break-word; /* Wrap long words onto a new line */
-  color: black;
+  color: #840032;
 }
 
 /* Expand icon styles */
 .expand-icon {
   font-size: 18px;
-  color: black;
+  color: #840032;
 }
 
 /* Answer styles */
@@ -66,5 +66,5 @@
   margin-top: 10px;
   font-size: 16px;
   word-wrap: break-word; /* Wrap long words onto a new line */
-  color: black;
+  color: #840032;
 }

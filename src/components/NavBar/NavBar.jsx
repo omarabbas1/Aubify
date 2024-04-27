@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../../UserContext";
 import "./NavBar.css";
-import SideBar from "../SideBar/SideBar";
-import menuIcon from "../icons/menu.png";
-import plusIcon from "../icons/plus2.png";
+import plusIcon from "../icons/plus.png";
 import axios from "axios";
 
 const Navbar = ({ onSearch }) => {
   const navigate = useNavigate();
   const { username, setUsername } = useUser();
-  const [sidebarVisible, setSidebarVisible] = useState(false);
   const [userAvatar, setUserAvatar] = useState(""); // Initialize state for user avatar
   const location = useLocation();
   const { isAdmin, setIsAdmin } = useUser();
@@ -38,16 +35,6 @@ const Navbar = ({ onSearch }) => {
   useEffect(() => {
     fetchAdminStatus();
   }, [userEmail, isAdmin]); // Run the effect when userEmail changes
-
-  const handleSignOut = () => {
-    localStorage.clear();
-    navigate("/");
-    window.history.replaceState(null, "", "/");
-    window.onpopstate = () => {
-      navigate("/");
-      window.history.replaceState(null, "", "/");
-    };
-  };
 
   const fetchAvatar = async () => {
     try {

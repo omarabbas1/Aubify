@@ -3,7 +3,7 @@
 }
 
 .feedback-page .interface-title {
-  color: black;
+  color: #840032;
   margin-bottom: 3%;
 }
 
@@ -33,7 +33,7 @@
   margin-top: 10px;
   cursor: pointer;
   background-color: white;
-  color: black;
+  color: #840032;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   border: none;
   border-radius: 5px;
@@ -69,16 +69,16 @@
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   margin-left: auto;
   margin-right: auto;
-  color: black;
+  color: #840032;
   word-wrap: break-word;
 }
 
 .feedback-page .remaining-feedback-characters {
-  color: black;
+  color: #840032;
   margin-bottom: 0.33%;
 }
 
 .feedback-page .error-message-feedback {
-  color: black;
+  color: #840032;
   margin-top: 3%;
 }

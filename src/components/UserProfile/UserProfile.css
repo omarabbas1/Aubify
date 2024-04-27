@@ -90,7 +90,7 @@
 }
 
 .change-password-profile-container button {
-  background-color: black;
+  background-color: #840032;
   font-weight: bold;
   color: white;
   border: none;
@@ -143,7 +143,7 @@
 
 .user-profile-post {
   width: 100%;
-  background-color: black;
+  background-color: #840032;
   color: white;
   cursor: pointer;
   padding: 10px;
