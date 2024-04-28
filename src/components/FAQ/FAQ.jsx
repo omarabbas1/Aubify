@@ -14,15 +14,16 @@ const FAQ = () => {
         "If you already have a bachelor degree, then you will need to apply as second degree applicant.  Some of the credits taken in the bachelor degree will be transferred to your second degree per department approval",
     },
     {
-      question: "How do I pay my tuition fees?",
+      question:
+        "Are there any scholarships or financial aid offered to students and what are the basis?",
       answer:
-        "The tuition payment will appear on the AUBsis web statement of fees once you have registered for your spring courses. Print the Web statement of fees from your AUBsis, and refer to the Payment module posted in the Moodle section for the different methods of payment. Please note that payment of fees by Credit Cards or Travellers Cheques are currently not accepted. For any additional inquiries regarding the payment of tuition fees, kindly contact jm52@aub.edu.lb or re96@aub.edu.lb",
+        "Different financial aid packages and scholarships are available at AUB. You may review the information and contact the Office of Financial Aid for details regarding your financial aid/scholarship questions.",
     },
     {
       question:
         "I am an AUB graduate and want to apply to AUB for a second degree, do I submit an application to the Office of Admissions like other second degree applicants?",
       answer:
-        "AUB graduates who have been away from AUB for less than 2 years after graduation, must contact the Office of the Registrar on: registrar@aub.edu.lb and inquire about their application for second degree.   For all other applicants, they need to submit their second degree application form at the Office of Admissions.",
+        "AUB graduates who have been away from AUB for less than 2 years after graduation, must contact the Office of the Registrar on: <a href='mailto:registrar@aub.edu.lb'>registrar@aub.edu.lb</a> and inquire about their application for second degree.   For all other applicants, they need to submit their second degree application form at the Office of Admissions.",
     },
     {
       question:
@@ -33,7 +34,7 @@ const FAQ = () => {
     {
       question: "What diplomas are currently offered at AUB?",
       answer:
-        "Some of the diplomas that we offer include: \n-Teaching Diploma Program \n-Diploma in Special Education \n-Diploma in Educational Management and Leadership",
+        "Some of the diplomas that we offer include: Teaching Diploma Program, Diploma in Special Education, Diploma in Educational Management and Leadership",
     },
     {
       question:
@@ -88,7 +89,10 @@ const FAQ = () => {
               </span>
             </div>
             {expandedIndex === index && (
-              <div className="answer">{item.answer}</div>
+              <div
+                className="answer"
+                dangerouslySetInnerHTML={{ __html: item.answer }}
+              ></div>
             )}
           </div>
         ))}
