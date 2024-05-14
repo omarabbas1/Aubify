@@ -60,7 +60,7 @@ const Navbar = ({ onSearch }) => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <img src="/logo.png" alt="Logo" className="navbar-logo" />
+        <img src="/aubify-logo.png" alt="Logo" className="navbar-logo" />
         <span className="website-name">Aubify</span>
       </div>
       <div className="navbar-center">
