@@ -6,14 +6,14 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState("");
-  const [userAvatar, setUserAvatar] = useState(""); // Add state for user avatar
+  const [userAvatar, setUserAvatar] = useState("");
   const [isAdmin, setIsAdmin] = useState();
 
   const value = {
     username,
     setUsername,
-    userAvatar, // Include userAvatar in the context value
-    setUserAvatar, // Include setUserAvatar function in the context value
+    userAvatar,
+    setUserAvatar,
     isAdmin,
     setIsAdmin,
   };

@@ -1,12 +1,11 @@
-/* FAQ container styles */
 .faq-container {
-  color: #fff; /* White text color */
-  position: fixed; /* Fix the container position */
-  top: 0; /* Align to the top of the viewport */
-  right: 0; /* Align to the right of the viewport */
-  bottom: 0; /* Align to the bottom of the viewport */
-  left: 0; /* Align to the left of the viewport */
-  overflow-y: auto; /* Enable vertical scrolling if needed */
+  color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
   margin-top: 3%;
   overflow-x: hidden;
 }
@@ -18,7 +17,6 @@
   margin-left: 24%;
 }
 
-/* FAQ list styles */
 .faq-list {
   margin-top: 3%;
   background-color: whitesmoke;
@@ -26,20 +24,18 @@
   margin-left: 12%;
 }
 
-/* FAQ item styles */
 .faq-item {
-  border: 1px solid grey; /* Border around each FAQ item */
+  border: 1px solid grey;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #fff; /* White background color */
+  background-color: #fff;
   cursor: pointer;
   width: 70%;
   margin: 20px auto;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
 }
 
-/* Question container styles */
 .question-container {
   display: flex;
   justify-content: space-between;
@@ -47,24 +43,21 @@
   cursor: pointer;
 }
 
-/* Question styles */
 .question {
   font-size: 18px;
   font-weight: bold;
-  word-wrap: break-word; /* Wrap long words onto a new line */
+  word-wrap: break-word;
   color: #840032;
 }
 
-/* Expand icon styles */
 .expand-icon {
   font-size: 18px;
   color: #840032;
 }
 
-/* Answer styles */
 .answer {
   margin-top: 10px;
   font-size: 16px;
-  word-wrap: break-word; /* Wrap long words onto a new line */
+  word-wrap: break-word;
   color: #840032;
 }

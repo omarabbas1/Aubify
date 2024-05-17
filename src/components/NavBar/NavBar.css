@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: white; /* Main color */
-  color: #fff; /* White text */
+  background-color: white;
+  color: #fff;
   padding: 10px 20px;
   width: 100%;
   display: flex;
@@ -38,8 +38,8 @@
 }
 
 .navbar-center input[type="text"] {
-  width: calc(100% + 120px); /* Adjusted width */
-  max-width: 400px; /* Limit width on larger screens */
+  width: calc(100% + 120px);
+  max-width: 400px;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid grey;
@@ -99,11 +99,10 @@
   margin-right: 5px;
 }
 
-/* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
   .navbar-center input[type="text"] {
-    width: 100%; /* Take full width on small screens */
-    max-width: none; /* No maximum width */
+    width: 100%;
+    max-width: none;
     display: none;
   }
 }

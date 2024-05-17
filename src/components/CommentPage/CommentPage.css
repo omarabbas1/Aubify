@@ -1,11 +1,11 @@
 .comment-page {
   padding: 20px;
-  background-color: whitesmoke; /* Main color background */
-  color: #fff; /* White text */
-  width: 100%; /* Set width to 100% of viewport width */
-  height: 100vh; /* Set height to 100% of viewport height */
-  margin: 0; /* Remove any default margin */
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds viewport height */
+  background-color: whitesmoke;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  overflow-y: auto;
 }
 
 .comment-page-container {
@@ -20,9 +20,9 @@
 
 .comment-page-container h2 {
   margin-bottom: 10px;
-  max-width: 100%; /* Ensure heading doesn't exceed container width */
-  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
-  text-align: center; /* Align heading to the left */
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
   margin-top: 4%;
 }
 .comment-page-container .post {
@@ -31,19 +31,19 @@
   padding: 15px;
   border-radius: 20px;
   margin-bottom: 20px;
-  width: 100%; /* Adjusted width to fill the container */
-  max-width: 700px; /* Maximum width to ensure readability */
-  margin-left: auto; /* Center the post */
-  margin-right: auto; /* Center the post */
-  color: #840032; /* Change text color to #840032 for contrast */
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #840032;
 }
 
 .comment-page-container.post h2 {
   margin: 0;
   text-align: center;
   padding-bottom: 10px;
-  max-width: 100%; /* Ensure heading doesn't exceed container width */
-  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .comment-page-container .post p {
@@ -61,8 +61,8 @@
 .comment-page-container .comments-container h3 {
   font-size: 50px;
   margin-bottom: 10px;
-  max-width: 100%; /* Ensure heading doesn't exceed container width */
-  overflow-wrap: break-word; /* Allow heading to break to next line if needed */
+  max-width: 100%;
+  overflow-wrap: break-word;
   text-align: center;
 }
 
@@ -71,18 +71,18 @@
 }
 
 .comment-page-container .comment {
-  background-color: white; /* White background */
+  background-color: white;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
   padding: 10px;
   border-radius: 15px;
   word-wrap: break-word;
   font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
-  display: block; /* Ensure it's a block-level element */
-  width: 100%; /* Adjusted width to fill the container */
-  max-width: 700px; /* Maximum width to ensure readability */
-  margin-left: auto; /* Center the comment */
-  margin-right: auto; /* Center the comment */
+  color: #840032;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 2%;
 }
 
@@ -96,21 +96,21 @@
 }
 
 .comment-page .add-comment textarea {
-  width: 700px; /* Same width as posts */
-  height: 100px; /* Larger height */
-  margin: 20px auto; /* Center horizontally with space below */
+  width: 700px;
+  height: 100px;
+  margin: 20px auto;
   display: block;
   padding: 10px;
   border-radius: 15px;
   font-family: "Times New Roman", Times, serif;
-  color: #840032; /* Main color text */
+  color: #840032;
   border: 1px solid grey;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.411);
-  resize: none; /* Disable textarea resizing */
+  resize: none;
   font-size: 25px;
 }
 .comment-page .add-comment textarea::placeholder {
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 24px;
 }
 
 .comment-page .add-comment button[type="submit"] {
@@ -160,11 +160,11 @@
 }
 
 .comment-page .character-limit {
-  text-align: left; /* Align character limit text to the left */
-  margin-top: 10px; /* Add margin to separate from the textarea */
-  margin-left: auto; /* Align to the left */
-  margin-right: auto; /* Align to the right */
-  width: 700px; /* Set a width to control the width of the character limit text */
+  text-align: left;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
   color: #840032;
 }
 
