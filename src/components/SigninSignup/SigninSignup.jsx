@@ -277,7 +277,7 @@ function SigninSignup({ user, setUser }) {
             />
             <input
               type="email"
-              placeholder="Email ~ AUBnet@mail.aub.edu"
+              placeholder="Email"
               value={signupEmail}
               onChange={(e) => setSignupEmail(e.target.value)}
               required
@@ -318,7 +318,7 @@ function SigninSignup({ user, setUser }) {
           <div className="toggle">
             <div className={`toggle-panel toggle-left ${activeContainer}`}>
               <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all site features</p>
+              <p>Sign In to use all platform features</p>
               <button className="hidden" onClick={handleSigninClick}>
                 Sign In
               </button>
@@ -326,7 +326,8 @@ function SigninSignup({ user, setUser }) {
             <div className={`toggle-panel toggle-right ${activeContainer}`}>
               <h1>Hello, Student!</h1>
               <p>
-                Register with your personal details to use all site features
+                Sign Up to use all site features and make sure to use your AUB
+                email
               </p>
               <button className="hidden" onClick={handleRegisterClick}>
                 Sign Up
